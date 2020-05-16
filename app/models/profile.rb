@@ -17,5 +17,5 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_one :address, dependent: :destroy
 
-  enum status: { lead: 0, claimed: 1, reported: 2, inactive: 3 }
+  enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 end

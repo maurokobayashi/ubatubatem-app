@@ -5,6 +5,12 @@ ruby '2.7.1'
 
 
 ############# CUSTOM GEMS #############
+
+# admin
+gem 'trestle'
+gem 'trestle-search'
+
+# db annotations on models
 group :development do
   gem 'annotate'
 end
