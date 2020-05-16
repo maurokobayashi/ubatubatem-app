@@ -1,7 +1,6 @@
 class CreateProfiles < ActiveRecord::Migration[6.0]
   def change
     create_table :profiles do |t|
-      t.integer :user_id
       t.string :title
       t.string :tagline
       t.text :bio
@@ -11,6 +10,5 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :profiles, :user_id
   end
 end

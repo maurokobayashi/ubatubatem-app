@@ -7,7 +7,6 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :complemento
       t.string :bairro
 
-      t.timestamps
     end
     add_index :addresses, :profile_id
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_113858) do
+ActiveRecord::Schema.define(version: 2020_05_16_210412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,13 +21,20 @@ ActiveRecord::Schema.define(version: 2020_05_16_113858) do
     t.string "numero"
     t.string "complemento"
     t.string "bairro"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
   end
 
+  create_table "instagram_accounts", force: :cascade do |t|
+    t.integer "profile_id"
+    t.string "username"
+    t.string "access_token"
+    t.string "instagram_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_instagram_accounts_on_profile_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
-    t.integer "user_id"
     t.string "title"
     t.string "tagline"
     t.text "bio"
@@ -36,16 +43,17 @@ ActiveRecord::Schema.define(version: 2020_05_16_113858) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "instagram_token"
-    t.string "instagram_user_id"
+    t.string "email"
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "remember_token"
+    t.datetime "remember_token_expires_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["username"], name: "index_users_on_username"
   end
 
 end

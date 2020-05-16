@@ -1,12 +1,6 @@
 Trestle.resource(:users) do
   menu do
-    group :Usuários do
-      item :users, icon: "fa fa-user", label: "Usuários"
-    end
-  end
-
-  search do |query|
-    query ? User.where("username ILIKE ?","%#{query}%") : User.all
+    item :users, icon: "fa fa-star"
   end
 
   # Customize the table columns shown on the index view.

@@ -8,6 +8,7 @@ ruby '2.7.1'
 
 # admin
 gem 'trestle'
+gem 'trestle-auth'
 gem 'trestle-search'
 
 # db annotations on models
