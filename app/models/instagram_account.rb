@@ -3,6 +3,7 @@
 # Table name: instagram_accounts
 #
 #  id                :bigint           not null, primary key
+#  profile_id        :integer
 #  username          :string
 #  access_token      :string
 #  instagram_user_id :string

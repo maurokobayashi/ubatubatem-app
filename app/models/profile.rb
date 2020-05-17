@@ -2,19 +2,20 @@
 #
 # Table name: profiles
 #
-#  id                   :bigint           not null, primary key
-#  title                :string
-#  tagline              :string
-#  bio                  :text
-#  whatsapp             :string
-#  phone_secondary      :string
-#  status               :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  id              :bigint           not null, primary key
+#  title           :string
+#  tagline         :string
+#  bio             :text
+#  whatsapp        :string
+#  phone_secondary :string
+#  status          :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class Profile < ApplicationRecord
   has_one :instagram_account, dependent: :destroy
   has_one :address, dependent: :destroy
+  has_many :opening_hours
 
   enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 end

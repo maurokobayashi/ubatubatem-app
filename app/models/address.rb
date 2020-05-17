@@ -8,8 +8,6 @@
 #  numero      :string
 #  complemento :string
 #  bairro      :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
 #
 class Address < ApplicationRecord
   belongs_to :profile
