@@ -1,8 +1,6 @@
 Trestle.resource(:instagram_accounts) do
   menu do
-    group :catálogo do
-      item :accounts, icon: "fa fa-instagram", label: "Instagram Accounts"
-    end
+    item :accounts, icon: "fa fa-instagram", label: "Instagram Accounts", group: "dados cadastrados"
   end
 
   search do |query|

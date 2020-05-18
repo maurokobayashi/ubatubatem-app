@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_144625) do
+ActiveRecord::Schema.define(version: 2020_05_18_002724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 2020_05_17_144625) do
     t.string "complemento"
     t.string "bairro"
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
+  end
+
+  create_table "categs", force: :cascade do |t|
+    t.string "name"
+    t.string "search_tags"
+    t.integer "status"
+    t.index ["name"], name: "index_categs_on_name"
   end
 
   create_table "instagram_accounts", force: :cascade do |t|

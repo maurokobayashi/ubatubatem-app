@@ -47,7 +47,7 @@ Trestle.resource(:profiles) do
     tab :negócio do
       select :status, Profile.statuses.keys.to_a
       text_field :title, append: "max. 30", label: "Título"
-      text_field :tagline, append: "max. 60", label: "Slogan"
+      text_field :tagline, append: "max. 60", label: "Subtítulo"
       text_area :bio, append: "max. 255"
       row do
         col(sm: 6) { telephone_field :whatsapp, prepend: status_tag(icon("fa fa-phone"), :success), label: "WhatsApp" }
@@ -59,15 +59,20 @@ Trestle.resource(:profiles) do
       end
     end
 
-    tab :horários do
+    tab :horários, badge: profile.opening_hours.count do
       table (OpeningHour.where("profile_id = ?", profile.id).order(:day)), admin: :opening_hour do
-        column :day, ->(opening_hour) {opening_hour.day_to_s}, header: "Dia"
+        column :day, ->(opening_hour) {link_to(opening_hour.day_to_s, trestle.opening_hours_admin_path(opening_hour.id))}, header: "Dia", link: true
         column :opens_at, ->(opening_hour) {"#{'%02d'%opening_hour.opens_at.hour}h às #{'%02d'%opening_hour.closes_at.hour}h"}, header: "Horário"
         column :id, ->(opening_hour) {link_to(status_tag(icon("fa fa-pencil")), trestle.opening_hours_admin_path(opening_hour.id))}, link: true, header: ""
       end
+
+      if profile.opening_hours.count < 7
+        concat "</br>".html_safe
+        concat admin_link_to("Novo horário", admin: :opening_hours, action: :new, params: { profile_id: profile }, class: "btn btn-success",)
+      end
     end
 
-    tab :endereço do
+    tab :endereço, badge: profile.address.present? ? 1 : nil do
       table (Address.where("profile_id = ?", profile.id)), admin: :address do
         column :logradouro, ->(address) {link_to(address.logradouro, trestle.addresses_admin_path(address.id))}, link: true
         column :numero
@@ -75,9 +80,14 @@ Trestle.resource(:profiles) do
         column :bairro
         column :id, ->(address) {link_to(status_tag(icon("fa fa-pencil")), trestle.addresses_admin_path(address.id))}, link: true, header: ""
       end
+
+      if profile.address.blank?
+        concat "</br>".html_safe
+        concat admin_link_to("Novo Endereço", admin: :addresses, action: :new, params: { profile_id: profile }, class: "btn btn-success",)
+      end
     end
 
-    tab :instagram do
+    tab :instagram, badge: profile.instagram_account.present? ? 1 : nil do
       table (InstagramAccount.where("profile_id = ?", profile.id)), admin: :instagram_account do
         column :username, ->(instagram_account) {link_to(instagram_account.username, trestle.instagram_accounts_admin_path(instagram_account.id))}, link: true
         column :access_token
@@ -85,6 +95,7 @@ Trestle.resource(:profiles) do
         column :created_at, header: "Criado em", align: :center
         column :id, ->(instagram_account) {link_to(status_tag(icon("fa fa-pencil")), trestle.instagram_accounts_admin_path(instagram_account.id))}, link: true, header: ""
       end
+
     end
 
   end

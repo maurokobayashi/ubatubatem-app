@@ -1,8 +1,20 @@
 Trestle.resource(:opening_hours) do
-  menu do
-    group :catálogo do
-      item :opening_hours, icon: "fa fa-clock", label: "Horários de funcionamento"
+  build_instance do |attrs, params|
+    if params[:profile_id]
+      profile = Profile.find(params[:profile_id])
+      attrs[:profile] = profile
+      if profile.opening_hours.present?
+        last = profile.opening_hours.last
+        attrs[:day] = OpeningHour.days[last.day]+1 if last.day != "dom"
+        attrs[:opens_at] = last.opens_at
+        attrs[:closes_at] = last.closes_at
+      end
     end
+    OpeningHour.new(attrs)
+  end
+
+  menu do
+    item :opening_hours, icon: "fa fa-clock", label: "Horários de funcionamento", group: "dados cadastrados"
   end
 
   table do
