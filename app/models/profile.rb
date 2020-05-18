@@ -15,7 +15,7 @@
 class Profile < ApplicationRecord
   has_one :instagram_account, dependent: :destroy
   has_one :address, dependent: :destroy
-  has_many :opening_hours
+  has_many :opening_hours, dependent: :destroy
 
   enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 end
