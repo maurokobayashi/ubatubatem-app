@@ -9,7 +9,7 @@ Trestle.resource(:addresses) do
   end
 
   search do |query|
-    query ? Address.where("logradouro ILIKE ? OR bairro ILIKE ?", "%#{query}%", "%#{query}%") : Address.all
+    query ? Address.where("logradouro ILIKE ?", "%#{query}%") : Address.all
   end
 
 

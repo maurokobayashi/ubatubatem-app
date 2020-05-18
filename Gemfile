@@ -16,6 +16,9 @@ group :development do
   gem 'annotate'
 end
 
+# geokit
+gem 'geokit-rails'
+
 
 ############# DEFAULT GEMS #############
 

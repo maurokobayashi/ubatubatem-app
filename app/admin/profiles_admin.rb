@@ -37,9 +37,10 @@ Trestle.resource(:profiles) do
         content_tag(:small, profile.tagline, class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
+    column :name, ->(profile) { profile.address.present? ? profile.address.bairro : ""}, header: "Bairro", link: false
     column :whatsapp, header: "WhatsApp"
     column :username, ->(profile) { profile.instagram_account.present? ? link_to("@#{profile.instagram_account.username}", "https://www.instagram.com/#{profile.instagram_account.username}", target: "_blank", class: "external-link") : ""}, header: "Instagram", link: true
-    column :created_at, header: "Criado em", align: :center
+    column :created_at, ->(profile) { profile.created_at.strftime("%d/%m %H:%M")}, header: "Criado em", align: :center
     actions
   end
 
@@ -94,6 +95,12 @@ Trestle.resource(:profiles) do
         column :instagram_user_id
         column :created_at, header: "Criado em", align: :center
         column :id, ->(instagram_account) {link_to(status_tag(icon("fa fa-pencil")), trestle.instagram_accounts_admin_path(instagram_account.id))}, link: true, header: ""
+
+      end
+
+      if profile.instagram_account.blank?
+        concat "</br>".html_safe
+        concat admin_link_to("Novo Instagram", admin: :instagram_accounts, action: :new, params: { profile_id: profile }, class: "btn btn-success",)
       end
 
     end

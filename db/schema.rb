@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_003727) do
+ActiveRecord::Schema.define(version: 2020_05_18_214341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,16 @@ ActiveRecord::Schema.define(version: 2020_05_18_003727) do
     t.string "logradouro"
     t.string "numero"
     t.string "complemento"
-    t.string "bairro"
+    t.integer "bairro_id"
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
+  end
+
+  create_table "bairros", force: :cascade do |t|
+    t.string "name"
+    t.float "lat"
+    t.float "lng"
+    t.integer "regiao"
+    t.index ["lat", "lng"], name: "index_bairros_on_lat_and_lng"
   end
 
   create_table "categs", force: :cascade do |t|
@@ -39,6 +47,20 @@ ActiveRecord::Schema.define(version: 2020_05_18_003727) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_instagram_accounts_on_profile_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "cover_image_url"
+    t.string "title"
+    t.string "subtitle"
+    t.integer "profile_ids", default: [], array: true
+    t.time "starts_at"
+    t.time "finishes_at"
+    t.datetime "expires_on"
+    t.integer "priority"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "opening_hours", force: :cascade do |t|

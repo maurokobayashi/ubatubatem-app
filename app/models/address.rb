@@ -7,8 +7,9 @@
 #  logradouro  :string
 #  numero      :string
 #  complemento :string
-#  bairro      :string
+#  bairro_id   :integer
 #
 class Address < ApplicationRecord
   belongs_to :profile
+  belongs_to :bairro
 end
