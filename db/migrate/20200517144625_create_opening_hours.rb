@@ -1,7 +1,7 @@
 class CreateOpeningHours < ActiveRecord::Migration[6.0]
   def change
     create_table :opening_hours do |t|
-      t.integer :profile_id
+      t.integer :profile_id, null: false
       t.integer :day
       t.time :opens_at
       t.time :closes_at

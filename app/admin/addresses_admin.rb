@@ -5,7 +5,7 @@ Trestle.resource(:addresses) do
   end
 
   menu do
-    item :addresses, icon: "fa fa-map-marker", label: "Endereços", group: "dados cadastrados"
+    item :addresses, icon: "fa fa-map-marker", label: "Endereços", group: "dados da conta"
   end
 
   search do |query|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_214341) do
+ActiveRecord::Schema.define(version: 2020_05_19_180656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 2020_05_18_214341) do
     t.index ["name"], name: "index_categs_on_name"
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "profile_id", null: false
+    t.boolean "has_delivery", default: true
+    t.boolean "has_retirada", default: false
+    t.boolean "has_ponto_comercial", default: false
+    t.integer "delivery_fee", default: 0
+    t.integer "bairro_ids", default: [], array: true
+  end
+
   create_table "instagram_accounts", force: :cascade do |t|
     t.integer "profile_id"
     t.string "username"
@@ -47,6 +56,15 @@ ActiveRecord::Schema.define(version: 2020_05_18_214341) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_instagram_accounts_on_profile_id"
+  end
+
+  create_table "lead_instagrams", force: :cascade do |t|
+    t.string "instagram_user_id"
+    t.string "username"
+    t.string "title"
+    t.string "avatar_url"
+    t.datetime "created_at"
+    t.index ["username"], name: "index_lead_instagrams_on_username"
   end
 
   create_table "lists", force: :cascade do |t|
@@ -80,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_214341) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "website"
   end
 
   create_table "sub_categs", force: :cascade do |t|

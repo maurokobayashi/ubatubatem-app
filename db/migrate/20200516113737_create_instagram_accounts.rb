@@ -1,7 +1,7 @@
 class CreateInstagramAccounts < ActiveRecord::Migration[6.0]
   def change
     create_table :instagram_accounts do |t|
-      t.integer :profile_id
+      t.integer :profile_id, null: false
       t.string :username
       t.string :access_token
       t.string :instagram_user_id

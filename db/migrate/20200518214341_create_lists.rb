@@ -8,8 +8,8 @@ class CreateLists < ActiveRecord::Migration[6.0]
       t.time :starts_at
       t.time :finishes_at
       t.datetime :expires_on
-      t.integer :priority
-      t.integer :status
+      t.integer :priority, default: 0
+      t.integer :status, default: 0
 
       t.timestamps
     end

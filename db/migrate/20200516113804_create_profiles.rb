@@ -6,7 +6,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.text :bio
       t.string :whatsapp
       t.string :phone_secondary
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

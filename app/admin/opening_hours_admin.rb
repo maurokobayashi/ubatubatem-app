@@ -14,7 +14,7 @@ Trestle.resource(:opening_hours) do
   end
 
   menu do
-    item :opening_hours, icon: "fa fa-clock", label: "Horários de funcionamento", group: "dados cadastrados"
+    item :opening_hours, icon: "fa fa-clock", label: "Horários de funcionamento", group: "dados da conta"
   end
 
   table do

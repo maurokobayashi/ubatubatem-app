@@ -6,13 +6,19 @@ Profile
 . bio (text)
 . whatsapp
 . phone_number
+. website
 . status
-. has_delivery?
-. has_retirada?
-. delivery_fee
 . [opening_hours] 1-N
 . [address] 1-1
 . [instagram_account] 1-1
+. [delivery] 1-0..1
+
+Delivery
+. has_delivery?
+. has_retirada?
+. has_ponto_comercial?
+. delivery_fee
+. [bairros] 1-N
 
 OpeningHour
 . *profile_id
@@ -63,3 +69,8 @@ Bairros
 . lat
 . lng
 
+LeadsInstagram
+. instagram_user_id
+. username
+. title
+. avatar_url
