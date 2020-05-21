@@ -91,7 +91,7 @@ Trestle.resource(:profiles) do
         column :delivery_fee, ->(delivery) { number_to_currency(delivery.delivery_fee/100.00, unit: "", separator: ",", delimiter: "") }, header: "Taxa de entrega"
       end
 
-      if profile.delivery.persisted?
+      if profile.delivery && profile.delivery.persisted?
         concat "</br>".html_safe
         concat link_to(icon("fa fa-pencil")+" Editar", trestle.deliveries_admin_path(profile.delivery.id), class: "btn btn-success")
       else
@@ -108,7 +108,7 @@ Trestle.resource(:profiles) do
         column :bairro
       end
 
-      if profile.address.persisted?
+      if profile.address && profile.address.persisted?
         concat "</br>".html_safe
         concat link_to(icon("fa fa-pencil")+" Editar", trestle.addresses_admin_path(profile.address.id), class: "btn btn-success")
       else
@@ -128,7 +128,6 @@ Trestle.resource(:profiles) do
         column :instagram_user_id
         column :created_at, header: "Criado em", align: :center
         column :id, ->(instagram_account) {link_to(status_tag(icon("fa fa-pencil")), trestle.instagram_accounts_admin_path(instagram_account.id))}, link: true, header: ""
-
       end
 
       if profile.instagram_account.blank?
