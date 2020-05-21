@@ -6,3 +6,35 @@
 //
 //    @import "trestle/custom/my_custom_css";
 //
+.poster-column {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.media-title-column {
+  min-width: 15em;
+
+  a {
+    white-space: normal;
+
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+  }
+
+  small {
+    display: block;
+  }
+}
+
+.poster {
+  display: inline-block;
+  height: 50px;
+  max-width: none;
+}
+
+.media-grid {
+  figure.aspect-ratio-16x9 {
+    padding-bottom: percentage(9 / 16)
+  }
+}

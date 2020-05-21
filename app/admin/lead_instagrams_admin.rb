@@ -1,6 +1,6 @@
 Trestle.resource(:lead_instagrams) do
   menu do
-    item :lead_instagrams, icon: "fa fa-instagram", label: "Instagram Following", group: "configurações"
+    item :lead_instagrams, icon: "fa fa-instagram", label: "Leads Instagram", group: "leads"
   end
 
   search do |query|

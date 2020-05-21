@@ -1,0 +1,2 @@
+class LeadExcel < ApplicationRecord
+end

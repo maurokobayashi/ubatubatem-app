@@ -18,7 +18,7 @@ Trestle.resource(:deliveries) do
     actions
   end
 
-  form do |delivery|
+  form do
     select :profile_id, Profile.all
     check_box :has_delivery?, label: "Faz delivery"
     check_box :has_retirada?, label: "Retirada no local"

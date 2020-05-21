@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_180656) do
+ActiveRecord::Schema.define(version: 2020_05_21_005707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(version: 2020_05_19_180656) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_instagram_accounts_on_profile_id"
+  end
+
+  create_table "lead_excels", force: :cascade do |t|
+    t.string "instagram"
+    t.string "name"
+    t.string "whatsapp"
+    t.string "website"
+    t.string "logradouro"
+    t.string "numero"
+    t.string "bairro"
+    t.string "horarios"
+    t.string "categoria"
+    t.string "porte"
   end
 
   create_table "lead_instagrams", force: :cascade do |t|
