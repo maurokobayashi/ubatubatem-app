@@ -1,17 +1,25 @@
 # on rails console: load "db/scripts/create_profile_from_leads.rb"
 
-LeadExcel.all.each do |lead_excel|
-  lead_insta = LeadInstagram.find_by_username lead_excel.instagram
-  # tem lead insta e profile(com insta account) já não existe
-  if lead_insta.present? && !InstagramAccount.exists?(username: lead_excel.instagram)
-    profile = Profile.create(title: lead_excel.name, tagline: lead_insta.title, bio: nil, whatsapp: lead_excel.whatsapp, website: lead_excel.website, status: 0)
+LeadInstagram.all.each do |lead_insta|
+  lead_excel = LeadExcel.find_by_instagram lead_insta.username
 
-    # address
-    numero = lead_excel.numero ? lead_excel.numero.split("-").first.try(:strip) : nil
-    complemento = lead_excel.numero ? lead_excel.numero.split("-").second.try(:strip) : nil
-    address = Address.create(profile: profile, logradouro: lead_excel.logradouro, numero: numero, complemento: complemento, bairro: Bairro.find_by_name(lead_excel.bairro))
+  # profile(com insta account) já não existe
+  if !InstagramAccount.exists?(username: lead_insta.username)
+    response = HTTParty.get("https://www.instagram.com/#{lead_insta.username}/?__a=1")
+    bio = response["graphql"].present? ? response["graphql"]["user"]["biography"] : nil
+    profile = Profile.create(avatar_url: lead_insta.avatar_url, title: lead_excel.present? ? lead_excel.name : lead_insta.title, tagline: lead_insta.title, bio: bio, whatsapp: lead_excel.present? ? lead_excel.whatsapp : nil, website: lead_excel.present? ? lead_excel.website : nil, status: 0)
+
+    if lead_excel
+      # address
+      numero = lead_excel.numero ? lead_excel.numero.split("-").first.try(:strip) : nil
+      complemento = lead_excel.numero ? lead_excel.numero.split("-").second.try(:strip) : nil
+      bairro = Bairro.find_by_name(lead_excel.bairro)
+      Address.create(profile: profile, logradouro: lead_excel.logradouro, numero: numero, complemento: complemento, bairro: bairro)
+    end
+
     # instagram
-    InstagramAccount.create(profile: profile, username: lead_insta.username)
+    InstagramAccount.create(profile: profile, username: lead_insta.username, instagram_user_id: lead_insta.instagram_user_id)
+
     # delivery
     Delivery.create(profile: profile)
   end

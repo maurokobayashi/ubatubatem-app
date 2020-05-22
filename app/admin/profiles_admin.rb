@@ -18,12 +18,7 @@ Trestle.resource(:profiles) do
   table do
     column :id, link: true
     column :avatar_url, header: false, align: :center, blank: nil do |profile|
-      if profile.instagram_account.present?
-        lead = LeadInstagram.find_by_username(profile.instagram_account.username)
-        avatar(fallback: profile.initials) { lead ? image_tag(lead.avatar_url) : nil }
-      else
-        avatar(fallback: profile.initials) { nil }
-      end
+      avatar(fallback: profile.initials) { image_tag(profile.avatar_url) }
     end
     column :title, header: "Negócio", link: true, sort: :title, class: "media-title-column" do |profile|
       safe_join([
@@ -54,6 +49,9 @@ Trestle.resource(:profiles) do
 
   form do |profile|
     tab :negócio do
+      form_group :avatar_url, label: false, align: :left do
+        link_to image_tag(profile.avatar_url), profile.avatar_url, data: { behavior: "zoom" }
+      end if profile.avatar_url?
       select :status, Profile.statuses.keys.to_a
       text_field :title, append: "max. 30", label: "Título"
       text_field :tagline, append: "max. 60", label: "Subtítulo"
@@ -62,7 +60,8 @@ Trestle.resource(:profiles) do
         col(sm: 6) { telephone_field :whatsapp, prepend: status_tag(icon("fa fa-phone"), :success), label: "WhatsApp" }
         col(sm: 6) { telephone_field :phone_secondary, prepend: status_tag(icon("fa fa-phone"), :secondary), label: "Telefone 2" }
       end
-      url_field :website
+      text_field :website
+      text_field :avatar_url
       row do
         col(sm: 6) { static_field :created_at }
         col(sm: 6) { static_field :updated_at }

@@ -12,12 +12,11 @@ gem 'trestle-auth'
 gem 'trestle-search'
 
 # db annotations on models
-group :development do
-  gem 'annotate'
-end
-
+gem 'annotate', group: :development
 # geokit
 gem 'geokit-rails'
+# http requests
+gem 'httparty'
 
 
 ############# DEFAULT GEMS #############

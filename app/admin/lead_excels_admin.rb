@@ -4,7 +4,7 @@ Trestle.resource(:lead_excels) do
   end
 
   search do |query|
-    query ? LeadExcel.where("instagram ILIKE ? OR name ILIKE ?", "%#{query}%", "%#{query}%") : LeadExcel.all
+    query ? LeadExcel.where("instagram ILIKE ? OR name ILIKE ? OR logradouro ILIKE ?", "%#{query}%", "%#{query}%", "%#{query}%") : LeadExcel.all
   end
 
 end
