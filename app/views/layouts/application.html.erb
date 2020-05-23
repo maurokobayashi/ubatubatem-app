@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title>Ubatubatem</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32">
+    <title>Ubatuba Tem</title>
+    <meta name="description" content="Catálogo colaborativo de pequenos negócios de Ubatuba">
+    <meta name="keywords" content="ubatuba, comércio, restaurantes, lojas" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- <body> -->
+  <%= yield %>
+
 </html>

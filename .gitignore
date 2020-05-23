@@ -24,3 +24,6 @@
 /config/master.key
 
 .DS_Store
+
+# yarn
+*yarn*
