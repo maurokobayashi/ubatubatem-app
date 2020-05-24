@@ -1,0 +1,25 @@
+<!-- Dialog WhatsApp -->
+<div class="modal fade dialogbox" id="dialog-whatsapp" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-icon text-success">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title">WhatsApp</h5>
+      </div>
+      <div class="modal-body">
+        <%= profile.title %>
+        <br>
+        <%= mask_phone profile.whatsapp %>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-list">
+          <a href="<%= whatsapp_link profile.whatsapp %>" target="_system" class="btn btn-text-primary btn-block">Enviar Mensagem</a>
+          <a href="javascript:;" class="btn btn-text-secondary btn-block" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Dialog WhatsApp -->

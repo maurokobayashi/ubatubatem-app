@@ -1,11 +1,11 @@
 <!-- App Bottom Menu -->
 <div class="appBottomMenu">
-  <a href="index.html" class="item active">
+  <a href="<%= root_path %>" class="item">
     <div class="col">
       <ion-icon name="home-outline"></ion-icon>
     </div>
   </a>
-  <a href="busca.html" class="item">
+  <a href="<% buscar_path %>" class="item">
     <div class="col">
       <ion-icon name="search-outline"></ion-icon>
     </div>
@@ -17,12 +17,12 @@
       </div>
     </div>
   </a>
-  <a href="favoritos.html" class="item">
+  <a href="#" class="item">
     <div class="col">
       <ion-icon name="bookmark-outline"></ion-icon>
     </div>
   </a>
-  <a href="perfil.html" class="item">
+  <a href="<%= profile_path Profile.all.sample %>" class="item">
     <div class="col">
       <ion-icon name="person-outline"></ion-icon>
     </div>

@@ -140,45 +140,24 @@
   </div>
   <!-- * Dialog Horários -->
 
-  <!-- Dialog WhatsApp -->
-  <div class="modal fade dialogbox" id="dialog-whatsapp" data-backdrop="static" tabindex="-1" role="dialog">
+  <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
+
+  <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
+
+  <div class="modal fade dialogbox" id="dialog-avatar" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-icon text-success">
-          <ion-icon name="logo-whatsapp"></ion-icon>
-        </div>
-        <div class="modal-header">
-          <h5 class="modal-title">WhatsApp</h5>
-        </div>
-        <div class="modal-body">
-          Maycon Arcante Pães Artesanais
-          <br>11 98045-6449
-        </div>
+      <div class="modal-content align-center">
+        <img src="<%= @profile.avatar_url %>" alt="image" class="imaged w160">
         <div class="modal-footer">
-          <div class="btn-list">
-            <a href="https://wa.me/5511980456449?lang=pt_br" target="_system" class="btn btn-text-primary btn-block">Enviar Mensagem</a>
-            <a href="javascript:;" class="btn btn-text-secondary btn-block" data-dismiss="modal">Fechar</a>
+          <div class="btn-inline">
+            <a href="#" class="btn btn-text-primary" data-dismiss="modal">Fechar</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- * Dialog WhatsApp -->
 
-
-  <!-- Toast success -->
-  <div id="toast-salvar" class="toast-box toast-bottom bg-success">
-    <div class="in">
-      <ion-icon name="checkmark-circle" class="text-white"></ion-icon>
-      <div class="text text-white weight-5">
-        Salvo na minha lista
-      </div>
-    </div>
-    <button type="button" class="btn btn-sm btn-text-light close-button">OK</button>
-  </div>
-  <!-- * Toast success -->
-
-
+  <%= toast_success("toast-salvar", "Salvo na minha lista") %>
 
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -186,7 +165,7 @@
     <div class="section mt-2">
       <div class="profile-head">
         <div class="avatar">
-          <%= image_tag @profile.avatar_url, class: "imaged w64 rounded" %>
+          <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", 'data-toggle':"modal", 'data-target': "#dialog-avatar" %>
         </div>
         <div class="in">
           <h3 class="name"><%= @profile.title %></h3>
@@ -205,17 +184,33 @@
 
     <div class="section full mt-3">
       <ul class="listview listview-sm image-listview">
+        <% if @profile.whatsapp.present? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-whatsapp">
             <div class="icon-box">
               <ion-icon name="logo-whatsapp"></ion-icon>
             </div>
             <div class="in">
-              <div><%= @profile.whatsapp %></div>
-              <span class="text-muted">enviar whatsapp</span>
+              <div><%= mask_phone @profile.whatsapp %></div>
+              <span class="text-muted">whatsapp</span>
             </div>
           </a>
         </li>
+        <% end %>
+        <% if @profile.address.present? %>
+        <li>
+          <a href="#" class="item" data-toggle="modal" data-target="#dialog-address">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div><%= humanize_address @profile.address %></div>
+              <span class="text-muted">mapa</span>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.delivery.present? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-delivery">
             <div class="icon-box">
@@ -223,10 +218,11 @@
             </div>
             <div class="in">
               <div><%= humanize_delivery_mode @profile.delivery %></div>
-              <span class="text-muted">ver regiões</span>
+              <span class="text-muted">locais de entrega</span>
             </div>
           </a>
         </li>
+        <% end %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios">
             <div class="icon-box">
@@ -238,6 +234,7 @@
             </div>
           </a>
         </li>
+        <% if @profile.instagram_account.present? %>
         <li>
           <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item">
             <div class="icon-box">
@@ -245,10 +242,12 @@
             </div>
             <div class="in">
               <div><%= "@#{@profile.instagram_account.username}" %></div>
+              <span class="text-muted">instagram</span>
             </div>
           </a>
         </li>
-        <li>
+        <% end %>
+        <!-- <li>
           <a href="javascript:;" onclick="toastbox('toast-salvar', 3000);" class="item">
             <div class="icon-box">
               <ion-icon name="bookmark-outline"></ion-icon>
@@ -257,7 +256,7 @@
               <div>Salvar na minha lista</div>
             </div>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
 
@@ -270,11 +269,11 @@
               <ion-icon name="camera-outline"></ion-icon>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#tab2" role="tab">
               <ion-icon name="chatbox-outline"></ion-icon>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#tab3" role="tab">
               <ion-icon name="analytics-outline"></ion-icon>
@@ -293,40 +292,28 @@
         <div class="tab-pane fade show active" id="tab1" role="tabpanel">
           <div class="mt-2 pr-2 pl-2">
             <div class="row">
+              <% @instagram_scrap[:pictures].each do |picture| %>
               <div class="col-4 mb-2">
-                <img src="https://scontent-gru1-1.cdninstagram.com/v/t51.2885-15/e35/s320x320/95056050_176716443797367_688055900148956417_n.jpg?_nc_ht=scontent-gru1-1.cdninstagram.com&_nc_cat=103&_nc_ohc=DrRr2mgqvFcAX_5DKQ9&oh=2fabf4a758d8a10a55da6a8f45b31867&oe=5ED8D014" alt="image" class="imaged w-100">
+                <a href="<%= picture[:original] %>" target="_system">
+                  <img src="<%= picture[:thumbnail] %>" alt="image" class="imaged w-100">
+                </a>
               </div>
-              <div class="col-4 mb-2">
-                <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.2885-15/e35/c0.180.1440.1440a/s320x320/95260378_569583043688789_9113223970536863506_n.jpg?_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_cat=105&_nc_ohc=YojLOs3VynwAX-9M5X9&oh=a771dde45c670016ef56bb3a321145b5&oe=5ED6CC6B" alt="image" class="imaged w-100">
-              </div>
-              <div class="col-4 mb-2">
-                <img src="https://scontent-gru1-1.cdninstagram.com/v/t51.2885-15/e35/s320x320/95606800_3388686154492729_8138001469538034696_n.jpg?_nc_ht=scontent-gru1-1.cdninstagram.com&_nc_cat=101&_nc_ohc=5zPIkueOyW4AX92JpHV&oh=62181642698c5d8bd5d0a7a275ff816d&oe=5ED6DA0B" alt="image" class="imaged w-100">
-              </div>
-              <div class="col-4 mb-2">
-                <img src="https://scontent-gru1-1.cdninstagram.com/v/t51.2885-15/e35/c0.128.1080.1080a/s320x320/93947545_2912699082290096_7504398645728201335_n.jpg?_nc_ht=scontent-gru1-1.cdninstagram.com&_nc_cat=108&_nc_ohc=7S5LJ2ZL32sAX83PQ9Q&oh=c7249736df99ddd85d91ae1fe796b46f&oe=5ED60FA9" alt="image" class="imaged w-100">
-              </div>
-              <div class="col-4 mb-2">
-                <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.2885-15/e35/s320x320/94130150_158735915609796_7926300492169200883_n.jpg?_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_cat=100&_nc_ohc=fyYR4WhiwFwAX95P6JQ&oh=69488de4d7e16a6ba8f52f0bf96a9ce9&oe=5ED86153" alt="image" class="imaged w-100">
-              </div>
-              <div class="col-4 mb-2">
-                <img src="https://scontent-gru2-2.cdninstagram.com/v/t51.2885-15/e35/c0.120.960.960a/s320x320/93570811_2571040616472348_657440992531038182_n.jpg?_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_cat=100&_nc_ohc=WUQFJCSEw5YAX8HGaVN&oh=c126a72a20a26083daacd74efb09c2ca&oe=5ED8BC2C" alt="image" class="imaged w-100">
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
         <!-- * TAB1 -->
 
         <!-- * TAB2: comentários -->
-        <div class="tab-pane fade" id="tab2" role="tabpanel">
+        <!-- <div class="tab-pane fade" id="tab2" role="tabpanel">
           <div class="section full mt-2 mb-2">
             <div class="section-title">2 Comentários</div>
             <div class="wide-block border-none pt-2 pb-2">
 
-              <!-- comment block -->
               <div class="comment-block">
                 <div class="item">
                   <div class="avatar">
-                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w32 rounded">
+                    <img src="https://picsum.photos/32" alt="avatar" class="imaged w32 rounded">
                   </div>
                   <div class="in">
                     <div class="comment-header">
@@ -350,7 +337,7 @@
                 </div>
                 <div class="item">
                   <div class="avatar">
-                    <img src="assets/img/sample/avatar/avatar3.jpg" alt="avatar" class="imaged w32 rounded">
+                    <img src="https://picsum.photos/32" alt="avatar" class="imaged w32 rounded">
                   </div>
                   <div class="in">
                     <div class="comment-header">
@@ -375,7 +362,6 @@
                   </div>
                 </div>
               </div>
-              <!-- * comment block -->
 
             </div>
 
@@ -384,7 +370,7 @@
             </div>
 
           </div>
-        </div>
+        </div> -->
         <!-- * friends -->
 
         <!-- settings -->
@@ -447,38 +433,6 @@
 
   </div>
   <!-- * App Capsule -->
-
-  <!-- App Bottom Menu -->
-  <div class="appBottomMenu">
-    <a href="index.html" class="item">
-      <div class="col">
-        <ion-icon name="home-outline"></ion-icon>
-      </div>
-    </a>
-    <a href="busca.html" class="item">
-      <div class="col">
-        <ion-icon name="search-outline"></ion-icon>
-      </div>
-    </a>
-    <a href="#" class="item">
-      <div class="col">
-        <div class="action-button">
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-      </div>
-    </a>
-    <a href="favoritos.html" class="item">
-      <div class="col">
-        <ion-icon name="bookmark-outline"></ion-icon>
-      </div>
-    </a>
-    <a href="perfil.html" class="item active">
-      <div class="col">
-        <ion-icon name="person-outline"></ion-icon>
-      </div>
-    </a>
-  </div>
-  <!-- * App Bottom Menu -->
 
 
   <!-- ///////////// Js Files ////////////////////  -->

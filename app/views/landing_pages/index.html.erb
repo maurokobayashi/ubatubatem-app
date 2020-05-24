@@ -11,10 +11,10 @@
     <!-- Section Busca -->
     <div class="section full mt-1 mb-3">
       <div class="section">
-        <form class="search-form">
+        <form class="search-form" action="<%= buscar_path %>" autocomplete="off">
           <div class="form-group boxed">
             <div class="input-wrapper">
-              <input type="text" class="form-control" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="O que procura?">
+              <input type="text" name="q" class="form-control" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="O que procura?">
               <i class="clear-input">
                 <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
               </i>
@@ -360,19 +360,10 @@
 
 
   <!-- ///////////// Js Files ////////////////////  -->
-  <!-- Jquery -->
   <%= javascript_include_tag 'jquery-3.4.1.min.js', 'data-turbolinks-track': 'reload' %>
-  <!-- Bootstrap-->
-  <script src="/assets/popper.min.js"></script>
-  <script src="/assets/bootstrap.min.js"></script>
-  <!-- Ionicons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
-  <!-- Owl Carousel -->
+  <%= javascript_include_tag 'bootstrap.min.js', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'owl.carousel.min.js', 'data-turbolinks-track': 'reload' %>
-  <!-- Base Js File -->
   <%= javascript_include_tag 'base.js', 'data-turbolinks-track': 'reload' %>
-
+  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
 
 </body>
-
-</html>

@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root 'landing_pages#index'
 
   # Profiles
-  get 'profiles/index'
-  get 'profiles/:id', to: 'profiles#show'
+  get 'profiles/:id', to: 'profiles#show', as: 'profile'
+  get 'buscar', to: 'profiles#search'
 end
