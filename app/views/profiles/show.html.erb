@@ -47,28 +47,6 @@
   <!-- * Action Sheet Share -->
 
 
-  <!-- Dialog Delivery -->
-  <div class="modal fade dialogbox" id="dialog-delivery" data-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Regiões de entrega</h5>
-        </div>
-        <div class="modal-body align-left">
-          <p class="font-13">
-            Praia Grande, Itaguá, Centro, Estufa I, Estufa II, Jardim Carolina, Perequê Açu
-            <strong class="display-block mt-2">Taxa de entrega: R$ 4</strong>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <div class="btn-inline">
-            <a href="#" class="btn btn-text-primary" data-dismiss="modal">Fechar</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- * Dialog Delivery -->
 
   <!-- Dialog Horários -->
   <div class="modal fade dialogbox" id="dialog-horarios" data-backdrop="static" tabindex="-1" role="dialog">
@@ -98,6 +76,9 @@
   </div>
   <!-- * Dialog Horários -->
 
+
+  <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? %>
+
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
 
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
@@ -123,7 +104,9 @@
     <div class="section mt-2">
       <div class="profile-head">
         <div class="avatar">
-          <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", 'data-toggle':"modal", 'data-target': "#dialog-avatar" %>
+          <a href="javascript:;">
+            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", 'data-toggle':"modal", 'data-target': "#dialog-avatar" %>
+          </a>
         </div>
         <div class="in">
           <h3 class="name"><%= @profile.title %></h3>
@@ -154,7 +137,7 @@
       <ul class="listview listview-sm image-listview">
         <% if @profile.whatsapp.present? %>
         <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-whatsapp">
+          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-whatsapp">
             <div class="icon-box">
               <ion-icon name="logo-whatsapp"></ion-icon>
             </div>
@@ -167,7 +150,7 @@
         <% end %>
         <% if @profile.address.present? %>
         <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-address">
+          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-address">
             <div class="icon-box">
               <ion-icon name="location-outline"></ion-icon>
             </div>
@@ -180,7 +163,7 @@
         <% end %>
         <% if @profile.delivery.present? %>
         <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-delivery">
+          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-delivery">
             <div class="icon-box">
               <ion-icon name="bicycle-outline"></ion-icon>
             </div>
@@ -192,7 +175,7 @@
         </li>
         <% end %>
         <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios">
+          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-horarios">
             <div class="icon-box">
               <ion-icon name="time-outline"></ion-icon>
             </div>
@@ -204,13 +187,26 @@
         </li>
         <% if @profile.instagram_account.present? %>
         <li>
-          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item">
+          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="nofollow">
             <div class="icon-box">
               <ion-icon name="logo-instagram"></ion-icon>
             </div>
             <div class="in">
               <div><%= "@#{@profile.instagram_account.username}" %></div>
               <span class="text-muted">instagram</span>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if @profile.website.present? %>
+        <li>
+          <a href="<%= mask_url @profile.website %>" target="_blank" class="item" rel="nofollow">
+            <div class="icon-box">
+              <ion-icon name="globe-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div><%= @profile.website %></div>
+              <span class="text-muted">website</span>
             </div>
           </a>
         </li>
@@ -237,14 +233,9 @@
               <ion-icon name="camera-outline"></ion-icon>
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab">
-              <ion-icon name="chatbox-outline"></ion-icon>
-            </a>
-          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#tab3" role="tab">
-              <ion-icon name="analytics-outline"></ion-icon>
+              <ion-icon name="bar-chart-outline"></ion-icon>
             </a>
           </li>
         </ul>
@@ -272,98 +263,30 @@
         </div>
         <!-- * TAB1 -->
 
-        <!-- * TAB2: comentários -->
-        <!-- <div class="tab-pane fade" id="tab2" role="tabpanel">
-          <div class="section full mt-2 mb-2">
-            <div class="section-title">2 Comentários</div>
-            <div class="wide-block border-none pt-2 pb-2">
 
-              <div class="comment-block">
-                <div class="item">
-                  <div class="avatar">
-                    <img src="https://picsum.photos/32" alt="avatar" class="imaged w32 rounded">
-                  </div>
-                  <div class="in">
-                    <div class="comment-header">
-                      <h4 class="title">Diego Morata</h4>
-                      <span class="time">há 2 dias</span>
-                    </div>
-                    <div class="text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="comment-footer">
-                      <a href="javascript:;" class="comment-button">
-                        <ion-icon name="heart-outline"></ion-icon>
-                        Curtir (2)
-                      </a>
-                      <a href="javascript:;" class="comment-button">
-                        <ion-icon name="flag-outline"></ion-icon>
-                        Denunciar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="avatar">
-                    <img src="https://picsum.photos/32" alt="avatar" class="imaged w32 rounded">
-                  </div>
-                  <div class="in">
-                    <div class="comment-header">
-                      <h4 class="title">Henry Itondo</h4>
-                      <span class="time">há 5 dias</span>
-                    </div>
-                    <div class="text">
-                      Sed laoreet leo eget maximus ultricies. Nunc vitae enim facilisis tortor aliquet
-                      ullamcorper
-                      nec at tortor.
-                    </div>
-                    <div class="comment-footer">
-                      <a href="javascript:;" class="comment-button">
-                        <ion-icon name="heart" class="text-danger"></ion-icon>
-                        Curtiu (4)
-                      </a>
-                      <a href="javascript:;" class="comment-button">
-                        <ion-icon name="flag-outline"></ion-icon>
-                        Denunciar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="section mt-2 mb-4">
-              <button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#action-sheet-comment">Escrever comentário</button>
-            </div>
-
-          </div>
-        </div> -->
-        <!-- * friends -->
-
-        <!-- settings -->
+        <!-- TAB2: estatísticas -->
         <div class="tab-pane fade" id="tab3" role="tabpanel">
           <ul class="listview image-listview text flush transparent pt-1">
             <li>
               <div class="item">
                 <div class="in">
-                  <div class="small">Visualizações</div>
+                  <div class="small">Visitas</div>
                   <span class="text-muted">68</span>
                 </div>
               </div>
             </li>
-            <li>
+            <!-- <li>
               <div class="item">
                 <div class="in">
                   <div class="small">Salvo em listas</div>
                   <span class="text-muted">12</span>
                 </div>
               </div>
-            </li>
+            </li> -->
             <li>
               <div class="item">
                 <div class="in">
-                  <div class="small">Mensagens por WhatsApp</div>
+                  <div class="small">Cliques no WhatsApp</div>
                   <span class="text-muted">6</span>
                 </div>
               </div>
@@ -371,7 +294,7 @@
             <li>
               <div class="item">
                 <div class="in">
-                  <div class="small">Visitas no Instagram</div>
+                  <div class="small">Cliques no Instagram</div>
                   <span class="text-muted">6</span>
                 </div>
               </div>
@@ -384,17 +307,9 @@
                 </div>
               </div>
             </li>
-            <li>
-              <div class="item">
-                <div class="in">
-                  <div class="small">Comentários</div>
-                  <span class="text-muted">2</span>
-                </div>
-              </div>
-            </li>
           </ul>
         </div>
-        <!-- * settings -->
+        <!-- * TAB2 -->
       </div>
     </div>
     <!-- * tab content -->

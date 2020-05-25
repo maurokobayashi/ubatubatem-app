@@ -12,6 +12,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  website         :string
+#  avatar_url      :string
 #
 class Profile < ApplicationRecord
   has_one :instagram_account, dependent: :destroy

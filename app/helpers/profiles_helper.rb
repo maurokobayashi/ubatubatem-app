@@ -17,8 +17,4 @@ module ProfilesHelper
     address_line+=" - #{address.bairro.name}" if address.bairro.present?
   end
 
-  def mask_phone(phone)
-    "(#{phone[0,2]}) #{phone[2, (phone.length-6)]}-#{phone[-4,4]}"
-  end
-
 end

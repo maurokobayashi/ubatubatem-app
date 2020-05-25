@@ -1,0 +1,37 @@
+<% delivery = profile.delivery %>
+<!-- Dialog Delivery -->
+<div class="modal fade dialogbox" id="dialog-delivery" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Locais de entrega</h5>
+      </div>
+      <div class="modal-body align-left">
+        <p class="font-13">
+          <% if delivery.has_bairros? %>
+          <%= delivery.bairros.map{|b| b.name}.join(", ") %>
+          <% elsif profile.address.present? %>
+          <%= "#{profile.address.bairro.name} e imediações." %>
+          <% else %>
+          Não informado
+          <% end %>
+          <strong class="display-block mt-2">
+            <% if delivery.delivery_fee.blank? %>
+            Consulte nossa taxa de entrega
+            <% elsif delivery.delivery_fee == 0 %>
+            Entrega grátis
+            <% else %>
+            Taxa de entrega: <%= mask_money(delivery.delivery_fee) %>
+            <% end %>
+          </strong>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-inline">
+          <a href="#" class="btn btn-text-primary" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Dialog Delivery -->

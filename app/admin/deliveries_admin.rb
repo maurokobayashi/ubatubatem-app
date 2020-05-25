@@ -14,7 +14,7 @@ Trestle.resource(:deliveries) do
     column :has_retirada, header: "Retirada"
     column :has_ponto_comercial, header: "Ponto comercial"
     column :bairro_ids, ->(delivery) { content_tag(:small, Bairro.where(id: delivery.bairro_ids).map(&:name).join(", "), class: "text-muted hidden-xs") }, header: "Locais de entrega"
-    column :delivery_fee, ->(delivery) { number_to_currency(delivery.delivery_fee/100.00, unit: "", separator: ",", delimiter: "") }, header: "Taxa de entrega"
+    column :delivery_fee, ->(delivery) { number_to_currency(delivery.delivery_fee/100.00, unit: "", separator: ",", delimiter: "") if delivery.delivery_fee.present? }, header: "Taxa de entrega"
     actions
   end
 
@@ -24,6 +24,7 @@ Trestle.resource(:deliveries) do
     check_box :has_retirada?, label: "Retirada no local"
     check_box :has_ponto_comercial?, label: "Tem ponto comercial"
     divider
+    check_box :free?, label: "Entrega grátis"
     number_field :delivery_fee, label: "Taxa de entrega (em centavos)"
     select :bairro_ids, Bairro.all, { label: "Locais de entrega" }, multiple: true
   end
