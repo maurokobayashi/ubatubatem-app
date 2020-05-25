@@ -1688,8 +1688,8 @@ a.badge-dark {
   min-height: 50px;
 }
 .image-listview.listview-sm > li .item{
-  padding-top:7px;
-  padding-bottom:7px;
+  padding-top:5px;
+  padding-bottom:5px;
 }
 .listview.listview-sm > li > a {
   min-height: 40px!important;
