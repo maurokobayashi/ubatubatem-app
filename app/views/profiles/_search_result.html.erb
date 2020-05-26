@@ -1,5 +1,5 @@
 <li>
-  <a href="<%= profile_path profile %>" class="item">
+  <a href="<%= profile_path profile %>" class="item" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:perfil_view] %>);">
     <div class="imageWrapper">
       <img src="<%= profile.avatar_url %>" alt="image" class="imaged w64">
     </div>

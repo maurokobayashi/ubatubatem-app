@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   # Profiles
   get 'profiles/:id', to: 'profiles#show', as: 'profile'
   get 'buscar', to: 'profiles#search'
+
+  # Statistics
+  post 'statistics', to: 'statistics#track_profile', as:'track_statistic'
 end

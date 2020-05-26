@@ -1,0 +1,13 @@
+trackProfile = function(profileId, event) {
+  $.ajax({
+    url: "/statistics",
+    type: "POST",
+    data: {
+      profile_id: profileId,
+      event: event
+    },
+    success: function (data) {
+      // alert("statistic tracked! \o/");
+    }
+  });
+};

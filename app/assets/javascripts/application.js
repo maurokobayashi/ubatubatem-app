@@ -3,3 +3,4 @@
 //= require owl.carousel.min
 //= require will_paginate_infinite_custom
 //= require base
+//= require_tree .
