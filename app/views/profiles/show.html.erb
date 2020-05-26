@@ -83,19 +83,6 @@
 
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
 
-  <div class="modal fade dialogbox" id="dialog-avatar" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content align-center">
-        <img src="<%= @profile.avatar_url %>" alt="image" class="imaged w160">
-        <div class="modal-footer">
-          <div class="btn-inline">
-            <a href="#" class="btn btn-text-primary" data-dismiss="modal">Fechar</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <%= toast_success("toast-salvar", "Salvo na minha lista") %>
 
   <!-- App Capsule -->
@@ -104,9 +91,7 @@
     <div class="section mt-2">
       <div class="profile-head">
         <div class="avatar">
-          <a href="javascript:;">
-            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", 'data-toggle':"modal", 'data-target': "#dialog-avatar" %>
-          </a>
+          <%= image_tag @profile.avatar_url, class: "imaged w64 rounded" %>
         </div>
         <div class="in">
           <h3 class="name"><%= @profile.title %></h3>
@@ -270,7 +255,7 @@
             <li>
               <div class="item">
                 <div class="in">
-                  <div class="small">Visitas</div>
+                  <div class="small">Visitas no perfil</div>
                   <span class="text-muted">68</span>
                 </div>
               </div>
@@ -307,6 +292,14 @@
                 </div>
               </div>
             </li>
+            <li>
+              <div class="item">
+                <div class="in">
+                  <div class="small">Fotos visualizadas</div>
+                  <span class="text-muted">24</span>
+                </div>
+              </div>
+            </li>
           </ul>
         </div>
         <!-- * TAB2 -->
@@ -317,12 +310,5 @@
   </div>
   <!-- * App Capsule -->
 
-
-  <!-- ///////////// Js Files ////////////////////  -->
-  <%= javascript_include_tag 'jquery-3.4.1.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'bootstrap.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'owl.carousel.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'base.js', 'data-turbolinks-track': 'reload' %>
-  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
 
 </body>

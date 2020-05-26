@@ -13,10 +13,13 @@ gem 'trestle-search'
 
 # db annotations on models
 gem 'annotate', group: :development
-# geokit
+# geolocation
 gem 'geokit-rails'
 # http requests
 gem 'httparty'
+# infinite pagination
+gem 'will_paginate'
+gem 'will_paginate_infinite'
 
 
 ############# DEFAULT GEMS #############
@@ -71,4 +74,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-

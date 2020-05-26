@@ -31,30 +31,13 @@
     </div>
     <ul class="listview image-listview media search-result mb-2">
       <% @profiles.each do |profile| %>
-        <li>
-          <a href="<%= profile_path profile %>" class="item">
-            <div class="imageWrapper">
-              <img src="<%= profile.avatar_url %>" alt="image" class="imaged w64">
-            </div>
-            <div class="in">
-              <div>
-                <%= profile.title %>
-                <div class="text-muted"><%= profile.tagline %></div>
-              </div>
-            </div>
-          </a>
-        </li>
+        <%= render 'search_result', profile: profile %>
       <% end %>
     </ul>
 
+    <%= will_paginate @profiles, renderer: WillPaginateInfinite::InfinitePagination %>
+
   </div>
   <!-- * App Capsule -->
-
-  <!-- ///////////// Js Files ////////////////////  -->
-  <%= javascript_include_tag 'jquery-3.4.1.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'bootstrap.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'owl.carousel.min.js', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'base.js', 'data-turbolinks-track': 'reload' %>
-  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
 
 </body>

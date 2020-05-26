@@ -24,7 +24,6 @@ Trestle.resource(:deliveries) do
     check_box :has_retirada?, label: "Retirada no local"
     check_box :has_ponto_comercial?, label: "Tem ponto comercial"
     divider
-    check_box :free?, label: "Entrega grátis"
     number_field :delivery_fee, label: "Taxa de entrega (em centavos)"
     select :bairro_ids, Bairro.all, { label: "Locais de entrega" }, multiple: true
   end

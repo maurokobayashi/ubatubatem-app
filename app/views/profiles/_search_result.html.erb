@@ -1,0 +1,13 @@
+<li>
+  <a href="<%= profile_path profile %>" class="item">
+    <div class="imageWrapper">
+      <img src="<%= profile.avatar_url %>" alt="image" class="imaged w64">
+    </div>
+    <div class="in">
+      <div>
+        <%= profile.title %>
+        <div class="text-muted"><%= profile.tagline %></div>
+      </div>
+    </div>
+  </a>
+</li>
