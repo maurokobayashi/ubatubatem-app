@@ -15,7 +15,7 @@ module UxHelper
   end
 
   def google_maps_link(address_line)
-    "https://www.google.com/maps/place/#{address_line}, Ubatuba-SP"
+    "https://maps.google.com?daddr=#{address_line}, Ubatuba-SP"
   end
 
   def whatsapp_link(phone, text=nil)

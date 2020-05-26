@@ -6,6 +6,8 @@ class StatisticsController < ApplicationController
     if params[:profile_id].present? && params[:event].present?
       Statistic.create!(profile: Profile.find(params[:profile_id]), event: params[:event].to_i)
     end
+
+    head :ok
   end
 
 end

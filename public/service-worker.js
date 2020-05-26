@@ -16,7 +16,7 @@ const assets = [
   // 'assets/jquery.countdown.min.js',
   // 'assets/base.js',
   // 'assets/owl.carousel.min.css',
-  // 'assets/owl.theme.default.css',
+  // 'assets/owl.theme.min.css',
   // 'assets/bootstrap.min.css',
   // 'assets/style.css',
 ];
@@ -56,7 +56,7 @@ self.addEventListener('activate', evt => {
 
 // Fetch
 self.addEventListener('fetch', evt => {
-  if (evt.request.url.indexOf('www.yoururl.com') === -1) {
+  if (evt.request.url.indexOf('localhost:3000') === -1) {
     evt.respondWith(
       caches.match(evt.request).then(cacheRes => {
         return cacheRes || fetch(evt.request).then(fetchRes => {

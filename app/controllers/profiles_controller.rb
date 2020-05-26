@@ -37,6 +37,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def autocomplete
+
+  end
+
   private
     def scrap_from_instagram(username)
       instagram_scrap = {}
