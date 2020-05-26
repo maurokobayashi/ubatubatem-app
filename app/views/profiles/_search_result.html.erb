@@ -1,5 +1,5 @@
 <li>
-  <a href="<%= profile_path profile %>" class="item" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:perfil_view] %>);">
+  <a href="<%= profile_path profile %>" class="item vibrate" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:perfil_view] %>);">
     <div class="imageWrapper">
       <img src="<%= profile.avatar_url %>" alt="image" class="imaged w64">
     </div>
@@ -8,7 +8,7 @@
         <%= profile.title %>
         <div class="text-muted">
           <%= profile.tagline %>
-          <div class="mt-0a5"><small>Categoria&nbsp;>&nbsp;Subcategoria</small></div>
+          <div><small>Categoria&nbsp;>&nbsp;Subcategoria</small></div>
         </div>
       </div>
     </div>
