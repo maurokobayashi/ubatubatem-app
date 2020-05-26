@@ -19,6 +19,7 @@ class Profile < ApplicationRecord
   has_one :address, dependent: :destroy
   has_one :delivery, dependent: :destroy
   has_many :opening_hours, dependent: :destroy
+  has_many :statistics, dependent: :destroy
 
   enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 
