@@ -17,6 +17,8 @@ gem 'annotate', group: :development
 gem 'geokit-rails'
 # http requests
 gem 'httparty'
+# pg elastic search
+gem 'pg_search'
 # infinite pagination
 gem 'will_paginate'
 gem 'will_paginate_infinite'

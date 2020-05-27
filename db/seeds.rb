@@ -3,6 +3,14 @@ User.delete_all
 User.create(email: "mauro.kobayashi@gmail.com", password: "mauro.kobayashi@gmail.com", first_name: "Mauro", last_name: "Kobayashi")
 User.create(email: "lunapedricci@gmail.com", password: "lunapedricci@gmail.com", first_name: "Luna", last_name: "Pedricci")
 
+# Categs
+Categ.delete_all
+categ = Categ.create('alias': "desconhecido", name: "Não informado", status: 2)
+
+# Subcategs
+SubCateg.delete_all
+SubCateg.create(categ: categ, 'alias': "desconhecido", name: "Não informado", status: 2)
+
 # Instagram Following Leads
 LeadInstagram.delete_all
 LeadInstagram.create(instagram_user_id:"  34874410605 ".strip,username:"  hana_oleosessenciais  ".strip,title:" dōTERRA✨ Valéria  ".strip,avatar_url:"  https://scontent-gru1-1.cdninstagram.com/v/t51.2885-19/s150x150/95884957_169929927677251_6090192681458204672_n.jpg?_nc_ht=scontent-gru1-1.cdninstagram.com&_nc_ohc=R8j-Jg-Xcp4AX_C0mCu&oh=2b0fd06942435e75037d697d8ad7a583&oe=5EEC7B71  ".strip)

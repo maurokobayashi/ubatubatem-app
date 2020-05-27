@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: []
 
+  RESULTS_PER_PAGE = 10
+
   # GET profiles/:id
   def show
     @profile = Profile.find(params[:id])
@@ -19,12 +21,31 @@ class ProfilesController < ApplicationController
   # GET /buscar?q=
   def search
     sleep 0.5
-    per_page = 10
     @query = params[:q]
     if @query.present?
       @profiles = Profile.where("title ILIKE ? OR tagline ILIKE ?", "%#{@query}%", "%#{@query}%")
       # query_unnacent = @query.gsub(/[^0-9A-Za-z]/, '_')
       # @profiles = Profile.where("title ILIKE ? OR tagline ILIKE ?", "%#{query_unnacent}%", "%#{query_unnacent}%").limit(15)
+    else
+      @profiles = Profile.none
+    end
+
+    # TODO: adicionar no fim da fila os profiles da subcategoria (caso a query ê match)
+
+    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET /buscar_full?q=
+  def fullsearch
+    per_page = 10
+    @query = params[:q]
+    if @query.present?
+      @profiles = Profile.search_by_title_and_tagline(@query)
     else
       @profiles = Profile.none
     end
@@ -35,6 +56,8 @@ class ProfilesController < ApplicationController
       format.html
       format.js
     end
+
+    render "search"
   end
 
   private

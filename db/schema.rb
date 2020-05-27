@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_120930) do
+ActiveRecord::Schema.define(version: 2020_05_27_202602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 2020_05_26_120930) do
   create_table "categs", force: :cascade do |t|
     t.string "name"
     t.string "search_tags"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
+    t.string "alias", null: false
+    t.index ["alias"], name: "index_categs_on_alias"
     t.index ["name"], name: "index_categs_on_name"
   end
 
@@ -113,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_05_26_120930) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "website"
     t.string "avatar_url"
+    t.integer "sub_categ_id", default: 1, null: false
   end
 
   create_table "statistics", force: :cascade do |t|
@@ -122,10 +125,12 @@ ActiveRecord::Schema.define(version: 2020_05_26_120930) do
   end
 
   create_table "sub_categs", force: :cascade do |t|
-    t.integer "categ_id"
+    t.integer "categ_id", null: false
     t.string "name"
     t.string "search_tags"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
+    t.string "alias", null: false
+    t.index ["alias"], name: "index_sub_categs_on_alias"
     t.index ["name"], name: "index_sub_categs_on_name"
   end
 

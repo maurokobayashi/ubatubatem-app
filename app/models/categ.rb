@@ -5,7 +5,8 @@
 #  id          :bigint           not null, primary key
 #  name        :string
 #  search_tags :string
-#  status      :integer
+#  status      :integer          default("sugerido"), not null
+#  alias       :string           not null
 #
 class Categ < ApplicationRecord
   has_many :subcategs, dependent: :destroy

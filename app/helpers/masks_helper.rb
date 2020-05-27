@@ -18,7 +18,7 @@ module MasksHelper
 
     # symbols & pics
     regex = /[\u{1f300}-\u{1f5ff}]/
-    clean = text.gsub regex, ""
+    clean = text.gsub regex, " "
 
     # enclosed chars
     regex = /[\u{2500}-\u{2BEF}]/ # I changed this to exclude chinese char
