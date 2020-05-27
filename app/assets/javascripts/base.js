@@ -97,14 +97,13 @@ $(document).ready(function () {
 
   // Input
   $(".clear-input").click(function () {
-    alert();
     $(this).parent(".input-wrapper").find(".form-control").focus();
     $(this).parent(".input-wrapper").find(".form-control").val("");
     $(this).parent(".input-wrapper").removeClass("not-empty");
   });
   // active
   $(".form-group .form-control").focus(function () {
-    $(this).parent(".input-wrapper").addClass("active");
+    $(this).parent(".input-wrapper").addClass("active").addClass("not-empty");
   }).blur(function () {
     $(this).parent(".input-wrapper").removeClass("active");
   })
@@ -125,6 +124,7 @@ $(document).ready(function () {
     var a = $("#search").hasClass("show");
     if (a) {
       $("#search").removeClass("show");
+      $("#search .form-control").val("");
     }
     else {
       $("#search").addClass("show");

@@ -4,7 +4,6 @@
   <%= render 'app_components/menu_bottom' %>
   <%= render 'app_components/header' %>
 
-
   <!-- App Capsule -->
   <div id="appCapsule" class="mb-5">
 
@@ -14,7 +13,7 @@
         <form class="search-form" action="<%= buscar_path %>" autocomplete="off">
           <div class="form-group boxed">
             <div class="input-wrapper">
-              <input type="text" name="q" class="form-control" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="O que procura?" value="<%= @query %>">
+              <input type="text" name="q" class="form-control" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="Buscar..." value="<%= @query %>">
               <i class="clear-input">
                 <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
               </i>
@@ -24,18 +23,47 @@
       </div>
     </div>
 
+    <!-- Search Results -->
+    <% if @profiles.count > 0 %>
     <div class="listview-title mt-1">
-      <div>
-        <%= pluralize(@profiles.count, "resultado", "resultados") %> para <strong class="text-primary">"<%= @query %>"</strong>
-      </div>
+      <div><%= pluralize(@profiles.count, "resultado", "resultados") %> para <strong class="text-primary">"<%= @query %>"</strong></div>
     </div>
     <ul class="listview image-listview media search-result mb-2">
       <% @profiles.each do |profile| %>
         <%= render 'search_result', profile: profile %>
       <% end %>
     </ul>
-
     <%= will_paginate @profiles, renderer: WillPaginateInfinite::InfinitePagination %>
+
+    <% else %>
+
+      <% if @query.present? %>
+      <div class="listview-title">
+        <div>Nenhum resultado encontrado para <strong class="text-primary">"<%= @query %>"</strong></div>
+      </div>
+      <% end %>
+
+    <!-- Suggestions -->
+    <div class="section mt-2">
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">sushi</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">pães</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">crochê</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">doces</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">artesanato</span>
+      </a>
+    </div>
+
+    <% end %>
+
 
   </div>
   <!-- * App Capsule -->

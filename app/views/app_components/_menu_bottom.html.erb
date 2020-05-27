@@ -1,11 +1,13 @@
 <!-- App Bottom Menu -->
+<%= render 'app_components/search' %>
+
 <div class="appBottomMenu">
   <a href="<%= root_path %>" class="item vibrate">
     <div class="col">
       <ion-icon name="home-outline"></ion-icon>
     </div>
   </a>
-  <a href="<%= buscar_path %>" class="item vibrate">
+  <a href="#" class="item toggle-searchbox vibrate" onclick="javascript:$('#search-input-header').focus();">
     <div class="col">
       <ion-icon name="search-outline"></ion-icon>
     </div>
