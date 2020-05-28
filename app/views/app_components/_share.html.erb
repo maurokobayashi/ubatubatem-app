@@ -1,0 +1,37 @@
+<% link = URI.join(root_url, profile_path(profile)).to_s %>
+<!-- Action Sheet Share -->
+<div class="modal fade action-sheet inset" id="action-sheet-share" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Compartilhar</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="action-button-list">
+          <li>
+            <a href="<%= share_whatsapp_link link %>" target="_system" class="btn btn-list">
+              <span><ion-icon name="logo-whatsapp"></ion-icon>WhatsApp</span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= share_facebook_link link %>" target="_system" class="btn btn-list">
+              <span><ion-icon name="logo-facebook"></ion-icon>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= share_twitter_link link, profile.title+' - '+profile.tagline %>" target="_system" class="btn btn-list">
+              <span><ion-icon name="logo-twitter"></ion-icon>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-list" onclick="copyToClipboard('share-copy-link'); toastbox('toast-copy-to-clipboard', 3000);" data-dismiss="modal">
+              <span><ion-icon name="copy-outline"></ion-icon>Copiar link</span>
+            </a>
+            <input id="share-copy-link" style="overflow: hidden;position: absolute;top: 200%;" value="<%= link %>">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Action Sheet Share -->

@@ -1,0 +1,7 @@
+copyToClipboard = function(elementId) {
+  var element = document.getElementById(elementId);
+  element.select();
+  element.setSelectionRange(0, 99999); /*For mobile devices*/
+  element.blur();
+  document.execCommand("copy");
+}

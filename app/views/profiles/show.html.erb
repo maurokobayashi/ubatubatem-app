@@ -1,89 +1,16 @@
 <body>
 
-  <%= render 'app_components/loader' %>
-  <%= render 'app_components/menu_bottom' %>
-  <%= render 'app_components/header' %>
-
-
-  <!-- Action Sheet Share -->
-  <div class="modal fade action-sheet inset" id="action-sheet-share" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Compartilhar</h5>
-        </div>
-        <div class="modal-body">
-          <ul class="action-button-list">
-            <li>
-              <a href="#" class="btn btn-list" data-dismiss="modal">
-                <span><ion-icon name="logo-whatsapp"></ion-icon>WhatsApp</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="btn btn-list" data-dismiss="modal">
-                <span><ion-icon name="logo-instagram"></ion-icon>Instagram</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="btn btn-list" data-dismiss="modal">
-                <span><ion-icon name="logo-facebook"></ion-icon>Facebook</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="btn btn-list" data-dismiss="modal">
-                <span><ion-icon name="logo-twitter"></ion-icon>Twitter</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="btn btn-list" data-dismiss="modal">
-                <span><ion-icon name="copy-outline"></ion-icon>Copiar link</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- * Action Sheet Share -->
-
-
-
-  <!-- Dialog Horários -->
-  <div class="modal fade dialogbox" id="dialog-horarios" data-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Horários de funcionamento</h5>
-        </div>
-        <div class="modal-body mb-2 align-left">
-          <ul class="font-13">
-            <li>Segunda: 8h às 20h</li>
-            <li>Terça: 8h às 20h</li>
-            <li>Quarta: 8h às 20h</li>
-            <li>Quinta: 8h às 20h</li>
-            <li>Sexta: 8h às 20h</li>
-            <li>Sábado: 8h às 20h</li>
-            <li>Domingo: fechado</li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <div class="btn-inline">
-            <a href="#" class="btn btn-text-primary" data-dismiss="modal">Fechar</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- * Dialog Horários -->
-
+  <%= render "app_components/loader" %>
+  <%= render "app_components/menu_bottom" %>
+  <%= render "app_components/header", right_button: "share" %>
+  <%= render "app_components/share", profile: @profile %>
 
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? %>
-
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
-
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
-
-  <%= toast_success("toast-salvar", "Salvo na minha lista") %>
+  <%= render("dialog_horarios") %>
+  <%= toast_notification("toast-salvar", "success", "Salvo na minha lista") %>
+  <%= toast_notification("toast-copy-to-clipboard", "primary", "Copiado para área de transferência") %>
 
   <!-- App Capsule -->
   <div id="appCapsule">
@@ -91,7 +18,9 @@
     <div class="section mt-2">
       <div class="profile-head">
         <div class="avatar">
-          <%= image_tag @profile.avatar_url, class: "imaged w64 rounded" %>
+          <a href="<%= @instagram_scrap[:avatar_url_large] %>" target="_system" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);">
+            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded" %>
+          </a>
         </div>
         <div class="in">
           <h3 class="name"><%= @profile.title %></h3>
@@ -113,7 +42,7 @@
     <div class="section mt-1 mb-2">
       <div class="profile-info">
         <div class="bio">
-          <%= remove_emojis @profile.bio %>
+          <%= add_breaklines(remove_emojis @profile.bio) %>
         </div>
       </div>
     </div>

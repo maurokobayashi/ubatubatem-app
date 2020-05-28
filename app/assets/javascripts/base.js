@@ -204,7 +204,7 @@ $(document).ready(function () {
 
   // Notification
   // trigger notification
-  function notification(target, time) {
+  notification = function (target, time) {
     var a = "#" + target;
     $(".notification-box").removeClass("show");
     setTimeout(() => {
@@ -230,7 +230,7 @@ $(document).ready(function () {
 
   // Toast
   // trigger toast
-  function toastbox(target, time) {
+  toastbox = function(target, time) {
     var a = "#" + target;
     $(".toast-box").removeClass("show");
     setTimeout(() => {
@@ -256,7 +256,7 @@ $(document).ready(function () {
 
   // Header Scrolled
   // Animated header style
-  function animatedHeader() {
+  animatedHeader = function() {
     var scrollS = $(this).scrollTop();
     if (scrollS > 20) {
       $(".appHeader.scrolled").addClass("is-active");
@@ -277,7 +277,7 @@ $(document).ready(function () {
   var OfflineText = "Sem conexão com a internet";
 
   // Online Mode Toast Append
-  function onlineModeToast() {
+  onlineModeToast = function() {
     $("body").append(
       "<div id='online-toast' class='toast-box bg-success toast-top tap-to-close'>"
       +
@@ -293,7 +293,7 @@ $(document).ready(function () {
   }
 
   // Ofline Mode Toast Append
-  function offlineModeToast() {
+  offlineModeToast = function() {
     $("body").append(
       "<div id='offline-toast' class='toast-box bg-danger toast-top tap-to-close'>"
       +
@@ -309,7 +309,7 @@ $(document).ready(function () {
   }
 
   // Online Mode Function
-  function onlineMode() {
+  onlineMode = function() {
     if ($("#offline-toast").hasClass("show")) {
       $("#offline-toast").removeClass("show");
     }
@@ -328,7 +328,7 @@ $(document).ready(function () {
   }
 
   // Offline Mode Function
-  function offlineMode() {
+  offlineMode = function() {
     if ($("#online-toast").hasClass("show")) {
       $("#online-toast").removeClass("show");
     }
@@ -389,7 +389,7 @@ $(document).ready(function () {
 
 
   // Add to Home
-  function AddtoHome(time, once) {
+  AddtoHome = function(time, once) {
     if (once) {
       var AddHomeStatus = localStorage.getItem("MobilekitAddHomeStatus");
       if (AddHomeStatus === "1" || AddHomeStatus === 1) {

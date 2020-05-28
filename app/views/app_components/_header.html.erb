@@ -1,5 +1,10 @@
+<%
+  if !defined?(right_button)
+    right_button = nil
+  end
+%>
 <!-- App Header -->
-<div class="appHeader bg-secondary scrolled">
+<div class="appHeader bg-primary scrolled">
   <div class="left">
     <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
       <ion-icon name="menu-outline"></ion-icon>
@@ -9,9 +14,15 @@
     ubatuba tem
   </div>
   <div class="right">
-    <a href="login.html" class="headerButton">
+    <% if right_button.blank? %>
+    <a href="#" class="headerButton">
       <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="person add outline"></ion-icon>
     </a>
+    <% elsif right_button == "share" %>
+    <a href="#" data-toggle="modal" data-target="#action-sheet-share" class="headerButton">
+      <ion-icon name="share-social-outline"></ion-icon>
+    </a>
+    <% end %>
   </div>
 </div>
 <!-- * App Header -->
