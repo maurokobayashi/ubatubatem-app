@@ -9,22 +9,22 @@
       <div class="modal-body">
         <ul class="action-button-list">
           <li>
-            <a href="<%= share_whatsapp_link link %>" target="_system" class="btn btn-list">
+            <a href="<%= share_whatsapp_link link %>" target="_system" class="btn btn-list vibrate" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:compartilhar_click] %>);">
               <span><ion-icon name="logo-whatsapp"></ion-icon>WhatsApp</span>
             </a>
           </li>
           <li>
-            <a href="<%= share_facebook_link link %>" target="_system" class="btn btn-list">
+            <a href="<%= share_facebook_link link %>" target="_system" class="btn btn-list vibrate" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:compartilhar_click] %>);">
               <span><ion-icon name="logo-facebook"></ion-icon>Facebook</span>
             </a>
           </li>
           <li>
-            <a href="<%= share_twitter_link link, profile.title+' - '+profile.tagline %>" target="_system" class="btn btn-list">
+            <a href="<%= share_twitter_link link, profile.title+' - '+profile.tagline %>" target="_system" class="btn btn-list vibrate" onclick="trackProfile(<%= profile.id %>, <%= Statistic.events[:compartilhar_click] %>);">
               <span><ion-icon name="logo-twitter"></ion-icon>Twitter</span>
             </a>
           </li>
           <li>
-            <a href="#" class="btn btn-list" onclick="copyToClipboard('share-copy-link'); toastbox('toast-copy-to-clipboard', 3000);" data-dismiss="modal">
+            <a href="#" onclick="copyToClipboard('share-copy-link'); toastbox('toast-copy-to-clipboard', 3000); trackProfile(<%= profile.id %>, <%= Statistic.events[:compartilhar_click] %>);" data-dismiss="modal" class="btn btn-list vibrate">
               <span><ion-icon name="copy-outline"></ion-icon>Copiar link</span>
             </a>
             <input id="share-copy-link" style="overflow: hidden;position: absolute;top: 200%;" value="<%= link %>">
