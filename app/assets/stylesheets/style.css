@@ -23,8 +23,8 @@ body {
 .align-right{text-align:right!important;}
 .align-center{text-align:center!important;}
 .border-none{border:none!important;}
-.breadcrumb-sm{font-size: 80%;}
-.breadcrumb-sm a{color:#4F5050!important;}
+.breadcrumb-sm{font-size: 85%;}
+.breadcrumb-sm a{color:#A1A1A2!important;}
 .click-animated {
   position: relative;
   cursor: pointer;
@@ -262,7 +262,7 @@ button:hover, button:active, button:focus {
 }
 
 .appHeader.scrolled.bg-primary .headerButton {
-  color: #1E74FD;
+  /*color: #1E74FD;*/
 }
 
 .appHeader.scrolled.bg-primary.is-active {
