@@ -393,58 +393,57 @@ $(document).ready(function () {
     if (once) {
       var AddHomeStatus = localStorage.getItem("MobilekitAddHomeStatus");
       if (AddHomeStatus === "1" || AddHomeStatus === 1) {
-              // already showed up
+      // already showed up
+      }
+      else {
+        localStorage.setItem("MobilekitAddHomeStatus", 1)
+        window.addEventListener('load', () => {
+          if (navigator.standalone) {
+            // if app installed ios home screen
+            }
+            else if (matchMedia('(display-mode: standalone)').matches) {
+            // if app installed android home screen
             }
             else {
-              localStorage.setItem("MobilekitAddHomeStatus", 1)
-              window.addEventListener('load', () => {
-                if (navigator.standalone) {
-                      // if app installed ios home screen
-                    }
-                    else if (matchMedia('(display-mode: standalone)').matches) {
-                      // if app installed android home screen
-                    }
-                    else {
-                      // if app is not installed
-                      if (androidDetection) {
-                        setTimeout(() => {
-                          $('#android-add-to-home-screen').modal();
-                        }, time);
-                      }
-                      if (iosDetection) {
-                        setTimeout(() => {
-                          $('#ios-add-to-home-screen').modal();
-                        }, time);
-                      }
-                    }
-                  });
+              // if app is not installed
+              if (androidDetection) {
+                setTimeout(() => {
+                  $('#android-add-to-home-screen').modal();
+                }, time);
+              }
+              if (iosDetection) {
+                setTimeout(() => {
+                  $('#ios-add-to-home-screen').modal();
+                }, time);
+              }
             }
+          });
+        }
+      }
+      else {
+        window.addEventListener('load', () => {
+          if (navigator.standalone) {
+            // app loaded to ios
+          }
+          else if (matchMedia('(display-mode: standalone)').matches) {
+            // app loaded to android
           }
           else {
-            window.addEventListener('load', () => {
-              if (navigator.standalone) {
-                  // app loaded to ios
-                }
-                else if (matchMedia('(display-mode: standalone)').matches) {
-                  // app loaded to android
-                }
-                else {
-                  // app not loaded
-                  if (androidDetection) {
-                    setTimeout(() => {
-                      $('#android-add-to-home-screen').modal();
-                    }, time);
-                  }
-                  if (iosDetection) {
-                    setTimeout(() => {
-                      $('#ios-add-to-home-screen').modal();
-                    }, time);
-                  }
-                }
-              });
+            // app not loaded
+            if (androidDetection) {
+              setTimeout(() => {
+                $('#android-add-to-home-screen').modal();
+              }, time);
+            }
+            if (iosDetection) {
+              setTimeout(() => {
+                $('#ios-add-to-home-screen').modal();
+              }, time);
+            }
           }
-
-        }
+        });
+      }
+    }
 
   // Dark Mode Detection
   var checkDarkModeStatus = localStorage.getItem("MobilekitDarkModeActive");

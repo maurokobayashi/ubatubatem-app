@@ -30,12 +30,10 @@
     </div>
 
     <div class="section mt-1">
-      <nav aria-label="breadcrumb">
-        <small>
-          <a href="#">Categoria</a>
-          <span>&nbsp;>&nbsp;</span>
-          <a href="#" aria-current="page"><%= LeadExcel.find_by_instagram(@profile.instagram_account.username).try(:categoria).try(:camelize) || "Subcategoria" %></a>
-        </small>
+      <nav class="breadcrumb-sm" aria-label="breadcrumb">
+        <a href="#">Categoria</a>
+        <span>&nbsp;>&nbsp;</span>
+        <a href="#" aria-current="page"><%= LeadExcel.find_by_instagram(@profile.instagram_account.username).try(:categoria).try(:camelize) || "Subcategoria" %></a>
       </nav>
     </div>
 
@@ -51,7 +49,7 @@
       <ul class="listview listview-sm image-listview">
         <% if @profile.whatsapp.present? %>
         <li>
-          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
+          <a href="#" class="item" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
             <div class="icon-box">
               <ion-icon name="logo-whatsapp"></ion-icon>
             </div>
@@ -64,7 +62,7 @@
         <% end %>
         <% if @profile.address.present? %>
         <li>
-          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-address">
+        <a href="#" class="item" data-toggle="modal" data-target="#dialog-address">
             <div class="icon-box">
               <ion-icon name="location-outline"></ion-icon>
             </div>
@@ -77,7 +75,7 @@
         <% end %>
         <% if @profile.delivery.present? %>
         <li>
-          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-delivery">
+          <a href="#" class="item" data-toggle="modal" data-target="#dialog-delivery">
             <div class="icon-box">
               <ion-icon name="bicycle-outline"></ion-icon>
             </div>
@@ -89,7 +87,7 @@
         </li>
         <% end %>
         <li>
-          <a href="javascript:;" class="item" data-toggle="modal" data-target="#dialog-horarios">
+          <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios">
             <div class="icon-box">
               <ion-icon name="time-outline"></ion-icon>
             </div>
@@ -126,7 +124,7 @@
         </li>
         <% end %>
         <!-- <li>
-          <a href="javascript:;" onclick="toastbox('toast-salvar', 3000);" class="item" onclick="trackProfile(<%#= @profile.id %>, <%#= Statistic.events[:salvar_click] %>);">
+          <a href="#" onclick="toastbox('toast-salvar', 3000);" class="item" onclick="trackProfile(<%#= @profile.id %>, <%#= Statistic.events[:salvar_click] %>);">
             <div class="icon-box">
               <ion-icon name="bookmark-outline"></ion-icon>
             </div>
@@ -139,6 +137,7 @@
     </div>
 
 
+    <!-- TABS: headers -->
     <div class="section full mt-3 bg-white">
       <div class="wide-block transparent p-0">
         <ul class="nav nav-tabs lined iconed" role="tablist">
@@ -156,8 +155,7 @@
       </div>
     </div>
 
-
-    <!-- tab content -->
+    <!-- TABS: contents -->
     <div class="section full mb-2">
       <div class="tab-content">
 
@@ -180,6 +178,12 @@
 
         <!-- TAB2: estatísticas -->
         <div class="tab-pane fade" id="tab3" role="tabpanel">
+
+          <div class="wide-block pt-2 pb-2 border-none">
+            <% completion_rate = @profile.completion_rate %>
+            <%= progress_bar completion_rate, "Este perfil está #{completion_rate}% completo", true %>
+          </div>
+
           <ul class="listview image-listview text flush transparent pt-1">
             <li>
               <div class="item">

@@ -38,6 +38,26 @@ class Profile < ApplicationRecord
 
   enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 
+  def completion_rate
+    rate = 0
+    rate+= 10 if title.present?
+    rate+= 10 if tagline.present? && tagline != title
+    rate+= 10 if bio.present?
+    rate+= 10 if instagram_account.present? && instagram_account.has_permissions?
+    rate+= 10 if whatsapp.present?
+    rate+= 10 if address.present? && address.logradouro.present?
+    rate+= 10 if delivery.present? && delivery.is_configured?
+    rate+= 10 if opening_hours.present?
+    rate+= 10 if sub_categ.present?
+    rate+= 10 if self.claimed?
+    rate
+  end
+
+  # TODO
+  def claimed?
+    false
+  end
+
   def initials
     title.split.first(2).map(&:first).join
   end

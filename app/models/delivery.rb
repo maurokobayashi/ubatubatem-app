@@ -21,4 +21,12 @@ class Delivery < ApplicationRecord
     Bairro.where(id: self.bairro_ids)
   end
 
+  def is_configured?
+    configured = true
+    if has_delivery
+      configured = has_bairros? && delivery_fee.present?
+    end
+    configured
+  end
+
 end

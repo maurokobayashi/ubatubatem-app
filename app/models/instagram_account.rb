@@ -12,4 +12,8 @@
 #
 class InstagramAccount < ApplicationRecord
   belongs_to :profile, dependent: :destroy
+
+  def has_permissions?
+    self.access_token.present?
+  end
 end

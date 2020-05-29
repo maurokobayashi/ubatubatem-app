@@ -14,6 +14,25 @@ module UxHelper
     html.html_safe
   end
 
+  def progress_bar(percentual, label=nil, colored=false)
+    bar_color = ""
+    if colored
+      bar_color = "bg-success" if percentual > 80
+      bar_color = "bg-primary" if percentual.between? 31, 80
+      bar_color = "bg-danger" if percentual.between? 0, 30
+    end
+
+    percentual = percentual.to_s
+    html=""
+    html+="<p>"+label+"</p>" if label.present?
+    html+="<div class='progress'>"
+    html+="  <div class='progress-bar "+bar_color+"' role='progressbar' style='width: "+percentual+"%;' aria-valuenow='"+percentual+"' aria-valuemin='0' aria-valuemax='100'>"
+    html+="    "+percentual+"%"
+    html+="  </div>"
+    html+="</div>"
+    html.html_safe
+  end
+
   def google_maps_link(address_line)
     "https://maps.google.com?daddr=#{address_line}, Ubatuba-SP"
   end
