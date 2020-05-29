@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_202602) do
+ActiveRecord::Schema.define(version: 2020_05_29_204747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_05_27_202602) do
     t.string "search_tags"
     t.integer "status", default: 0, null: false
     t.string "alias", null: false
+    t.string "icon"
+    t.integer "order"
     t.index ["alias"], name: "index_categs_on_alias"
     t.index ["name"], name: "index_categs_on_name"
   end

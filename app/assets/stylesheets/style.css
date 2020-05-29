@@ -17,6 +17,40 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*Custom styles*/
+
+.align-left{text-align:left!important;}
+.align-right{text-align:right!important;}
+.align-center{text-align:center!important;}
+.border-none{border:none!important;}
+.breadcrumb-sm{font-size: 80%;}
+.breadcrumb-sm a{color:#4F5050!important;}
+.click-animated {
+  position: relative;
+  cursor: pointer;
+  z-index:0;
+}.click-animated:before {
+  content: "";
+  position: absolute;
+  z-index:-1;
+  top: 0;  left: 0;  right: 0;  bottom: 0;
+  background: rgba(0,0,0,0.1);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .5s ease-out;
+}.click-animated:hover:before{transform: scaleX(1);}
+.display-block{display:block!important;}
+.font-12{font-size:12px!important;}
+.font-13{font-size:13px!important;}
+.font-14{font-size:14px!important;}
+.font-15{font-size:15px!important;}
+.font-16{font-size:16px!important;}
+.weight-4{font-weight:400!important;}
+.weight-5{font-weight:500!important;}
+.weight-6{font-weight:600!important;}
+
+/*-----*/
+
 ::-webkit-scrollbar {
   width: 0;
 }
@@ -44,40 +78,6 @@ button {
 button:hover, button:active, button:focus {
   outline: 0 !important;
 }
-
-/*Custom styles*/
-
-.align-left{text-align:left!important;}
-.align-right{text-align:right!important;}
-.align-center{text-align:center!important;}
-.border-none{border:none!important;}
-.breadcrumb-sm{font-size: 80%;}
-.breadcrumb-sm a{color:#4F5050!important;}
-.display-block{display:block!important;}
-.font-12{font-size:12px!important;}
-.font-13{font-size:13px!important;}
-.font-14{font-size:14px!important;}
-.font-15{font-size:15px!important;}
-.font-16{font-size:16px!important;}
-.weight-4{font-weight:400!important;}
-.weight-5{font-weight:500!important;}
-.weight-6{font-weight:600!important;}
-
-
-.click-animated {
-  position: relative;
-  cursor: pointer;
-  z-index:0;
-}.click-animated:before {
-  content: "";
-  position: absolute;
-  z-index:-1;
-  top: 0;  left: 0;  right: 0;  bottom: 0;
-  background: rgba(0,0,0,0.1);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform .5s ease-out;
-}.click-animated:hover:before{transform: scaleX(1);}
 
 
 /*-------*/
@@ -1708,15 +1708,21 @@ a.badge-dark {
   position: relative;
   min-height: 50px;
 }
-.image-listview.listview-sm > li .item{
+.image-listview.listview-sm, .image-listview.listview-md > li .item{
   padding-top:5px;
   padding-bottom:5px;
 }
 .listview.listview-sm > li > a {
   min-height: 40px!important;
 }
+.listview.listview-md > li > a {
+  min-height: 42px!important;
+}
 .listview.listview-sm > li > a {
   font-size:13px;
+}
+.listview.listview-md > li > a {
+  font-size:14px;
 }
 
 .listview > li .item {

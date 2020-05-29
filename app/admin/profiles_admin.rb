@@ -26,6 +26,7 @@ Trestle.resource(:profiles) do
         content_tag(:small, profile.tagline, class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
+    column :sub_categ, link: false
     column :whatsapp, header: "WhatsApp"
     column :name, ->(profile) { profile.address.present? ? profile.address.bairro : ""}, header: "Bairro", link: false
     column :username, ->(profile) { profile.instagram_account.present? ? link_to("@#{profile.instagram_account.username}", "https://www.instagram.com/#{profile.instagram_account.username}", target: "_blank", class: "external-link") : ""}, header: "Instagram", link: true
@@ -54,7 +55,8 @@ Trestle.resource(:profiles) do
       end if profile.avatar_url?
       select :status, Profile.statuses.keys.to_a
       text_field :title, append: "max. 30", label: "Título"
-      text_field :tagline, append: "max. 60", label: "Subtítulo"
+      select :sub_categ_id, SubCateg.all
+      text_field :tagline, append: "max. 60", label: "Tagline"
       text_area :bio, append: "max. 255"
       row do
         col(sm: 6) { telephone_field :whatsapp, prepend: status_tag(icon("fa fa-phone"), :success), label: "WhatsApp" }

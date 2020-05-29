@@ -14,4 +14,8 @@ class SubCateg < ApplicationRecord
   has_many :profiles
 
   enum status: { sugerido: 0, ativo: 1, inativo: 2 }
+
+  def profile_count
+    self.profiles.count
+  end
 end

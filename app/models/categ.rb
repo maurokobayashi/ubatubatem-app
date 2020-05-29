@@ -7,9 +7,11 @@
 #  search_tags :string
 #  status      :integer          default("sugerido"), not null
 #  alias       :string           not null
+#  icon        :string
+#  order       :integer
 #
 class Categ < ApplicationRecord
-  has_many :subcategs, dependent: :destroy
+  has_many :sub_categs, dependent: :destroy
 
   enum status: { sugerido: 0, ativo: 1, inativo: 2 }
 end

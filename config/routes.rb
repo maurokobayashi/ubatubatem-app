@@ -2,14 +2,15 @@
 Rails.application.routes.draw do
   root "landing_pages#index"
 
-  # Profiles
+  # Profiles - TODO: /username
   get "profiles/:id", to: "profiles#show", as: "profile"
   # TODO: /marcante.paes
   get "buscar", to: "profiles#search"
   get "buscar_full", to: "profiles#fullsearch"
 
   # Categs
-  get "c/:name", to: "categs#categoria", as: "categoria"
+  get "cat/:alias", to: "categs#show", as: "categoria"
+  get "categorias", to: "categs#index", as: "categorias"
 
   # Statistics
   post "statistics", to: "statistics#track_profile", as:"track_statistic"

@@ -1,0 +1,53 @@
+<body>
+
+  <%= render 'app_components/loader' %>
+  <%= render 'app_components/menu_bottom' %>
+  <%= render 'app_components/header' %>
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="mt-3 mb-5">
+
+    <!-- Categorias -->
+    <div class="header-large-title">
+      <h1 class="title">Categorias</h1>
+      <h4 class="subtitle"><%= Profile.count %> pequenos negócios cadastrados</h4>
+    </div>
+
+    <div class="section full">
+      <div class="wide-block mt-2">
+        <ul class="listview full image-listview" style="border:none; margin-left:-16px;">
+          <% @categs.each do |categ| %>
+          <li class="multi-level">
+            <a href="#" class="item">
+              <div class="icon-box">
+                <ion-icon name="<%= categ.icon || 'reader-outline' %>"></ion-icon>
+              </div>
+              <div class="in">
+                <%= categ.name %>
+              </div>
+            </a>
+            <% if categ.sub_categs.present? %>
+            <ul class="listview listview-md link-listview">
+              <% categ.sub_categs.order(:name).each do |sub_categ| %>
+              <li class="click-animated">
+                <a href="<%= categoria_path sub_categ.alias %>" class="item vibrate">
+                  <div class="in">
+                    <%= sub_categ.name %>
+                    <span class="text-muted"><%= sub_categ.profile_count %></span>
+                  </div>
+                </a>
+              </li>
+              <% end %> <!-- *sub_categs -->
+            </ul>
+            <% end %> <!-- *if present? -->
+          </li>
+          <% end %> <!-- *categs -->
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- * App Capsule -->
+
+
+</body>
