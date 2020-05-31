@@ -1,6 +1,6 @@
 # Users
 User.delete_all
-User.create(email: "mauro.kobayashi@gmail.com", password: "mauro.kobayashi@gmail.com", first_name: "Mauro", last_name: "Kobayashi")
+User.create(email: "mauro.kobayashi@gmail.com", password: "ubatuba2018", first_name: "Mauro", last_name: "Kobayashi")
 User.create(email: "lunapedricci@gmail.com", password: "lunapedricci@gmail.com", first_name: "Luna", last_name: "Pedricci")
 
 # Categs e Subcategs
@@ -19,6 +19,7 @@ SubCateg.create(categ: c1, name: "Conservas", alias: "conservas", status: 1)
 SubCateg.create(categ: c1, name: "Doces e bolos", alias: "doces-e-bolos", status: 1)
 SubCateg.create(categ: c1, name: "Grãos e Cereais", alias: "graos-e-cereais", status: 1)
 SubCateg.create(categ: c1, name: "Hortifrutis", alias: "hortifrutis", status: 1)
+SubCateg.create(categ: c1, name: "Padarias", alias: "padarias", status: 1)
 SubCateg.create(categ: c1, name: "Pães artesanais", alias: "paes-artesanais", status: 1)
 SubCateg.create(categ: c1, name: "Pescados", alias: "pescados", status: 1)
 SubCateg.create(categ: c1, name: "Pizza e esfirra", alias: "pizza-e-esfirra", status: 1)
@@ -30,13 +31,12 @@ c2 = Categ.create(name: "Moda", alias: "moda", icon: "shirt-outline", order: 3, 
 SubCateg.create(categ: c2, name: "Bolsas e acessórios", alias: "bolsas-e-acessorios", status: 1)
 SubCateg.create(categ: c2, name: "Brechós", alias: "brechos", status: 1)
 SubCateg.create(categ: c2, name: "Calçados", alias: "calcados", status: 1)
-SubCateg.create(categ: c2, name: "Esportes", alias: "esportes", status: 1)
-SubCateg.create(categ: c2, name: "Feminina", alias: "feminina", status: 1)
-SubCateg.create(categ: c2, name: "Infantil", alias: "infantil", status: 1)
+SubCateg.create(categ: c2, name: "Moda feminina", alias: "feminina", status: 1)
+SubCateg.create(categ: c2, name: "Moda infantil", alias: "infantil", status: 1)
 SubCateg.create(categ: c2, name: "Jóias e semijóias", alias: "joias-e-semijoias", status: 1)
-SubCateg.create(categ: c2, name: "Masculina", alias: "masculina", status: 1)
+SubCateg.create(categ: c2, name: "Moda Masculina", alias: "masculina", status: 1)
 SubCateg.create(categ: c2, name: "Óticas", alias: "oticas", status: 1)
-SubCateg.create(categ: c2, name: "Praia", alias: "praia", status: 1)
+SubCateg.create(categ: c2, name: "Moda praia", alias: "praia", status: 1)
 SubCateg.create(categ: c2, name: "Surfshops", alias: "surfshops", status: 1)
 c3 = Categ.create(name: "Saúde e beleza", icon: "heart", alias: "saude-e-beleza", order: 4, status: 1)
 SubCateg.create(categ: c3, name: "Cosméticos naturais", alias: "cosmeticos-naturais", status: 1)

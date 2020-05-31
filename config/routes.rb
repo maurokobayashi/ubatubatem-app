@@ -2,6 +2,11 @@
 Rails.application.routes.draw do
   root "landing_pages#index"
 
+  # Sessions
+  get "entrar", to: "sessions#new", as: "new_session"
+  post "create", to: "sessions#create", as: "signin"
+  get "sair", to: "sessions#destroy", as: "signout"
+
   # Profiles - TODO: /username
   get "profiles/:id", to: "profiles#show", as: "profile"
   # TODO: /marcante.paes

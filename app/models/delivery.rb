@@ -14,7 +14,7 @@ class Delivery < ApplicationRecord
   belongs_to :profile
 
   def has_bairros?
-    self.bairro_ids.reject(&:empty?).present?
+    self.bairro_ids.reject{|b| b.nil? || b==""}.present?
   end
 
   def bairros

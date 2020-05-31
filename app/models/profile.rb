@@ -14,13 +14,16 @@
 #  website         :string
 #  avatar_url      :string
 #  sub_categ_id    :integer          default(1), not null
+#  username        :string
+#  user_id         :integer
 #
 class Profile < ApplicationRecord
   include PgSearch::Model
-    pg_search_scope :search_by_title_and_tagline,
+    pg_search_scope :search_full,
     against: {
       title: 'A',
-      tagline: 'B'
+      username: 'B',
+      tagline: 'C'
     },
     using: {
       tsearch: {
@@ -34,7 +37,8 @@ class Profile < ApplicationRecord
   has_one :delivery, dependent: :destroy
   has_many :opening_hours, dependent: :destroy
   has_many :statistics, dependent: :destroy
-  belongs_to :sub_categ
+  belongs_to :sub_categ, optional: true
+  belongs_to :user, optional: true
 
   enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
 

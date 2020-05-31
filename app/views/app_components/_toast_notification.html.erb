@@ -1,0 +1,16 @@
+<%
+  _position = (defined?(position) ? position : "bottom")
+  _text = (defined?(text) ? text : "")
+  _color = (defined?(color) ? color : "secondary")
+  _close_label = (defined?(close_label) ? close_label : "OK")
+%>
+
+<!-- Toast notification -->
+<div id="<%= id %>" class="toast-box toast-<%= _position %> bg-<%= _color %>">
+  <div class="in">
+    <ion-icon name="checkmark-circle" class="text-white md hydrated" role="img" aria-label="checkmark circle"></ion-icon>
+    <div class="text text-white weight-5"><%= _text %></div>
+  </div>
+  <button type="button" class="btn btn-sm btn-text-light close-button"><%= _close_label %></button>
+</div>
+<!-- * Toast notification -->

@@ -1,0 +1,48 @@
+<!-- Action Sheet Account -->
+<div class="modal fade action-sheet" id="action-sheet-account" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Minha conta</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="action-button-list">
+          <li>
+            <a href="<%= profile_path profile %>" class="btn btn-list text-primary vibrate">
+              <span>
+                <ion-icon name="person-outline" role="img" class="md hydrated" aria-label="document outline"></ion-icon>
+                Ver meu perfil
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-list vibrate">
+              <span>
+                <ion-icon name="settings-outline" role="img" class="md hydrated" aria-label="trash outline"></ion-icon>
+                Configurações
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= signout_path %>" class="btn btn-list vibrate">
+              <span>
+                <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="copy outline"></ion-icon>
+                Sair da conta
+              </span>
+            </a>
+          </li>
+          <li class="action-divider"></li>
+          <li>
+            <a href="#" class="btn btn-list" data-dismiss="modal">
+              <span>
+                <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
+                Fechar
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Action Sheet Account -->

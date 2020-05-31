@@ -16,8 +16,8 @@ $(document).ready(function () {
 
 
   // Vibrate on click
-  $("a.vibrate").click(function (e) {
-    navigator.vibrate([10]);
+  $(".vibrate").click(function (e) {
+    navigator.vibrate([5]);
   });
   $("form").submit(function (e) {
     navigator.vibrate([10]);

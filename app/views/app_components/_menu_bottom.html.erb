@@ -1,5 +1,6 @@
 <!-- App Bottom Menu -->
-<%= render 'app_components/search' %>
+<%= render "app_components/search" %>
+<%= render "app_components/account", profile: current_user.profile if signed_in? %>
 
 <div class="appBottomMenu">
   <a href="<%= root_path %>" class="item vibrate">
@@ -24,7 +25,11 @@
       <ion-icon name="layers-outline"></ion-icon>
     </div>
   </a>
+  <% if signed_in? %>
+  <a href="#" data-toggle="modal" data-target="#action-sheet-account" class="item vibrate">
+  <% else %>
   <a href="<%= profile_path Profile.all.sample %>" class="item vibrate">
+  <% end %>
     <div class="col">
       <ion-icon name="person-outline"></ion-icon>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_29_204747) do
+ActiveRecord::Schema.define(version: 2020_05_30_200815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,9 @@ ActiveRecord::Schema.define(version: 2020_05_29_204747) do
     t.string "website"
     t.string "avatar_url"
     t.integer "sub_categ_id", default: 1, null: false
+    t.string "username"
+    t.integer "user_id"
+    t.index ["username"], name: "index_profiles_on_username"
   end
 
   create_table "statistics", force: :cascade do |t|

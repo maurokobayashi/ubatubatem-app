@@ -1,0 +1,72 @@
+<!-- Action Sheet Statistics -->
+<div class="modal fade action-sheet" id="action-sheet-statistics" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Estatísticas</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="action-button-list">
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="eye-outline"></ion-icon>Visitas no perfil</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).perfil_view.count %></span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="images-outline"></ion-icon>Fotos visualizadas</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).foto_click.count %></span>
+            </a>
+          </li>
+          <% if profile.whatsapp.present? %>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="logo-whatsapp"></ion-icon>Clicks no WhatsApp</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).phone_click.count %></span>
+            </a>
+          </li>
+          <% end %>
+          <% if profile.instagram_account.present? %>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="logo-instagram"></ion-icon>Clicks no Instagram</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).instagram_click.count %></span>
+            </a>
+          </li>
+          <% end %>
+          <% if profile.address.present? %>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="location-outline"></ion-icon>Clicks no endereço</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).address_click.count %></span>
+            </a>
+          </li>
+          <% end %>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="share-social-outline"></ion-icon>Compartilhamentos</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).compartilhar_click.count %></span>
+            </a>
+          </li>
+          <% if @profile.website.present? %>
+          <li>
+            <a href="#" class="btn btn-list">
+              <span><ion-icon name="globe-outline"></ion-icon>Cliques no link</span>
+              <span class="text-muted"><%= Statistic.where(profile: profile).link_click.count %></span>
+            </a>
+          </li>
+          <% end %>
+
+          <li class="action-divider"></li>
+          <li>
+            <a href="#" data-dismiss="modal" class="btn btn-list">
+            <span><ion-icon name="close-outline"></ion-icon>Fechar</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Action Sheet Statistics -->

@@ -4,7 +4,7 @@ Trestle.resource(:profiles) do
   end
 
   search do |query|
-    query ? Profile.where("title ILIKE ? OR tagline ILIKE ? OR whatsapp ILIKE ?","%#{query}%", "%#{query}%", "%#{query}%") : Profile.all
+    query ? Profile.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?","%#{query}%", "%#{query}%", "%#{query}%") : Profile.all
   end
 
   scopes do
@@ -23,7 +23,7 @@ Trestle.resource(:profiles) do
     column :title, header: "Negócio", link: true, sort: :title, class: "media-title-column" do |profile|
       safe_join([
         content_tag(:strong, profile.title),
-        content_tag(:small, profile.tagline, class: "text-muted hidden-xs")
+        content_tag(:small, profile.username, class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
     column :sub_categ, link: false
@@ -54,16 +54,18 @@ Trestle.resource(:profiles) do
         link_to image_tag(profile.avatar_url), profile.avatar_url, data: { behavior: "zoom" }
       end if profile.avatar_url?
       select :status, Profile.statuses.keys.to_a
+      text_field :username, append: "max. 30", label: "Username"
       text_field :title, append: "max. 30", label: "Título"
-      select :sub_categ_id, SubCateg.all
+      select :sub_categ_id, SubCateg.all.order(:name)
       text_field :tagline, append: "max. 60", label: "Tagline"
-      text_area :bio, append: "max. 255"
+      text_area :bio, append: "max. 150"
       row do
         col(sm: 6) { telephone_field :whatsapp, prepend: status_tag(icon("fa fa-phone"), :success), label: "WhatsApp" }
         col(sm: 6) { telephone_field :phone_secondary, prepend: status_tag(icon("fa fa-phone"), :secondary), label: "Telefone 2" }
       end
       text_field :website
       text_field :avatar_url
+      select :user_id, User.all.to_a.unshift(User.new)
       row do
         col(sm: 6) { static_field :created_at }
         col(sm: 6) { static_field :updated_at }

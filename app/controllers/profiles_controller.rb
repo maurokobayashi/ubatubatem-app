@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
 
+    Statistic.track!(@profile, Statistic.events[:perfil_view]) unless current_user? @profile.user
+
     # instagram scraping
     if @profile.instagram_account.present?
       @instagram_scrap = scrap_from_instagram(@profile.instagram_account.username)
@@ -23,7 +25,7 @@ class ProfilesController < ApplicationController
     sleep 0.5
     @query = params[:q]
     if @query.present?
-      @profiles = Profile.where("title ILIKE ? OR tagline ILIKE ?", "%#{@query}%", "%#{@query}%")
+      @profiles = Profile.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
       # query_unnacent = @query.gsub(/[^0-9A-Za-z]/, '_')
       # @profiles = Profile.where("title ILIKE ? OR tagline ILIKE ?", "%#{query_unnacent}%", "%#{query_unnacent}%").limit(15)
     else
@@ -45,7 +47,7 @@ class ProfilesController < ApplicationController
     per_page = 10
     @query = params[:q]
     if @query.present?
-      @profiles = Profile.search_by_title_and_tagline(@query)
+      @profiles = Profile.search_full(@query)
     else
       @profiles = Profile.none
     end

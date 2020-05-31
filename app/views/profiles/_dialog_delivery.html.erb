@@ -6,20 +6,32 @@
       <div class="modal-header">
         <h5 class="modal-title">Locais de entrega</h5>
       </div>
-      <div class="modal-body align-left">
+      <div class="modal-body align-left mt-2">
         <p class="font-13">
           <% if delivery.has_bairros? %>
-          <%= delivery.bairros.map{|b| b.name}.join(", ") %>
+            <%
+              bairros = delivery.bairros
+              centro = bairros.select{|b| b.centro?}
+              serra = bairros.select{|b| b.serra?}
+              norte = bairros.select{|b| b.norte?}
+              sul = bairros.select{|b| b.sul?}
+            %>
+            <%= "<strong>Centro</strong><br/>#{centro.map{|b| b.name}.join(", ")}<br/>".html_safe if centro.present? %>
+            <%= "<strong>Serra</strong><br/>#{serra.map{|b| b.name}.join(", ")}<br/>".html_safe if serra.present? %>
+            <%= "<strong>Norte</strong><br/>#{norte.map{|b| b.name}.join(", ")}<br/>".html_safe if norte.present? %>
+            <%= "<strong>Sul</strong><br/>#{sul.map{|b| b.name}.join(", ")}<br/>".html_safe if sul.present? %>
+
           <% elsif profile.address.present? %>
-          <%= "#{profile.address.bairro.name} e imediações." %>
+            <%= "#{profile.address.bairro.name} e imediações." %>
           <% else %>
-          Não informado
+            Não informado
           <% end %>
-          <strong class="display-block mt-2">
+
+          <strong class="display-block text-primary mt-2">
             <% if delivery.delivery_fee.blank? %>
-            Consulte nossa taxa de entrega
+            Consulte a taxa de entrega
             <% elsif delivery.delivery_fee == 0 %>
-            Entrega grátis
+            Entrega Grátis!
             <% else %>
             Taxa de entrega: <%= mask_money(delivery.delivery_fee) %>
             <% end %>

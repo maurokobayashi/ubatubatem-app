@@ -1,32 +1,18 @@
 module UxHelper
 
-  def toast_notification(toggle_id, color="primary", message="")
-    html=""
-    html+="<!-- Toast notification -->"
-    html+="<div id='#{toggle_id}' class='toast-box toast-bottom bg-#{color}'>"
-    html+="  <div class='in'>"
-    html+="    <ion-icon name='checkmark-circle' class='text-white'></ion-icon>"
-    html+="    <div class='text text-white weight-5'>#{message}</div>"
-    html+="  </div>"
-    html+="  <button type='button' class='btn btn-sm btn-text-light close-button'>OK</button>"
-    html+="</div>"
-    html+="<!-- * Toast notification -->"
-    html.html_safe
-  end
-
-  def progress_bar(percentual, label=nil, colored=false)
+  def progress_bar(percentual, label=nil, colored=false, clazz="")
     bar_color = ""
     if colored
-      bar_color = "bg-success" if percentual > 80
-      bar_color = "bg-primary" if percentual.between? 31, 80
-      bar_color = "bg-danger" if percentual.between? 0, 30
+      bar_color = "bg-success" if percentual >= 80
+      bar_color = "bg-primary" if percentual.between? 30, 79
+      bar_color = "bg-danger" if percentual.between? 0, 29
     end
 
     percentual = percentual.to_s
     html=""
-    html+="<p>"+label+"</p>" if label.present?
-    html+="<div class='progress'>"
-    html+="  <div class='progress-bar "+bar_color+"' role='progressbar' style='width: "+percentual+"%;' aria-valuenow='"+percentual+"' aria-valuemin='0' aria-valuemax='100'>"
+    html+="<small>"+label+"</small>" if label.present?
+    html+="<div class='mt-1 progress #{clazz}'>"
+    html+="  <div class='progress-bar #{bar_color}' role='progressbar' style='width: #{percentual}%;' aria-valuenow='#{percentual}' aria-valuemin='0' aria-valuemax='100'>"
     html+="    "+percentual+"%"
     html+="  </div>"
     html+="</div>"
