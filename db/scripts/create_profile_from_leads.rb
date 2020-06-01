@@ -2,7 +2,7 @@
 # on heroku: heroku run bundle exec rails runner ./db/scripts/create_profile_from_leads.rb
 
 LeadInstagram.all.each do |lead_insta|
-  lead_excel = LeadExcel.find_by_instagram lead_insta.username
+  lead_excel = LeadExcel.find_by(instagram: lead_insta.username)
 
   # profile(com insta account) já não existe
   if !InstagramAccount.exists?(username: lead_insta.username)
