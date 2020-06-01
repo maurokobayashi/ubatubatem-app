@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
     if @profile.instagram_account.present?
       @instagram_scrap = scrap_from_instagram(@profile.instagram_account.username)
       # override avatar_url on profile
-      if @instagram_scrap[:avatar_url] != @profile.avatar_url
+      if @instagram_scrap[:avatar_url] && (@instagram_scrap[:avatar_url] != @profile.avatar_url)
         @profile.avatar_url = @instagram_scrap[:avatar_url]
         @profile.save(touch: false)
       end
@@ -67,6 +67,7 @@ class ProfilesController < ApplicationController
       instagram_scrap = {}
       response = HTTParty.get("https://www.instagram.com/#{username}/?__a=1")
       if response["graphql"].present?
+        logger.info "[PROFILE::INSTAGRAM SCRAPPING] Response: \n#{response['graphql']['user']}"
         instagram_scrap[:avatar_url] = response["graphql"]["user"]["profile_pic_url"]
         instagram_scrap[:avatar_url_large] = response["graphql"]["user"]["profile_pic_url_hd"]
         if response["graphql"]["user"]["edge_owner_to_timeline_media"]["count"] > 0
