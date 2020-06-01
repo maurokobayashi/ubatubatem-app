@@ -1,16 +1,17 @@
 <!-- App Bottom Menu -->
-<%= render "app_components/search" %>
-<%= render "app_components/account", profile: current_user.profile if signed_in? %>
+<%= render "app_components/search_header" %>
 
 <div class="appBottomMenu">
   <a href="<%= root_path %>" class="item vibrate">
     <div class="col">
       <ion-icon name="home-outline"></ion-icon>
+      <strong>Início</strong>
     </div>
   </a>
-  <a href="#" class="item toggle-searchbox vibrate" onclick="javascript:$('#search-input-header').focus();">
+  <a href="#" class="item toggle-searchbox vibrate">
     <div class="col">
       <ion-icon name="search-outline"></ion-icon>
+      <strong>Buscar</strong>
     </div>
   </a>
   <a href="#" class="item vibrate">
@@ -23,16 +24,23 @@
   <a href="<%= categorias_path %>" class="item vibrate">
     <div class="col">
       <ion-icon name="layers-outline"></ion-icon>
+      <strong>Categorias</strong>
     </div>
   </a>
   <% if signed_in? %>
-  <a href="#" data-toggle="modal" data-target="#action-sheet-account" class="item vibrate">
-  <% else %>
-  <a href="<%= profile_path Profile.all.sample %>" class="item vibrate">
-  <% end %>
+  <a href="<%= profile_path current_user.profile %>" class="item vibrate">
     <div class="col">
       <ion-icon name="person-outline"></ion-icon>
+      <strong>Meu Perfil</strong>
     </div>
   </a>
+  <% else %>
+  <a href="<%= new_session_path %>" class="item vibrate">
+    <div class="col">
+      <ion-icon name="person-add-outline"></ion-icon>
+      <strong>Login</strong>
+    </div>
+  </a>
+  <% end %>
 </div>
 <!-- * App Bottom Menu -->

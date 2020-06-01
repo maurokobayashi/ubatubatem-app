@@ -1,0 +1,11 @@
+<% _query = defined?(query) ? query : "" %>
+<form class="search-form" action="<%= buscar_path %>" autocomplete="off">
+  <div class="form-group boxed">
+    <div class="input-wrapper">
+      <input type="text" name="q" class="form-control" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="Buscar..." value="<%= _query %>">
+      <i class="clear-input">
+        <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+      </i>
+    </div>
+  </div>
+</form>

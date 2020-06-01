@@ -1,28 +1,37 @@
 <%
-  if !defined?(right_button)
-    right_button = nil
-  end
+  _right_buttons = defined?(right_buttons) ? right_buttons : []
+  _left_button = defined?(left_button) ? left_button : :back
+  _back_link = defined?(back_link) ? back_link : "javascript:window.history.back();"
 %>
+
+<%= render ("app_components/options") if _right_buttons.include? :options %>
+<%= render("app_components/share_profile", profile: @profile) if _right_buttons.include? :share_profile %>
+
 <!-- App Header -->
 <div class="appHeader bg-primary scrolled">
   <div class="left">
-    <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
-      <ion-icon name="menu-outline"></ion-icon>
+    <% if _left_button == :back %>
+    <a href="<%= _back_link %>" class="headerButton">
+      <ion-icon name="arrow-back-outline" role="img" class="md hydrated"></ion-icon>
     </a>
+    <% end %>
   </div>
   <div class="pageTitle">
     ubatuba tem
   </div>
   <div class="right">
-    <% if right_button.blank? %>
-    <a href="#" class="headerButton">
-      <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="person add outline"></ion-icon>
-    </a>
-    <% elsif right_button == "share" %>
-    <a href="#" data-toggle="modal" data-target="#action-sheet-share" class="headerButton">
+    <% if _right_buttons.include? :share_profile %>
+    <a href="#" data-toggle="modal" data-target="#action-sheet-share-profile" class="headerButton">
       <ion-icon name="share-social-outline"></ion-icon>
     </a>
     <% end %>
+
+    <% if _right_buttons.include? :options %>
+      <a href="#" class="headerButton" data-toggle="modal" data-target="#action-sheet-options">
+        <ion-icon name="ellipsis-vertical-outline" role="img" class="md hydrated"></ion-icon>
+      </a>
+    <% end %>
+
   </div>
 </div>
 <!-- * App Header -->

@@ -1,0 +1,53 @@
+<!-- Action Sheet Options -->
+<%= render("app_components/share") %>
+
+<div class="modal fade action-sheet" id="action-sheet-options" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Opções</h5>
+      </div>
+      <div class="modal-body">
+        <ul class="action-button-list">
+          <li>
+            <a href="#" data-toggle="modal" data-target="#action-sheet-share" data-dismiss="modal" class="btn btn-list vibrate">
+              <span>
+                <ion-icon name="share-social-outline" role="img" class="md hydrated"></ion-icon>
+                Compartilhar
+              </span>
+            </a>
+          </li>
+          <% if signed_in? %>
+          <li>
+            <a href="<%= signout_path %>" class="btn btn-list text-danger vibrate">
+              <span>
+                <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="copy outline"></ion-icon>
+                Sair da conta
+              </span>
+            </a>
+          </li>
+          <% else %>
+          <li>
+            <a href="<%= new_session_path %>" class="btn btn-list text-primary vibrate">
+              <span>
+                <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="copy outline"></ion-icon>
+                Fazer login na conta
+              </span>
+            </a>
+          </li>
+          <% end %>
+          <li class="action-divider"></li>
+          <li>
+            <a href="#" class="btn btn-list" data-dismiss="modal">
+              <span>
+                <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
+                Fechar
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- * Action Sheet Options -->
