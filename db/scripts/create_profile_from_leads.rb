@@ -1,4 +1,5 @@
 # on rails console: load "db/scripts/create_profile_from_leads.rb"
+# on heroku: heroku run bundle exec rails runner ./db/scripts/create_profile_from_leads.rb
 
 LeadInstagram.all.each do |lead_insta|
   lead_excel = LeadExcel.find_by_instagram lead_insta.username
