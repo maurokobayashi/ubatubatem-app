@@ -6,8 +6,8 @@
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios") %>
-  <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
   <%= render("dialog_avatar", image_src: @instagram_scrap[:avatar_url_large] || @profile.avatar_url) %>
+  <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
 
   <%= render("app_components/toast_notification", id: "toast-salvar", text: "Salvo na minha lista", color: "primary") %>
 
