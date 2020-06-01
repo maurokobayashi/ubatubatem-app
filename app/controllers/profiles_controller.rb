@@ -66,8 +66,8 @@ class ProfilesController < ApplicationController
     def scrap_from_instagram(username)
       instagram_scrap = {}
       response = HTTParty.get("https://www.instagram.com/#{username}/?__a=1")
+      logger.debug "[PROFILE::INSTAGRAM SCRAPPING] Response: \n#{response}"
       if response["graphql"].present?
-        logger.info "[PROFILE::INSTAGRAM SCRAPPING] Response: \n#{response['graphql']['user']}"
         instagram_scrap[:avatar_url] = response["graphql"]["user"]["profile_pic_url"]
         instagram_scrap[:avatar_url_large] = response["graphql"]["user"]["profile_pic_url_hd"]
         if response["graphql"]["user"]["edge_owner_to_timeline_media"]["count"] > 0
