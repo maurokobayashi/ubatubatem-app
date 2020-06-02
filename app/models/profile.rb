@@ -56,7 +56,7 @@ class Profile < ApplicationRecord
     rate+= 10 if bio.present?
     rate+= 10 if instagram_account.present? && instagram_account.has_permissions?
     rate+= 10 if whatsapp.present?
-    rate+= 10 if address.present? && address.logradouro.present?
+    rate+= 10 if address.present? && address.bairro.present?
     rate+= 10 if delivery.present? && delivery.is_configured?
     rate+= 10 if opening_hours.present?
     rate+= 10 if sub_categ.present?
