@@ -59,7 +59,7 @@
           </a>
         </div>
         <div class="mt-1" style="display: none;">
-          <% completion_rate = @profile.completion_rate %>
+          <% completion_rate = @profile.completion_progress %>
           <%= progress_bar completion_rate, "Faltam algumas informações no seu perfil", true, "progress-sm" %>
         </div>
       <% else %>
@@ -73,7 +73,7 @@
         <% end %>
         <div class="col-6">
           <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="toastbox('toast-salvar', 3000);">
-            <ion-icon name="heart-outline" role="img" class="md hydrated"></ion-icon>
+            <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
             Salvar
           </a>
         </div>
@@ -128,7 +128,7 @@
               <ion-icon name="time-outline"></ion-icon>
             </div>
             <div class="in">
-              <div>Aberto hoje - 08h às 20h</div>
+              <div>Aberto hoje - 08h às 20h (FAKE)</div>
               <span class="text-muted">ver horários</span>
             </div>
           </a>

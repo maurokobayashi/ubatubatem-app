@@ -1852,17 +1852,17 @@ a.badge-dark {
 }
 
 .image-listview > li .item .icon-box {
-  min-width: 36px;
-  max-width: 36px;
-  width: 36px;
-  height: 36px;
+  min-width: 30px;
+  max-width: 34px;
+  width: 30px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1em;
-  font-size: 19px;
+  font-size: 18px;
   border-radius: 400px;
-  margin-right: 12px;
+  margin-right: 6px;
 }
 
 .image-listview > li .item .icon-box.bg-primary, .image-listview > li .item .icon-box.bg-secondary, .image-listview > li .item .icon-box.bg-success, .image-listview > li .item .icon-box.bg-danger, .image-listview > li .item .icon-box.bg-warning, .image-listview > li .item .icon-box.bg-info, .image-listview > li .item .icon-box.bg-dark, .image-listview > li .item .icon-box.bg-light {

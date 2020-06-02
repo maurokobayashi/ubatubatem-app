@@ -18,19 +18,19 @@
 #  user_id         :integer
 #
 class Profile < ApplicationRecord
-  include PgSearch::Model
-    pg_search_scope :search_full,
-    against: {
-      title: 'A',
-      username: 'B',
-      tagline: 'C'
-    },
-    using: {
-      tsearch: {
-        prefix: true,
-        any_word: true
-      }
-    }
+  # include PgSearch::Model
+  #   pg_search_scope :search_full,
+  #   against: {
+  #     title: 'A',
+  #     username: 'B',
+  #     tagline: 'C'
+  #   },
+  #   using: {
+  #     tsearch: {
+  #       prefix: true,
+  #       any_word: true
+  #     }
+  #   }
 
   has_one :instagram_account, dependent: :destroy
   has_one :address, dependent: :destroy
@@ -40,9 +40,16 @@ class Profile < ApplicationRecord
   belongs_to :sub_categ, optional: true
   belongs_to :user, optional: true
 
-  enum status: { novo: 0, ativo: 1, denunciado: 2, inativo: 3 }
+  scope :order_by_id_desc, -> { order(id: :desc) }
+  scope :order_by_username, -> { order(username: :asc) }
 
-  def completion_rate
+  enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
+
+  def url
+    "#{Ubatubatem::Application.config.root_url}/profiles/#{self.id}"
+  end
+
+  def completion_progress
     rate = 0
     rate+= 10 if title.present?
     rate+= 10 if tagline.present? && tagline != title
@@ -53,13 +60,12 @@ class Profile < ApplicationRecord
     rate+= 10 if delivery.present? && delivery.is_configured?
     rate+= 10 if opening_hours.present?
     rate+= 10 if sub_categ.present?
-    rate+= 10 if self.claimed?
+    rate+= 10 if self.reivindicado?
     rate
   end
 
-  # TODO
-  def claimed?
-    false
+  def show?
+    self.aprovado? || self.reivindicado?
   end
 
   def initials

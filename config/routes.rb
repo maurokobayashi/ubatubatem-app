@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "profiles/:id", to: "profiles#show", as: "profile"
   # TODO: /marcante.paes
   get "buscar", to: "profiles#search"
-  get "buscar_full", to: "profiles#fullsearch"
+  # get "buscar_full", to: "profiles#fullsearch"
 
   # Categs
   get "cat/:alias", to: "categs#show", as: "categoria"

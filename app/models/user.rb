@@ -11,6 +11,7 @@
 #  remember_token_expires_at :datetime
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  admin                     :boolean          default(FALSE)
 #
 class User < ApplicationRecord
   include Trestle::Auth::ModelMethods

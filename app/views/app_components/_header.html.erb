@@ -14,6 +14,10 @@
     <a href="<%= _back_link %>" class="headerButton">
       <ion-icon name="arrow-back-outline" role="img" class="md hydrated"></ion-icon>
     </a>
+    <% elsif _left_button == :about %>
+    <a href="#" class="headerButton" onclick="alert('Breve texto sobre o Ubatuba Tem');">
+      <ion-icon name="information-circle-outline" role="img" class="md hydrated"></ion-icon>
+    </a>
     <% end %>
   </div>
   <div class="pageTitle">

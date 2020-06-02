@@ -46,12 +46,12 @@ Trestle.configure do |config|
   # Set the path to consider the application root (for title links and breadcrumbs).
   # Defaults to the same value as `config.path`.
   #
-  # config.root = "/"
+  config.root = "profiles"
 
   # Set the initial breadcrumbs to display in the breadcrumb trail.
   # Defaults to a breadcrumb labeled 'Home' linking to to the application root.
   #
-  # config.root_breadcrumbs = -> { [Trestle::Breadcrumb.new("Home", Trestle.config.root)] }
+  config.root_breadcrumbs = -> { [Trestle::Breadcrumb.new("Admin", Trestle.config.root)] }
 
   # Set the default icon class to use when it is not explicitly provided.
   # Defaults to "fa fa-arrow-circle-o-right".
@@ -97,7 +97,7 @@ Trestle.configure do |config|
   # Toggle whether Turbolinks is enabled within the admin.
   # Defaults to true if Turbolinks is available.
   #
-  # config.turbolinks = false
+  config.turbolinks = false
 
   # Specify the parameters that should persist across requests when
   # paginating or reordering. Defaults to [:sort, :order, :scope].
@@ -125,7 +125,7 @@ Trestle.configure do |config|
   #
   # Enable debugging of form errors. Defaults to true in development mode.
   #
-  # config.debug_form_errors = true
+  config.debug_form_errors = true
 
 
 
@@ -139,7 +139,7 @@ Trestle.configure do |config|
   # Specify the scope for valid admin users.
   # Defaults to config.auth.user_class (unscoped).
   #
-  # config.auth.user_scope = -> { User.where(admin: true) }
+  config.auth.user_scope = -> { User.where(admin: true) }
 
   # Specify the Trestle admin for managing administrator users.
   #

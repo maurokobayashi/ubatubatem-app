@@ -1,45 +1,49 @@
 Trestle.resource(:profiles) do
+
+  collection { Profile.order(id: :desc) }
+
   menu do
     item :profiles, icon: "fa fa-store", label: "Negócios"
   end
 
   search do |query|
-    query ? Profile.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?","%#{query}%", "%#{query}%", "%#{query}%") : Profile.all
+    query ? Profile.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?","%#{query}%", "%#{query}%", "%#{query}%") : Profile.order(id: :desc)
   end
 
   scopes do
     scope :all, default: true, label: "Todos"
     scope :novo
-    scope :ativo
-    scope :denunciado
+    scope :aprovado
+    scope :reivindicado
     scope :inativo
   end
 
   table do
-    column :id, link: true
+    column :id, link: false
     column :avatar_url, header: false, align: :center, blank: nil do |profile|
       avatar(fallback: profile.initials) { image_tag(profile.avatar_url) }
     end
-    column :title, header: "Negócio", link: true, sort: :title, class: "media-title-column" do |profile|
+    column :title, header: "Negócio", link: false, sort: :title, class: "media-title-column" do |profile|
       safe_join([
         content_tag(:strong, profile.title),
-        content_tag(:small, profile.username, class: "text-muted hidden-xs")
+        content_tag(:small, link_to(profile.username, profile.url, target: "_blank", class: "external-link"), class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
     column :sub_categ, link: false
+    column :completion_progress, ->(profile) { status_tag(profile.completion_progress, :secondary) }, header: "%"
     column :whatsapp, header: "WhatsApp"
     column :name, ->(profile) { profile.address.present? ? profile.address.bairro : ""}, header: "Bairro", link: false
     column :username, ->(profile) { profile.instagram_account.present? ? link_to("@#{profile.instagram_account.username}", "https://www.instagram.com/#{profile.instagram_account.username}", target: "_blank", class: "external-link") : ""}, header: "Instagram", link: true
     column :status, align: :center do |profile|
       case profile.status.try(:to_sym)
       when :novo
-        status_tag("novo", :info)
-      when :ativo
-        status_tag("ativo", :success)
-      when :denunciado
-        status_tag(icon("fa fa-exclamation-triangle"+" denunciado"), :warning)
+        status_tag("novo", :warning)
+      when :aprovado
+        status_tag("aprovado", :info)
+      when :reivindicado
+        status_tag("reivindicado", :success)
       when :inativo
-        status_tag(icon("fa fa-times")+" inativo", :danger)
+        status_tag("inativo", :danger)
       else
           status_tag("desconhecido", :secondary)
       end
@@ -54,9 +58,9 @@ Trestle.resource(:profiles) do
         link_to image_tag(profile.avatar_url), profile.avatar_url, data: { behavior: "zoom" }
       end if profile.avatar_url?
       select :status, Profile.statuses.keys.to_a
+      select :sub_categ_id, SubCateg.all.order(:name), label: "Sub Categoria"
       text_field :username, append: "max. 30", label: "Username"
       text_field :title, append: "max. 30", label: "Título"
-      select :sub_categ_id, SubCateg.all.order(:name)
       text_field :tagline, append: "max. 60", label: "Tagline"
       text_area :bio, append: "max. 150"
       row do

@@ -43,24 +43,24 @@ class ProfilesController < ApplicationController
   end
 
   # GET /buscar_full?q=
-  def fullsearch
-    per_page = 10
-    @query = params[:q]
-    if @query.present?
-      @profiles = Profile.search_full(@query)
-    else
-      @profiles = Profile.none
-    end
+  # def fullsearch
+  #   per_page = 10
+  #   @query = params[:q]
+  #   if @query.present?
+  #     @profiles = Profile.search_full(@query)
+  #   else
+  #     @profiles = Profile.none
+  #   end
 
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => per_page)
+  #   @profiles = @profiles.paginate(:page => params[:page], :per_page => per_page)
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+  #   respond_to do |format|
+  #     format.html
+  #     format.js
+  #   end
 
-    render "search"
-  end
+  #   render "search"
+  # end
 
   private
     def scrap_from_instagram(username)
