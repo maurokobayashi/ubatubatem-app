@@ -9,7 +9,7 @@ module MasksHelper
   end
 
   def mask_url(url)
-    (url[/\Ahttp:\/\//] || url[/\Ahttps:\/\//]) ? hrl : "http://#{url}"
+    (url[/\Ahttp:\/\//] || url[/\Ahttps:\/\//]) ? url : "http://#{url}"
   end
 
   def add_breaklines(text)
