@@ -1,3 +1,5 @@
+# on heroku: heroku run bundle exec rails runner ./db/scripts/update_profiles_bio.rb
+
 p = Profile.find_by(username: "ubatubaentrega")
 p.update_attribute(:bio, "Catálogo colaborativo de pequenos comerciantes, produtores e artistas de Ubatuba que estão operando via Delivery durante a pandemia")
 p = Profile.find_by(username: "lasorrentina_massas")
@@ -51,7 +53,7 @@ Arte sobre:
 #senhaladorlivros#pranchas 🏄🏼‍♀️🖤 tatto iniciante")
 p = Profile.find_by(username: "anacliseandrade")
 p.update_attribute(:bio, "Uma empresa apaixonada pelo que faz!
-"Vem provar nosso delicioso pão de Mel "")
+Vem provar nosso delicioso pão de Mel ")
 p = Profile.find_by(username: "biscoitocema")
 p.update_attribute(:bio, "Biscoito caseiro
 Mais informações via direct ou WhatsApp
@@ -237,7 +239,7 @@ p = Profile.find_by(username: "coresdeluanda")
 p.update_attribute(:bio, "♡ Agbês ♡ Alpargatas artesanais
 Por @Camila.do.agbe agbêzeira do @maracatuitaomi")
 p = Profile.find_by(username: "menestreis_de_ubatuba")
-p.update_attribute(:bio, ""Nos divertimos fazendo arte!"
+p.update_attribute(:bio, "Nos divertimos fazendo arte!
 Curso livre de teatro musical com metodologia diferenciada que trabalha a capacidade que todos tem para fazer arte!")
 p = Profile.find_by(username: "_vinhoemcasa")
 p.update_attribute(:bio, "Adquira um bom vinho sem sair de casa.  Delivery : Praia das Toninhas até Itamambuca. Atendemos de Terça a Domingo, das 18 às 23h.🍷📲 12 981099645")
@@ -547,7 +549,7 @@ p.update_attribute(:bio, "➡️Abertos das 19:00 as 00:00 todos os dias
 ➡️Rua Capitão Felipe, Itaguá, Ubatuba-SP
 🍔Venha conhecer nossos lanches 🍔")
 p = Profile.find_by(username: "puravidanocopo")
-p.update_attribute(:bio, ""Pura Vida" é uma expressão que vem da Costa Rica, uma zona azul onde as pessoas vivem mais que 100 anos, utilizando ingredientes orgânicos e locais.")
+p.update_attribute(:bio, "Pura Vida é uma expressão que vem da Costa Rica, uma zona azul onde as pessoas vivem mais que 100 anos, utilizando ingredientes orgânicos e locais.")
 p = Profile.find_by(username: "samonjapafood")
 p.update_attribute(:bio, "ZAP Delivery 12 99724 1061
 Delivery da culinária japonesa em Ubatuba-SP
@@ -724,7 +726,7 @@ p = Profile.find_by(username: "segredosdefamiliabyalinegalvao")
 p.update_attribute(:bio, "by Aline Galvão 💟 Ubatuba-SP 🏖
 🍪 COOKIES e MUITO MAIS!
 🤱🏻 Por uma mãe empreendedora!
-🙏🏻"Tudo o que fizer, faça com amor!"
+🙏🏻Tudo o que fizer, faça com amor!
 📽 @lavaminhalouca")
 p = Profile.find_by(username: "carolvellosofotografia")
 p.update_attribute(:bio, "Coaching de Imagem - Sessões Fotográficas - Mini Wedding - Estúdio & Praia ❤️ Ubatuba & São Paulo 🖤carolvelloso.com.br fotografoemubatuba.com")
@@ -1206,9 +1208,9 @@ p.update_attribute(:bio, "Praia do Perequê-açu ,Ubatuba-SP")
 p = Profile.find_by(username: "wallacy_castro29")
 p.update_attribute(:bio, "Morador da cidade de Ubatuba Sp carismático, simpático e humilde")
 p = Profile.find_by(username: "monarcaartesmanuais")
-p.update_attribute(:bio, ""Mergulhar de ponta na arte
+p.update_attribute(:bio, "Mergulhar de ponta na arte
 Morrer afogado faz parte
-E criar todo dia um novo começo."
+E criar todo dia um novo começo.
 (Jean Tassy).
 Ubatuba - SP
 Artesanato com mucho amor!
@@ -1244,7 +1246,7 @@ p.update_attribute(:bio, "Ubatuba-Sp 🌊
 Galeria Terra de Santa Cruz")
 p = Profile.find_by(username: "ahowvivasaud")
 p.update_attribute(:bio, "🌊 u b a t u b a ~
-"Porque alimentar-se bem é amar a si mesmo.." 🎶
+Porque alimentar-se bem é amar a si mesmo.. 🎶
 📲 (12) 99626-5838")
 p = Profile.find_by(username: "epedrondesign")
 p.update_attribute(:bio, "Focado em desenvolvimento de identidade visual, design de marcas e mídias sociais.
@@ -1712,7 +1714,7 @@ p = Profile.find_by(username: "cafeestrela")
 p.update_attribute(:bio, "☕Café Estrela
 🌟Desde 2003 em Ubatuba - SP
 ⌚ Seg. a Sábado -09:00 ás 19:30
-" Pois o que tu, Senhor, abençoas, abençoado está para sempre"
+Pois o que tu, Senhor, abençoas, abençoado está para sempre
 Shekiná 🙏")
 p = Profile.find_by(username: "nativadegaia")
 p.update_attribute(:bio, "Produtos sustentáveis feitos à 🖐
@@ -1748,7 +1750,7 @@ Whats 11 9 71349992
 Produtos de Minas
 Lanches, Panquecas, Pão de Queijo, Açaí, Doces.")
 p = Profile.find_by(username: "curiosidadesdeubatuba")
-p.update_attribute(:bio, "Baixe o APP "Curiosidades de Ubatuba" saiba mais sobre as praias, trilhas, cachoeiras e faça seu roteiro. Assine nosso canal no YouTube!")
+p.update_attribute(:bio, "Baixe o APP Curiosidades de Ubatuba saiba mais sobre as praias, trilhas, cachoeiras e faça seu roteiro. Assine nosso canal no YouTube!")
 p = Profile.find_by(username: "ubatubadivulga")
 p.update_attribute(:bio, "🌴 Pontos Turísticos
 🌴Dicas de Hotelaria | Passeios | Lojas
@@ -1876,7 +1878,7 @@ Shopping Iperoig
 Dr Esteves da Silva, 147, centro
 (12)  99662-3119")
 p = Profile.find_by(username: "katia_alfenas")
-p.update_attribute(:bio, "🌼🌿 "Cada um sabe a dor e a delícia de ser o que é"
+p.update_attribute(:bio, "🌼🌿 Cada um sabe a dor e a delícia de ser o que é
 ♑ Capricorniana
 👩‍🎨 Criadora e criativa da @casame_decor
 🇧🇷 Ubatuba")
@@ -1936,7 +1938,7 @@ p.update_attribute(:bio, "Desde 2003
 • Telefone: (12) 3833-3205
 Tem alguma dúvida? Mande sua pergunta no Direct.")
 p = Profile.find_by(username: "dijucafezinho")
-p.update_attribute(:bio, "" 1 cafézinho, vários sabores "
+p.update_attribute(:bio, " 1 cafézinho, vários sabores
 DIJU
 Whats(12) 991744343
 Fixo: 2103-8138, temos: cafés especiais ☕️sucos 🍊salgados 🥟bolos 🍩bebidas 🥤 doces 🥧🍫🍮🍭🍧🍬🍭🍩🥛🍯🍥")
