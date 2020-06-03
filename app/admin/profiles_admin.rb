@@ -29,7 +29,7 @@ Trestle.resource(:profiles) do
         content_tag(:small, link_to(profile.username, profile.url, target: "_blank", class: "external-link"), class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
-    column :sub_categ, link: false
+    column :sub_categ, sort: :sub_categ_id, link: false
     column :completion_progress, ->(profile) { status_tag(profile.completion_progress, :secondary) }, header: "%"
     column :whatsapp, header: "WhatsApp"
     column :name, ->(profile) { profile.address.present? ? profile.address.bairro : ""}, header: "Bairro", link: false
