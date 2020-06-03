@@ -67,4 +67,11 @@ Rails.application.configure do
   ########################################
   # App root url, as needed by some classes
   config.root_url = 'http://localhost:3000'
+
+  config.log_level = :debug
+# Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+  # Prepend all log lines with the following tags.
+  # config.log_tags = [ :ip ]
+
 end

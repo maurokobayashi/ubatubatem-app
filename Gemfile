@@ -22,6 +22,8 @@ gem 'pg_search'
 # infinite pagination
 gem 'will_paginate'
 gem 'will_paginate_infinite'
+# Loads environment variables from '.env'
+gem 'dotenv-rails', group: :development
 
 
 ############# DEFAULT GEMS #############
