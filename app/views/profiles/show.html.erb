@@ -96,19 +96,6 @@
           </a>
         </li>
         <% end %>
-        <% if @profile.address.present? %>
-        <li>
-        <a href="#" class="item" data-toggle="modal" data-target="#dialog-address" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:address_click] %>);">
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div><%= humanize_address @profile.address %></div>
-              <span class="text-muted">como chegar</span>
-            </div>
-          </a>
-        </li>
-        <% end %>
         <% if @profile.delivery.present? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-delivery">
@@ -133,6 +120,19 @@
             </div>
           </a>
         </li>
+        <% if @profile.address.present? %>
+        <li>
+        <a href="#" class="item" data-toggle="modal" data-target="#dialog-address" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:address_click] %>);">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div><%= humanize_address @profile.address %></div>
+              <span class="text-muted">como chegar</span>
+            </div>
+          </a>
+        </li>
+        <% end %>
         <% if @profile.instagram_account.present? %>
         <li>
           <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="nofollow" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:instagram_click] %>);">
