@@ -1,20 +1,46 @@
+<%
+  _title = defined?(title) ? title : "Ubatuba Tem - Pequenos Negócios em Ubatuba"
+  _theme_color = defined?(theme_color) ? theme_color : "#000000"
+  _description = defined?(description) ? description : "Catálogo colaborativo de pequenos comerciantes, produtores e artistas de Ubatuba"
+  _keywords = defined?(keywords) ? keywords : "ubatuba, comércio, restaurantes, lojas"
+  _og_properties = defined?(og_properties) ? og_properties : {
+    image: "https://instagram.fcgh12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/90962734_2256251341349035_2598005891781361664_n.jpg?_nc_ht=instagram.fcgh12-1.fna.fbcdn.net&_nc_ohc=e0K26EHW1WEAX_N7ab9&oh=0643588c86c57196df0627e2da1423cc&oe=5F04891A",
+    type: "image/jpg",
+    width: "247",
+    height: "247",
+    locale: "pt_BR",
+    url: root_url,
+    title: _title,
+    description: _description
+  }
+%>
+
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png"> -->
-    <meta name="theme-color" content="#000000">
     <!-- <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32"> -->
-    <title>Ubatuba Tem</title>
-    <meta name="description" content="Catálogo colaborativo de pequenos negócios de Ubatuba">
-    <meta name="keywords" content="ubatuba, comércio, restaurantes, lojas" />
+    <title><%= _title %></title>
+    <%= tag :meta, name: "theme-color", content: _theme_color %>
+    <%= tag :meta, name: "description", content: _description %>
+    <%= tag :meta, name: "keywords", content: _keywords %>
+    <%= tag :meta, property: "og:image", content: _og_properties[:image] %>
+    <%= tag :meta, property: "og:image:type", content: _og_properties[:type] %>
+    <%= tag :meta, property: "og:image:width", content: _og_properties[:width] %>
+    <%= tag :meta, property: "og:image:height", content: _og_properties[:height] %>
+    <%= tag :meta, property: "og:description", content: _og_properties[:description] %>
+    <%= tag :meta, property: "og:url", content: _og_properties[:url] %>
+    <%= tag :meta, property: "og:title", content: _og_properties[:title] %>
+    <%= tag :meta, property: "og:locale", content: _og_properties[:locale] %>
+
     <link rel="manifest" href="/__manifest.json">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

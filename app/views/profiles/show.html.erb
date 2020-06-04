@@ -1,11 +1,11 @@
 <body>
 
-  <%= render "app_components/header", right_buttons: [:share_profile, :options_profile] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:share_profile, :options_profile] %>
 
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? %>
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
-  <%= render("dialog_horarios") %>
+  <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @instagram_scrap[:avatar_url_large] || @profile.avatar_url) %>
   <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
 
@@ -109,17 +109,19 @@
           </a>
         </li>
         <% end %>
+        <% if @profile.opening_hours.present? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios">
             <div class="icon-box">
               <ion-icon name="time-outline"></ion-icon>
             </div>
             <div class="in">
-              <div>Aberto hoje - 08h às 20h (FAKE)</div>
+              <div><%= humanize_opening_hours @profile %></div>
               <span class="text-muted">ver horários</span>
             </div>
           </a>
         </li>
+        <% end %>
         <% if @profile.address.present? %>
         <li>
         <a href="#" class="item" data-toggle="modal" data-target="#dialog-address" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:address_click] %>);">
@@ -153,8 +155,7 @@
               <ion-icon name="globe-outline"></ion-icon>
             </div>
             <div class="in">
-              <div><%= @profile.website %></div>
-              <span class="text-muted">website</span>
+              <div><%= unmask_url @profile.website %></div>
             </div>
           </a>
         </li>

@@ -12,6 +12,10 @@ module MasksHelper
     (url[/\Ahttp:\/\//] || url[/\Ahttps:\/\//]) ? url : "http://#{url}"
   end
 
+  def unmask_url(url)
+    url.gsub("https://", "").gsub("http://", "") if url.present?
+  end
+
   def add_breaklines(text)
     if text.present?
       text.split("\n").join("<br/>").html_safe

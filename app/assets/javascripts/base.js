@@ -11,16 +11,16 @@ $(document).ready(function () {
 
   // Page Loader with preload
   setTimeout(() => {
-    $("#loader").fadeToggle(250);
-    }, 500); // hide delay when page load
+    $("#loader").fadeToggle(300);
+    }, 250); // hide delay when page load
 
 
   // Vibrate on click
   $(".vibrate").click(function (e) {
-    navigator.vibrate([8]);
+    navigator.vibrate([5]);
   });
   $("form").submit(function (e) {
-    navigator.vibrate([10]);
+    navigator.vibrate([5]);
   });
 
 

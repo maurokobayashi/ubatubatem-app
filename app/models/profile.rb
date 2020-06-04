@@ -45,6 +45,24 @@ class Profile < ApplicationRecord
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
 
+  def current_opening_day
+    opening_hours.select{|oh| oh.wday == DateTime.now.wday}.last if opening_hours.present?
+  end
+
+  def open?
+    if opening_hours.blank?
+      false
+    else
+      current = self.current_opening_day
+      start = DateTime.now.change({ hour: current.opens_at.hour, min: current.opens_at.min, sec: 0 })
+      finish = DateTime.now.change({ hour: current.closes_at.hour, min: current.closes_at.min, sec: 0 })
+      DateTime.now.between?(start, finish)
+    end
+  end
+  def closed?
+    !open?
+  end
+
   def url
     "#{Ubatubatem::Application.config.root_url}/profiles/#{self.id}"
   end

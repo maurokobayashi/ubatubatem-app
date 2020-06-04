@@ -32,4 +32,12 @@ class OpeningHour < ApplicationRecord
       end
   end
 
+  def wday
+    OpeningHour.days[self.day]+1
+  end
+
+  def humanize
+    "#{self.day_to_s} - #{opens_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")} às #{closes_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")}"
+  end
+
 end

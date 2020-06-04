@@ -1,14 +1,14 @@
 <body>
 
-  <%= render "app_components/header", left_button: :about, right_buttons: [:options] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :about, right_buttons: [:options] %>
 
   <!-- App Capsule -->
-  <div id="appCapsule" class="mt-3 mb-5">
+  <div id="appCapsule" class="mb-5">
 
     <!-- Section Busca -->
-    <div class="section full mb-3">
+    <div class="section full pb-2 mb-4 bg-primary">
       <div class="section">
-        <%= render "app_components/search_form" %>
+        <%= render "app_components/search_form", classes: "border-none", size: "sm" %>
       </div>
     </div>
 

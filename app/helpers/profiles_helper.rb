@@ -17,4 +17,25 @@ module ProfilesHelper
     address_line+=" - #{address.bairro.name}" if address.bairro.present?
   end
 
+  def humanize_opening_hours(profile)
+    text = ""
+    current_opening_day = @profile.current_opening_day
+    opens_today = current_opening_day.present?
+    opened_now = profile.open?
+
+    if opens_today
+      opens_at = current_opening_day.opens_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")
+      closes_at = current_opening_day.closes_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")
+      if opened_now
+        text+="Aberto agora"
+      else
+        not_open_yet = current_opening_day.opens_at.hour >= DateTime.now.hour
+        text+= not_open_yet ? "Abre hoje" : "Fechado"
+      end
+      text+=" - #{opens_at} às #{closes_at}"
+    else
+      text+="Fechado hoje"
+    end
+  end
+
 end

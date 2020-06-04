@@ -93,6 +93,7 @@ button:hover, button:active, button:focus {
   color: #141515;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
 }
+.appHeader.flat {box-shadow: none!important;}
 
 .appHeader:before {
   content: '';
@@ -1348,7 +1349,7 @@ mark {
 
 strong,
 b {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .page-title {
@@ -4128,6 +4129,7 @@ textarea,
   border-radius: 6px;
   padding: 0 40px 0 16px;
 }
+.form-group.boxed.sm .form-control{height: 36px!important;}
 
 .form-group.boxed .form-control:focus {
   border-color: #1E74FD;
@@ -4143,6 +4145,7 @@ textarea,
   height: 42px;
   width: 40px;
 }
+.form-group.boxed.sm .clear-input {height: 36px!important;}
 
 .form-group.boxed .label {
   margin-bottom: 8px;

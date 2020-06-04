@@ -7,13 +7,9 @@
       </div>
       <div class="modal-body mb-2 align-left">
         <ul class="font-13">
-          <li>Segunda: 8h às 20h</li>
-          <li>Terça: 8h às 20h</li>
-          <li>Quarta: 8h às 20h</li>
-          <li>Quinta: 8h às 20h</li>
-          <li>Sexta: 8h às 20h</li>
-          <li>Sábado: 8h às 20h</li>
-          <li>Domingo: fechado</li>
+          <% profile.opening_hours.order(:day).each do |oh| %>
+          <li><%= oh.humanize %></li>
+          <% end %>
         </ul>
       </div>
       <div class="modal-footer">

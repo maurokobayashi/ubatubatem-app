@@ -1,4 +1,5 @@
 <%
+  _classes = defined?(classes) ? classes : ""
   _right_buttons = defined?(right_buttons) ? right_buttons : []
   _left_button = defined?(left_button) ? left_button : :back
   _back_link = defined?(back_link) ? back_link : "javascript:window.history.back();"
@@ -8,7 +9,7 @@
 <%= render("app_components/share_profile", profile: @profile) if _right_buttons.include? :share_profile %>
 
 <!-- App Header -->
-<div class="appHeader bg-primary scrolled">
+<div class="appHeader <%= _classes %>">
   <div class="left">
     <% if _left_button == :back %>
     <a href="<%= _back_link %>" class="headerButton">
