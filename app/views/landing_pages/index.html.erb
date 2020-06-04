@@ -1,6 +1,6 @@
 <body>
 
-  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :about, right_buttons: [:options] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :blank, right_buttons: [:options] %>
 
   <!-- App Capsule -->
   <div id="appCapsule" class="mb-5">
@@ -96,7 +96,7 @@
       <h1 class="title">Negócios Locais</h1>
     </div>
 
-    <%= render "categs/categories_list", categs: @categs %>
+    <%= render "profiles/categories_list", categs: @categs %>
 
   </div>
   <!-- * App Capsule -->
