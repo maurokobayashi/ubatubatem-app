@@ -1,7 +1,7 @@
 <%
-  _title = defined?(title) ? title : "Ubatuba Tem - Pequenos Negócios em Ubatuba"
+  _title = defined?(@tag_title) ? @tag_title : "Ubatuba Tem - #{Profile.count} Pequenos Negócios em Ubatuba"
+  _description = defined?(@tag_description) ? @tag_description : "Catálogo colaborativo de pequenos comerciantes, produtores e artistas de Ubatuba"
   _theme_color = defined?(theme_color) ? theme_color : "#000000"
-  _description = defined?(description) ? description : "Catálogo colaborativo de pequenos comerciantes, produtores e artistas de Ubatuba"
   _keywords = defined?(keywords) ? keywords : "ubatuba, comércio, restaurantes, lojas"
   _og_properties = defined?(og_properties) ? og_properties : {
     image: "https://instagram.fcgh12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/90962734_2256251341349035_2598005891781361664_n.jpg?_nc_ht=instagram.fcgh12-1.fna.fbcdn.net&_nc_ohc=e0K26EHW1WEAX_N7ab9&oh=0643588c86c57196df0627e2da1423cc&oe=5F04891A",

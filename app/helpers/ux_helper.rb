@@ -19,6 +19,7 @@ module UxHelper
     html.html_safe
   end
 
+  # Links
   def google_maps_link(address_line)
     "https://maps.google.com?daddr=#{address_line}, Ubatuba-SP"
   end

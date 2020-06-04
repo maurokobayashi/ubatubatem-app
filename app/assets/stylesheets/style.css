@@ -20,6 +20,7 @@ body {
 .align-right{text-align:right!important;}
 .align-center{text-align:center!important;}
 .border-none{border:none!important;}
+.breadcrumb-sm{color: #A1A1A2!important;}
 .breadcrumb-sm{font-size: 85%;}
 .breadcrumb-sm a{color:#A1A1A2!important;}
 .click-animated {
@@ -6328,7 +6329,7 @@ textarea,
 }
 
 .profile-head .in .subtext {
-  color: #A1A1A2;
+  color: #797979;
   font-weight: 400;
   margin: 0;
 }

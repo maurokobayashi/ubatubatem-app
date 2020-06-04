@@ -27,7 +27,7 @@ module ProfilesHelper
       opens_at = current_opening_day.opens_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")
       closes_at = current_opening_day.closes_at.strftime("%Hh%M").delete_prefix("0").delete_suffix("00")
       if opened_now
-        text+="Aberto agora"
+        text+="<span class=\"text-success\">Aberto agora</span>"
       else
         not_open_yet = current_opening_day.opens_at.hour >= DateTime.now.hour
         text+= not_open_yet ? "Abre hoje" : "Fechado"
@@ -36,6 +36,7 @@ module ProfilesHelper
     else
       text+="Fechado hoje"
     end
+    text.html_safe
   end
 
 end

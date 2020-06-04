@@ -1,14 +1,15 @@
+<% @tag_title = "#{@profile.title} - #{@profile.tagline} | #{@profile.address.present? ? @profile.address.bairro.name+', ' : ''}Ubatuba-SP" %>
+<% @tag_description = "Conheça #{Profile.count} pequenos negócios com o charme de Ubatuba-SP." %>
+
 <body>
 
   <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:share_profile, :options_profile] %>
-
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? %>
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @instagram_scrap[:avatar_url_large] || @profile.avatar_url) %>
   <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
-
   <%= render("app_components/toast_notification", id: "toast-salvar", text: "Salvo na minha lista", color: "primary") %>
 
 
@@ -23,7 +24,12 @@
           </a>
         </div>
         <div class="in">
-          <h3 class="name"><%= @profile.title %></h3>
+          <h3 class="name">
+            <%= @profile.title %>
+            <% if @profile.reivindicado? %>
+            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+            <% end %>
+          </h3>
           <h5 class="subtext"><%= @profile.tagline %></h5>
         </div>
       </div>
@@ -66,8 +72,8 @@
         <% if @profile.whatsapp.present? %>
         <div class="col-6">
           <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
-            <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon>
-            Mensagem
+            <!-- <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon> -->
+            Enviar Mensagem
           </a>
         </div>
         <% end %>
@@ -91,7 +97,7 @@
             </div>
             <div class="in">
               <div><%= mask_phone @profile.whatsapp %></div>
-              <span class="text-muted">mensagem</span>
+              <span class="text-muted">whatsapp</span>
             </div>
           </a>
         </li>
@@ -104,7 +110,7 @@
             </div>
             <div class="in">
               <div><%= humanize_delivery_mode @profile.delivery %></div>
-              <span class="text-muted">locais de entrega</span>
+              <span class="text-muted">cobertura</span>
             </div>
           </a>
         </li>
@@ -117,7 +123,7 @@
             </div>
             <div class="in">
               <div><%= humanize_opening_hours @profile %></div>
-              <span class="text-muted">ver horários</span>
+              <span class="text-muted">horários</span>
             </div>
           </a>
         </li>
@@ -130,7 +136,7 @@
             </div>
             <div class="in">
               <div><%= humanize_address @profile.address %></div>
-              <span class="text-muted">como chegar</span>
+              <span class="text-muted">mapa</span>
             </div>
           </a>
         </li>
@@ -150,9 +156,9 @@
         <% end %>
         <% if @profile.website.present? %>
         <li>
-          <a href="<%= mask_url @profile.website %>" target="_blank" class="item" rel="nofollow" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:website_click] %>);">
+          <a href="<%= mask_url @profile.website %>" target="_blank" class="item" rel="nofollow" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:link_click] %>);">
             <div class="icon-box">
-              <ion-icon name="globe-outline"></ion-icon>
+              <ion-icon name="link-outline"></ion-icon>
             </div>
             <div class="in">
               <div><%= unmask_url @profile.website %></div>
