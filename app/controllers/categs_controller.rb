@@ -8,7 +8,7 @@ class CategsController < ApplicationController
     if @sub_categ.present?
       @profiles = Profile.where(sub_categ: @sub_categ)
     else
-      redirect_to categorias_path and return
+      redirect_to catalogo_path and return
     end
 
     @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
@@ -17,10 +17,6 @@ class CategsController < ApplicationController
       format.html
       format.js
     end
-  end
-
-  def index
-    @categs = Categ.ativo.all.order(:order, :name)
   end
 
 end

@@ -18,4 +18,9 @@ class Bairro < ApplicationRecord
   has_many :addresses
   enum regiao: { centro: 0, serra: 1, sul: 2, norte: 3 }
 
+  def profile_count
+    #TODO
+    4
+  end
+
 end

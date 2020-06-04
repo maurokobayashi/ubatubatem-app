@@ -42,6 +42,11 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def catalogo
+    @categs = Categ.ativo.all.order(:order, :name)
+    @bairros = Bairro.all.order(:regiao, :id)
+  end
+
   # GET /buscar_full?q=
   # def fullsearch
   #   per_page = 10

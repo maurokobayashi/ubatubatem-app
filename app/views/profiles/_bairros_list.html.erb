@@ -1,0 +1,31 @@
+<% regioes = bairros.map {|b| b.regiao}.uniq %>
+<div class="section full">
+  <div class="wide-block mt-2">
+    <ul class="listview full image-listview" style="border:none; margin-left:-16px;">
+      <% regioes.each do |regiao| %>
+      <li class="multi-level">
+        <a href="#" class="item">
+          <div class="icon-box">
+            <ion-icon name="location-outline"></ion-icon>
+          </div>
+          <div class="in">
+            <%= regiao.titleize %>
+          </div>
+        </a>
+        <ul class="listview listview-md link-listview">
+          <% bairros.select{|b| b.regiao == regiao}.each do |bairro| %>
+          <li class="click-animated">
+            <a href="<%= bairro_path bairro.name.parameterize %>" class="item vibrate">
+              <div class="in">
+                <%= bairro.name %>
+                <span class="text-muted"><%= bairro.profile_count %></span>
+              </div>
+            </a>
+          </li>
+          <% end %> <!-- *regiões -->
+        </ul>
+      </li>
+      <% end %> <!-- *bairros -->
+    </ul>
+  </div>
+</div>

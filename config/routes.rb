@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   get "profiles/:id", to: "profiles#show", as: "profile"
   # TODO: /marcante.paes
   get "buscar", to: "profiles#search"
+  get "catalogo", to: "profiles#catalogo", as: "catalogo"
+  get "categ/:alias", to: "categs#show", as: "categoria"
+  get "bairro/:alias", to: "categs#show", as: "bairro"
   # get "buscar_full", to: "profiles#fullsearch"
 
-  # Categs
-  get "cat/:alias", to: "categs#show", as: "categoria"
-  get "categorias", to: "categs#index", as: "categorias"
 
   # Statistics
   post "statistics", to: "statistics#track_profile", as:"track_statistic"
