@@ -29,7 +29,7 @@ module SessionsHelper
   end
 
   def current_admin?
-    self.current_user.admin?
+    signed_in? && current_user.try(:admin?)
   end
 
   def store_location

@@ -6,23 +6,11 @@ class ProfilesController < ApplicationController
   # GET profiles/:id
   def show
     @profile = Profile.find(params[:id])
-
     Statistic.track!(@profile, Statistic.events[:perfil_view]) unless current_user? @profile.user
-
-    # instagram scraping
-    # if @profile.instagram_account.present?
-      # @instagram_scrap = scrap_from_instagram(@profile.instagram_account.username)
-      # override avatar_url on profile
-      # if @instagram_scrap[:avatar_url] && (@instagram_scrap[:avatar_url] != @profile.avatar_url)
-      #   @profile.avatar_url = @instagram_scrap[:avatar_url]
-      #   @profile.save(touch: false)
-      # end
-    # end
   end
 
   # GET /buscar?q=
   def search
-    sleep 0.5
     @query = params[:q]
     if @query.present?
       @profiles = Profile.active.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
@@ -31,7 +19,6 @@ class ProfilesController < ApplicationController
     end
 
     # TODO: adicionar no fim da fila os profiles da subcategoria (caso a query ê match)
-
     @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
 
     respond_to do |format|
