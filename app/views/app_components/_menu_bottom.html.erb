@@ -28,12 +28,21 @@
     </div>
   </a>
   <% if signed_in? %>
-  <a href="<%= profile_path current_user.profile %>" class="item vibrate">
-    <div class="col">
-      <ion-icon name="person-outline"></ion-icon>
-      <strong>Meu Perfil</strong>
-    </div>
-  </a>
+    <% if current_admin? %>
+    <a href="<%= trestle_path %>/profiles" class="item vibrate">
+      <div class="col">
+        <ion-icon name="build-outline"></ion-icon>
+        <strong>Admin</strong>
+      </div>
+    </a>
+    <% else %>
+    <a href="<%= profile_path current_user.profile %>" class="item vibrate">
+      <div class="col">
+        <ion-icon name="person-outline"></ion-icon>
+        <strong>Meu Perfil</strong>
+      </div>
+    </a>
+    <% end %>
   <% else %>
   <a href="<%= new_session_path %>" class="item vibrate">
     <div class="col">

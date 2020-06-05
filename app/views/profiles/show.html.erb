@@ -31,16 +31,17 @@
             <% end %>
           </h3>
           <h5 class="subtext"><%= @profile.tagline %></h5>
+          <% if current_admin? %>
+          <small>
+            <a href="<%= "#{trestle_path}/profiles/#{@profile.id}" %>" target="_blank">Editar dados do perfil</a>
+          </small>
+          <% end %>
         </div>
       </div>
     </div>
 
     <div class="section mt-1">
-      <nav class="breadcrumb-sm" aria-label="breadcrumb">
-        <a href="#" class="vibrate"><%= @profile.sub_categ.try(:categ).try(:name) || "Categoria" %></a>
-        <span>&nbsp;>&nbsp;</span>
-        <a href="#" class="vibrate" aria-current="page"><%= @profile.sub_categ.try(:name) || "SubCategoria" %></a>
-      </nav>
+      <%= render "app_components/breadcrumb_profile", profile: @profile %>
     </div>
 
     <div class="section mt-1 mb-2">

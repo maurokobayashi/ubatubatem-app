@@ -8,9 +8,10 @@
         <%= profile.title %>
         <div class="text-muted">
           <%= profile.tagline %>
-          <% if profile.sub_categ.present? %>
+          <% if profile.sub_categ.try(:ativo?) %>
           <div>
-            <small><%= profile.sub_categ.categ.name %>&nbsp;>&nbsp;<%= profile.sub_categ.name %></small>
+            <small>
+              <%= "#{profile.sub_categ.categ.name}&nbsp;>&nbsp;#{profile.sub_categ.name}".html_safe %></small>
           </div>
           <% end %>
         </div>

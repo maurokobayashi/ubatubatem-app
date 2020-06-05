@@ -18,4 +18,5 @@ class SubCateg < ApplicationRecord
   def profile_count
     self.profiles.count
   end
+
 end

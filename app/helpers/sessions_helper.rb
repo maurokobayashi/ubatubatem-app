@@ -28,6 +28,10 @@ module SessionsHelper
     user.present? && user == current_user
   end
 
+  def current_admin?
+    self.current_user.admin?
+  end
+
   def store_location
     session[:return_to] = request.original_url
   end

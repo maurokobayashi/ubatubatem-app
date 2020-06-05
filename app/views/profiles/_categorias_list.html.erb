@@ -3,7 +3,7 @@
     <ul class="listview full image-listview" style="border:none; margin-left:-16px;">
       <% categs.each do |categ| %>
       <li class="multi-level">
-        <a href="#" class="item">
+        <a href="#" id="list-<%= categ.alias %>" class="item">
           <div class="icon-box">
             <ion-icon name="<%= categ.icon || 'reader-outline' %>"></ion-icon>
           </div>
