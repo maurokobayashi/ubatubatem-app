@@ -1,7 +1,7 @@
 <%
   _classes = defined?(classes) ? classes : ""
   _right_buttons = defined?(right_buttons) ? right_buttons : []
-  _left_button = defined?(left_button) ? left_button : :back
+  _left_button = defined?(left_button) ? left_button : ""
   _back_link = defined?(back_link) ? back_link : "javascript:window.history.back();"
 %>
 
@@ -15,9 +15,9 @@
     <a href="<%= _back_link %>" class="headerButton">
       <ion-icon name="arrow-back-outline" role="img" class="md hydrated"></ion-icon>
     </a>
-    <% elsif _left_button == :about %>
-    <a href="#" class="headerButton" onclick="alert('Breve texto sobre o Ubatuba Tem');">
-      <ion-icon name="information-circle-outline" role="img" class="md hydrated"></ion-icon>
+    <% else %>
+    <a href="#" class="headerButton toggle-searchbox">
+      <ion-icon name="search-outline"></ion-icon>
     </a>
     <% end %>
   </div>

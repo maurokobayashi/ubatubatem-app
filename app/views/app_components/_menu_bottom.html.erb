@@ -8,23 +8,23 @@
       <strong>Início</strong>
     </div>
   </a>
-  <a href="#" class="item toggle-searchbox vibrate">
+  <a href="<%= catalogo_path %>" class="item vibrate">
     <div class="col">
-      <ion-icon name="search-outline"></ion-icon>
-      <strong>Buscar</strong>
+      <ion-icon name="layers-outline"></ion-icon>
+      <strong>Catálogo</strong>
     </div>
   </a>
   <a href="#" class="item vibrate" onclick="alert('Aqui a galera vai poder adicionar novos negócios ao APP');">
     <div class="col">
       <div class="action-button">
-        <ion-icon name="add-outline"></ion-icon>
+        <ion-icon name="add-outline" role="img" class="md hydrated"></ion-icon>
       </div>
     </div>
   </a>
-  <a href="<%= catalogo_path %>" class="item vibrate">
+  <a href="#" class="item vibrate">
     <div class="col">
-      <ion-icon name="layers-outline"></ion-icon>
-      <strong>Catálogo</strong>
+      <ion-icon name="bookmark-outline"></ion-icon>
+      <strong>Salvos</strong>
     </div>
   </a>
   <% if signed_in? %>

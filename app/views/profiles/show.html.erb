@@ -3,7 +3,7 @@
 
 <body>
 
-  <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:share_profile, :options_profile] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options_profile] %>
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? %>
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
