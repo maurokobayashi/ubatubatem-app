@@ -8,7 +8,7 @@
   <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
-  <%= render("dialog_avatar", image_src: @instagram_scrap[:avatar_url_large] || @profile.avatar_url) %>
+  <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
   <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
   <%= render("app_components/toast_notification", id: "toast-salvar", text: "Salvo na minha lista", color: "primary") %>
 
@@ -170,24 +170,38 @@
       </ul>
     </div>
 
-    <% if @instagram_scrap[:pictures].present? %>
     <!-- Photos -->
     <div class="section full mt-3 pt-2 pr-2 pl-2 bg-white">
       <div class="row">
-        <% @instagram_scrap[:pictures].each do |picture| %>
-        <div class="col-4 mb-2">
-          <a href="<%= picture[:original] %>" target="_system" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);">
-            <img src="<%= picture[:thumbnail] %>" alt="image" class="imaged w-100">
-          </a>
-        </div>
-        <% end %>
+        <div id="instagram-feed" class="instagram_feed" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);"></div>
       </div>
     </div>
     <!-- * Photos -->
-    <% end %>
 
   </div>
   <!-- * App Capsule -->
 
 
 </body>
+
+<%#= javascript_include_tag 'InstagramFeed.min', 'data-turbolinks-track': 'reload' %>
+
+<script type="text/javascript">
+  (function($){
+    $(window).on('load', function(){
+      $.instagramFeed({
+        'username': '<%= @profile.instagram_account.username %>',
+        'container': "#instagram-feed",
+        'display_profile': false,
+        'display_biography': false,
+        'display_gallery': true,
+        'callback': null,
+        'styling': true,
+        'items': 12,
+        'items_per_row': 3,
+        'margin': 1.2
+        });
+      });
+
+  })(jQuery);
+</script>

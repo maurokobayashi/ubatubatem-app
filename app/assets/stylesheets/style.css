@@ -43,6 +43,10 @@ body {
 .font-14{font-size:14px!important;}
 .font-15{font-size:15px!important;}
 .font-16{font-size:16px!important;}
+.instagram_gallery .instagram-image img{
+  height: auto;
+  border-radius: 6px;
+}
 .weight-4{font-weight:400!important;}
 .weight-5{font-weight:500!important;}
 .weight-6{font-weight:600!important;}
