@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   # TODO: /marcante.paes
   get "buscar", to: "profiles#search"
   get "catalogo", to: "profiles#catalogo", as: "catalogo"
-  get "categ/:alias", to: "categs#show", as: "categoria"
-  get "bairro/:alias", to: "categs#show", as: "bairro"
+  get "categoria/:alias", to: "profiles#catalogo_categoria", as: "catalogo_categoria"
+  get "bairro/:alias", to: "profiles#catalogo_bairro", as: "catalogo_bairro"
   # get "buscar_full", to: "profiles#fullsearch"
 
 

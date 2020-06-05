@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_141600) do
+ActiveRecord::Schema.define(version: 2020_06_05_144553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_06_02_141600) do
     t.float "lat"
     t.float "lng"
     t.integer "regiao"
+    t.string "alias"
     t.index ["lat", "lng"], name: "index_bairros_on_lat_and_lng"
   end
 

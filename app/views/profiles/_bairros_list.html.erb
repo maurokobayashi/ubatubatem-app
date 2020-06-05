@@ -4,7 +4,7 @@
     <ul class="listview full image-listview" style="border:none; margin-left:-16px;">
       <% regioes.each do |regiao| %>
       <li class="multi-level">
-        <a href="#" class="item">
+        <a href="#" id="<%= "list-#{regiao}" %>" class="item">
           <div class="icon-box">
             <ion-icon name="location-outline"></ion-icon>
           </div>
@@ -13,16 +13,19 @@
           </div>
         </a>
         <ul class="listview listview-md link-listview">
-          <% bairros.select{|b| b.regiao == regiao}.each do |bairro| %>
+        <% bairros.select{|b| b.regiao == regiao}.each do |bairro| %>
+          <% count = bairro.profile_count %>
+          <% if count > 0 %>
           <li class="click-animated">
-            <a href="<%= bairro_path bairro.name.parameterize %>" class="item vibrate">
+            <a href="<%= catalogo_bairro_path bairro.name.parameterize %>" class="item vibrate">
               <div class="in">
                 <%= bairro.name %>
-                <span class="text-muted"><%= bairro.profile_count %></span>
+                <span class="text-muted"><%= count %></span>
               </div>
             </a>
           </li>
-          <% end %> <!-- *regiões -->
+          <% end %> <!-- *if -->
+        <% end %> <!-- *regiões -->
         </ul>
       </li>
       <% end %> <!-- *bairros -->

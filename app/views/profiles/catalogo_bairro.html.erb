@@ -1,0 +1,49 @@
+<body>
+
+  <%= render "app_components/header", right_buttons: [:options], back_link: "#{catalogo_path}?tab=bairros&list=#{@bairro.regiao}" %>
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="mt-3 mb-5">
+
+    <!-- Search Results -->
+    <% if @profiles.count > 0 %>
+    <div class="header-large-title">
+      <h1 class="title"><%= "#{@bairro.name} (#{@bairro.regiao.titleize})" %></h1>
+      <h4 class="subtitle"><%= pluralize(@profiles.count, "negócio cadastrado", "negócios cadastrados") %></h4>
+    </div>
+
+    <ul class="listview image-listview media search-result mt-2 mb-2">
+      <% @profiles.each do |profile| %>
+        <%= render 'profiles/search_result', profile: profile %>
+      <% end %>
+    </ul>
+    <%= will_paginate @profiles, renderer: WillPaginateInfinite::InfinitePagination %>
+
+    <% else %>
+
+    <!-- Suggestions -->
+    <div class="section mt-2">
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">sushi</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">pães</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">crochê</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">doces</span>
+      </a>
+      <a href="#" class="chip bg-white chip-outline">
+        <span class="chip-label">artesanato</span>
+      </a>
+    </div>
+
+    <% end %>
+
+
+  </div>
+  <!-- * App Capsule -->
+
+</body>

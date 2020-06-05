@@ -13,16 +13,19 @@
         </a>
         <% if categ.sub_categs.present? %>
         <ul class="listview listview-md link-listview">
-          <% categ.sub_categs.order(:name).each do |sub_categ| %>
+        <% categ.sub_categs.order(:name).each do |sub_categ| %>
+          <% count = sub_categ.profile_count %>
+          <% if count > 0 %>
           <li class="click-animated">
-            <a href="<%= categoria_path sub_categ.alias %>" class="item vibrate">
+            <a href="<%= catalogo_categoria_path sub_categ.alias %>" class="item vibrate">
               <div class="in">
                 <%= sub_categ.name %>
-                <span class="text-muted"><%= sub_categ.profile_count %></span>
+                <span class="text-muted"><%= count %></span>
               </div>
             </a>
           </li>
-          <% end %> <!-- *sub_categs -->
+          <% end %> <!-- *if -->
+        <% end %> <!-- *sub_categs -->
         </ul>
         <% end %> <!-- *if present? -->
       </li>

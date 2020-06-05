@@ -7,6 +7,7 @@
 #  lat    :float
 #  lng    :float
 #  regiao :integer
+#  alias  :string
 #
 class Bairro < ApplicationRecord
   acts_as_mappable :default_units => :kms,
@@ -19,8 +20,7 @@ class Bairro < ApplicationRecord
   enum regiao: { centro: 0, serra: 1, sul: 2, norte: 3 }
 
   def profile_count
-    #TODO
-    4
+    Profile.joins(:bairro).where(bairros: {id: self.id}).count
   end
 
 end

@@ -5,6 +5,7 @@ Trestle.resource(:bairros) do
 
   form do |bairro|
     text_field :name
+    text_field :alias
     select :regiao, Bairro.regiaos.keys.to_a
     row do
       col { text_field :lat }

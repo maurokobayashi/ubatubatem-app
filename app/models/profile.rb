@@ -34,13 +34,14 @@ class Profile < ApplicationRecord
 
   has_one :instagram_account, dependent: :destroy
   has_one :address, dependent: :destroy
+  has_one :bairro, through: :address
   has_one :delivery, dependent: :destroy
   has_many :opening_hours, dependent: :destroy
   has_many :statistics, dependent: :destroy
   belongs_to :sub_categ, optional: true
   belongs_to :user, optional: true
 
-  scope :order_by_id_desc, -> { order(id: :desc) }
+  scope :active, -> { where.not(status: "inativo") }
   scope :order_by_username, -> { order(username: :asc) }
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
