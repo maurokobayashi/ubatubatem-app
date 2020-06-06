@@ -3,9 +3,9 @@ class ProfilesController < ApplicationController
 
   RESULTS_PER_PAGE = 8
 
-  # GET profiles/:id
+  # GET /:username
   def show
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by(username: params[:username])
     Statistic.track!(@profile, Statistic.events[:perfil_view]) unless current_user? @profile.user
   end
 

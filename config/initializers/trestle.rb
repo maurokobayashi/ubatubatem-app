@@ -148,14 +148,14 @@ Trestle.configure do |config|
   # Specify the parameter (along with a password) to be used to
   # authenticate an administrator. Defaults to :email.
   #
-  # config.auth.authenticate_with = :login
+  # config.auth.authenticate_with = :username
 
   # Customize the method for authenticating a user given login parameters.
   # The block should return an instance of the auth user class, or nil.
   #
-  # config.auth.authenticate = ->(params) {
-  #   User.authenticate(params[:login], params[:password])
-  # }
+  config.auth.authenticate = ->(params) {
+    User.authenticate(params[:email], params[:password])
+  }
 
   # Customize the method for finding a user given an ID from the session.
   # The block should return an instance of the auth user class, or nil.

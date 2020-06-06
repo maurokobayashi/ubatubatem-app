@@ -1,5 +1,9 @@
+<%
+  sub_categ = profile.sub_categ
+  bairro = profile.bairro
+%>
 <li class="click-animated">
-  <a href="<%= profile_path profile %>" class="item vibrate">
+  <a href="<%= profile.profile_path %>" class="item vibrate">
     <div class="imageWrapper">
       <img src="<%= profile.avatar_url %>" alt="image" class="imaged w64">
     </div>
@@ -8,10 +12,13 @@
         <%= profile.title %>
         <div class="text-muted">
           <%= profile.tagline %>
-          <% if profile.sub_categ.try(:ativo?) %>
+          <% if sub_categ.ativo? || bairro.present? %>
           <div>
             <small>
-              <%= "#{profile.sub_categ.categ.name}&nbsp;>&nbsp;#{profile.sub_categ.name}".html_safe %></small>
+              <%= bairro.name if bairro.present? %>
+              <%= "&nbsp;>&nbsp;".html_safe if bairro.present? && sub_categ.ativo? %>
+              <%= sub_categ.name if sub_categ.ativo? %>
+            </small>
           </div>
           <% end %>
         </div>

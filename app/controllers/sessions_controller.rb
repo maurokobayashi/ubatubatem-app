@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
           sign_in @user
           flash.notice = FlashMessages::SIGNIN_SUCCESS
           logger.info("[SIGNIN::SUCCESS] User: #{@user.id} - #{@user.profile.username}")
-          redirect_to profile_path profile
+          redirect_to profile.profile_path
         else
           flash.alert = FlashMessages::SIGNIN_INVALID_PASSWORD
           logger.info("[SIGNIN::ERROR] Params: #{session_params}. Motivo: #{FlashMessages::SIGNIN_INVALID_PASSWORD}")

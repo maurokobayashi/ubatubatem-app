@@ -19,6 +19,21 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  def self.authenticate(_username, _password)
+    username = _username.strip.downcase
+    password = _password.strip.downcase
+    signed_user = nil
+
+    profile = Profile.find_by(username: username)
+    if profile.present?
+      user = profile.user
+      if user.present? && user.authenticate(password)
+        signed_user = user
+      end
+    end
+    return signed_user
+  end
+
   def refresh_remember_token
     self.update(remember_token: SecureRandom.urlsafe_base64)
   end

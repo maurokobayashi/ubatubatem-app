@@ -41,31 +41,28 @@ class Profile < ApplicationRecord
   belongs_to :sub_categ, optional: true
   belongs_to :user, optional: true
 
+  TITLE_MAX_LENGTH = 30
+  TAGLINE_MAX_LENGTH = 60
+  BIO_MAX_LENGTH = 150
+
   scope :active, -> { where.not(status: "inativo") }
-  scope :order_by_username, -> { order(username: :asc) }
+  scope :order_by_title, -> { order(title: :asc) }
+
+  validates_presence_of :title, :status, :username
+  validates_uniqueness_of :username
+  validates :username, length: { in: 2..30 }
+  validate :username_format
+  validate :username_available
+  validates :title, length: { maximum: TITLE_MAX_LENGTH }
+  validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH }
+  validates :bio, length: { maximum: BIO_MAX_LENGTH }
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
 
-  def current_opening_day
-    opening_hours.select{|oh| oh.wday == DateTime.now.wday}.last if opening_hours.present?
-  end
+  ###########################################################################
 
-  def open?
-    if opening_hours.blank?
-      false
-    else
-      current = self.current_opening_day
-      start = DateTime.now.change({ hour: current.opens_at.hour, min: current.opens_at.min, sec: 0 })
-      finish = DateTime.now.change({ hour: current.closes_at.hour, min: current.closes_at.min, sec: 0 })
-      DateTime.now.between?(start, finish)
-    end
-  end
   def closed?
     !open?
-  end
-
-  def url
-    "#{Ubatubatem::Application.config.root_url}/profiles/#{self.id}"
   end
 
   def completion_progress
@@ -83,11 +80,49 @@ class Profile < ApplicationRecord
     rate
   end
 
-  def show?
-    self.aprovado? || self.reivindicado?
+  def current_opening_day
+    opening_hours.select{|oh| oh.wday == DateTime.now.wday}.last if opening_hours.present?
   end
 
   def initials
     title.split.first(2).map(&:first).join
   end
+
+  def open?
+    if opening_hours.blank?
+      false
+    else
+      current = self.current_opening_day
+      if current.present?
+        start = DateTime.now.change({ hour: current.opens_at.hour, min: current.opens_at.min, sec: 0 })
+        finish = DateTime.now.change({ hour: current.closes_at.hour, min: current.closes_at.min, sec: 0 })
+        DateTime.now.between?(start, finish)
+      else
+        false
+      end
+    end
+  end
+
+  def profile_path
+    "#{Ubatubatem::Application.config.root_url}/#{self.username}"
+  end
+
+  def show?
+    self.aprovado? || self.reivindicado?
+  end
+
+  def url
+    "#{Ubatubatem::Application.config.root_url}/profiles/#{self.id}"
+  end
+
+  def username_available
+    errors.add(:username, "não está disponível") if USERNAME_UNAVAILABLE.include?( self.username )
+  end
+
+  def username_format
+    # seguindo as regras do instagram
+    errors.add(:username, "contém caracteres inválidos") unless !( self.username =~ /^([A-Za-z0-9._](?:(?:[A-Za-z0-9._]|(?:\.(?!\.))){2,28}(?:[A-Za-z0-9._]))?)$/ ).nil?
+  end
+
+
 end
