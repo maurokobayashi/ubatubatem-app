@@ -3,10 +3,24 @@
   <div class="wide-block mt-2">
     <ul class="listview full image-listview" style="border:none; margin-left:-16px;">
       <% regioes.each do |regiao| %>
+      <%
+        case regiao
+        when "centro"
+          icon = "sync-circle"
+        when "serra"
+          icon = "arrow-back-circle"
+        when "sul"
+          icon = "arrow-down-circle"
+        when "norte"
+          icon = "arrow-up-circle"
+        else
+          icon = "disc"
+        end
+      %>
       <li class="multi-level">
         <a href="#" id="<%= "list-#{regiao}" %>" class="item">
           <div class="icon-box">
-            <ion-icon name="location-outline"></ion-icon>
+            <ion-icon name="<%= icon %>-outline"></ion-icon>
           </div>
           <div class="in">
             <%= regiao.titleize %>

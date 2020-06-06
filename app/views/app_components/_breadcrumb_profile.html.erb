@@ -1,17 +1,15 @@
 <%
-  bairro = profile.bairro
   sub_categ = profile.sub_categ
+  bairro = profile.bairro
 %>
 <nav class="breadcrumb-sm" aria-label="breadcrumb">
-  <% if sub_categ.ativo? %>
-    <a href="<%= "#{catalogo_path}?tab=categorias&list=#{sub_categ.categ.alias}" %>" class="vibrate"><%= sub_categ.categ.name %></a>
-    <span>&nbsp;>&nbsp;</span>
-    <a href="<%= catalogo_categoria_path sub_categ.alias %>" class="vibrate" aria-current="page"><%= sub_categ.name %></a>
-    <%  if bairro.present? %>
-      <span>&nbsp;>&nbsp;</span>
-    <% end %>
+  <a href="<%= catalogo_path %>">Ubatuba</a>
+  <% if bairro.present? %>
+  <span>></span>
+  <a href="<%= catalogo_bairro_path bairro.name.parameterize %>"><%= bairro.name %></a>
   <% end %>
-  <%  if bairro.present? %>
-    <a href="<%= catalogo_bairro_path bairro.name.parameterize %>" class="vibrate"><%= profile.bairro.try(:name) || "Ubatuba" %></a>
+  <% if sub_categ.ativo? %>
+    <span>></span>
+    <a href="<%= catalogo_categoria_path sub_categ.alias %>"><%= sub_categ.name %></a>
   <% end %>
 </nav>

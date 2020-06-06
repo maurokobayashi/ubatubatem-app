@@ -21,8 +21,8 @@ body {
 .align-center{text-align:center!important;}
 .border-none{border:none!important;}
 .breadcrumb-sm{color: #A1A1A2!important;}
-.breadcrumb-sm{font-size: 85%;}
-.breadcrumb-sm a{color:#A1A1A2!important;}
+.breadcrumb-sm{font-size: 12px;}
+.breadcrumb-sm span{font-size: 80%; margin-left: 2px; margin-right: 2px; position: relative; top: -1px; color: #4F5050;}
 .click-animated {
   position: relative;
   cursor: pointer;
@@ -38,6 +38,7 @@ body {
   transition: transform .5s ease-out;
 }.click-animated:hover:before{transform: scaleX(1);}
 .display-block{display:block!important;}
+.font-11{font-size:11px!important;}
 .font-12{font-size:12px!important;}
 .font-13{font-size:13px!important;}
 .font-14{font-size:14px!important;}
@@ -1835,6 +1836,9 @@ a.badge-dark {
 .image-listview > li:after {
   left: 68px;
 }
+.image-listview.listview-sm > li:after {
+  left: 50px!important;
+}
 
 .image-listview > li .item {
   padding: 10px 16px;
@@ -1844,8 +1848,8 @@ a.badge-dark {
   align-items: center;
 }
 .listview-sm.image-listview > li .item {
-  padding-top: 7px!important;
-  padding-bottom: 7px!important;
+  padding-top: 6px!important;
+  padding-bottom: 6px!important;
 }
 
 .image-listview > li .item .image {
@@ -6329,7 +6333,7 @@ textarea,
 .profile-head .in .name {
   margin: 0 0 5px 0;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .profile-head .in .subtext {
