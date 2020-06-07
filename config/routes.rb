@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   post "create", to: "sessions#create", as: "authenticate"
   get "sair", to: "sessions#destroy", as: "signout"
 
-  # Profiles
-  get "buscar", to: "profiles#search", as: "buscar"
+  # Catalogo
+  get "buscar", to: "catalogo#search", as: "buscar"
+  get "catalogo", to: "catalogo#index", as: "catalogo"
+  get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
+  get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
 
-  get "catalogo", to: "profiles#catalogo", as: "catalogo"
-  get "categoria/:alias", to: "profiles#catalogo_categoria", as: "catalogo_categoria"
-  get "bairro/:alias", to: "profiles#catalogo_bairro", as: "catalogo_bairro"
-
-  get "salvos", to: "profiles#salvos", as: "salvos"
+  # Bookmarks
+  get "salvos", to: "bookmarks#index", as: "bookmarks"
 
 
   # Statistics

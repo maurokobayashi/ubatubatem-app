@@ -32,8 +32,12 @@ module SessionsHelper
     signed_in? && current_user.try(:admin?)
   end
 
-  def store_location
+  def store_referer_path
     session[:return_to] = request.referer
+  end
+
+  def store_current_path
+    session[:return_to] = request.original_url
   end
 
 end

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   # GET /entrar
   def new
-    store_location
+    store_referer_path  unless params[:redirect]
 
     if signed_in?
       flash.notice = FlashMessages::SIGNIN_SUCCESS
@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
 
   # GET /signout
   def destroy
-    store_location
+    store_referer_path
 
     sign_out
     flash.notice = FlashMessages::SIGNOUT_SUCCESS

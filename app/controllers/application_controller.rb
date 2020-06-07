@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 private
   def require_authentication
-    store_location
-    redirect_to signin_path unless signed_in?
+    store_current_path
+    redirect_to signin_path redirect: false unless signed_in?
   end
 end

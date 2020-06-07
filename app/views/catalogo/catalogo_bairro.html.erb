@@ -1,6 +1,6 @@
 <body>
 
-  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options], back_link: "#{catalogo_path}?tab=categorias&list=#{@sub_categ.categ.alias}" %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options], back_link: "#{catalogo_path}?tab=bairros&list=#{@bairro.regiao}" %>
 
   <!-- App Capsule -->
   <div id="appCapsule" class="mt-3 mb-5">
@@ -8,12 +8,13 @@
     <!-- Search Results -->
     <% if @profiles.count > 0 %>
     <div class="header-large-title">
-      <h1 class="title"><%= @sub_categ.name %></h1>
+      <h1 class="title"><%= "#{@bairro.name} (#{@bairro.regiao.titleize})" %></h1>
       <h4 class="subtitle"><%= pluralize(@profiles.count, "negócio cadastrado", "negócios cadastrados") %></h4>
     </div>
+
     <ul class="listview image-listview media search-result mt-2 mb-2">
       <% @profiles.each do |profile| %>
-        <%= render 'profiles/search_result', profile: profile %>
+        <%= render 'catalogo/search_result', profile: profile %>
       <% end %>
     </ul>
     <%= will_paginate @profiles, renderer: WillPaginateInfinite::InfinitePagination %>

@@ -34,7 +34,7 @@
     </div>
     <ul class="listview image-listview media search-result mt-1 mb-2">
       <% @profiles.each do |profile| %>
-        <%= render 'search_result', profile: profile %>
+        <%= render 'catalogo/search_result', profile: profile %>
       <% end %>
     </ul>
     <%= will_paginate @profiles, page_links: false, renderer: WillPaginateInfinite::InfinitePagination %>
