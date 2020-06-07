@@ -1,0 +1,21 @@
+<body>
+
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options] %>
+
+  <!-- App Capsule -->
+  <div id="appCapsule">
+
+    <div class="error-page">
+      <img src="https://mobilekit.bragherstudio.com/view6/assets/img/sample/photo/vector6.png" alt="alt" class="imaged square w200">
+      <h1 class="title">A página que você procura não existe.</h1>
+      <div class="text mb-5">
+        No catálogo, você pode encontrar o que procura por bairro ou categoria.
+      </div>
+
+      <a href="<%= catalogo_path %>" class="btn btn-primary btn-lg btn-block">Ir para Catálogo</a>
+    </div>
+
+  </div>
+  <!-- * App Capsule -->
+
+</body>

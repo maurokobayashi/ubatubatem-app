@@ -28,13 +28,7 @@
           <% end %>
 
           <strong class="display-block text-primary mt-2">
-            <% if delivery.delivery_fee.blank? %>
             Consulte a taxa de entrega
-            <% elsif delivery.delivery_fee == 0 %>
-            Entrega Grátis!
-            <% else %>
-            Taxa de entrega: <%= mask_money(delivery.delivery_fee) %>
-            <% end %>
           </strong>
         </p>
       </div>

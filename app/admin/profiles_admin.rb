@@ -95,7 +95,6 @@ Trestle.resource(:profiles) do
         column :has_retirada, header: "Retirada"
         column :has_ponto_comercial, header: "Ponto comercial"
         column :bairro_ids, ->(delivery) { content_tag(:small, Bairro.where(id: delivery.bairro_ids).map(&:name).join(", "), class: "text-muted hidden-xs") }, header: "Locais de entrega"
-        column :delivery_fee, ->(delivery) { number_to_currency(delivery.delivery_fee/100.00, unit: "", separator: ",", delimiter: "") if delivery.delivery_fee.present? }, header: "Taxa de entrega"
       end
 
       if profile.delivery && profile.delivery.persisted?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_144553) do
+ActiveRecord::Schema.define(version: 2020_06_07_135005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 2020_06_05_144553) do
     t.boolean "has_delivery", default: true
     t.boolean "has_retirada", default: false
     t.boolean "has_ponto_comercial", default: false
-    t.integer "delivery_fee"
     t.integer "bairro_ids", default: [], array: true
   end
 

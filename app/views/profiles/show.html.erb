@@ -106,7 +106,7 @@
         <% if @profile.delivery.present? %>
         <% delivery_info = @profile.delivery.has_bairros? %>
         <li>
-          <a href="#" class="item" <%= delivery_info ? "data-toggle=\"modal\" data-target=\"#dialog-delivery\"" : "" %> >
+          <a href="#" class="item" <%= delivery_info ? "data-toggle=modal data-target=#dialog-delivery" : "" %> >
             <div class="icon-box">
               <ion-icon name="bicycle-outline"></ion-icon>
             </div>
@@ -166,6 +166,7 @@
             </div>
             <div class="in">
               <div><%= unmask_url @profile.website %></div>
+              <span class="text-muted">site</span>
             </div>
           </a>
         </li>

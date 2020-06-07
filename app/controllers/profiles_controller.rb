@@ -3,50 +3,11 @@ class ProfilesController < ApplicationController
 
   RESULTS_PER_PAGE = 8
 
-  # GET /:username
-  def show
-    @profile = Profile.find_by(username: params[:username])
-    Statistic.track!(@profile, Statistic.events[:perfil_view]) unless current_user? @profile.user
-  end
-
-  # GET /buscar?q=
-  def search
-    @query = params[:q]
-    if @query.present?
-      @profiles = Profile.active.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
-    else
-      @profiles = Profile.none
-    end
-
-    # TODO: adicionar no fim da fila os profiles da subcategoria (caso a query ê match)
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+  ###############################################
 
   def catalogo
     @categs = Categ.ativo.all.order(:order, :name)
     @bairros = Bairro.all.order(:regiao, :id)
-  end
-
-  # GET /categoria/:alias => lista todos os perfis de uma subcategoria
-  def catalogo_categoria
-    @sub_categ = SubCateg.find_by_alias params[:alias]
-    if @sub_categ.present?
-      @profiles = Profile.active.where(sub_categ: @sub_categ)
-    else
-      redirect_to catalogo_path and return
-    end
-
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   # GET /bairro/:alias => lista todos os perfis de uma subcategoria
@@ -66,6 +27,52 @@ class ProfilesController < ApplicationController
       format.js
     end
   end
+
+  # GET /categoria/:alias => lista todos os perfis de uma subcategoria
+  def catalogo_categoria
+    @sub_categ = SubCateg.find_by_alias params[:alias]
+    if @sub_categ.present?
+      @profiles = Profile.active.where(sub_categ: @sub_categ)
+    else
+      redirect_to catalogo_path and return
+    end
+
+    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET /buscar?q=
+  def search
+    @query = params[:q]
+    if @query.present?
+      @profiles = Profile.active.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
+    else
+      @profiles = Profile.none
+    end
+
+    # TODO: adicionar no fim da fila os profiles da subcategoria (caso a query dê match)
+    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET /:username
+  def show
+    @profile = Profile.find_by(username: params[:username])
+    if @profile
+      Statistic.track!(@profile, Statistic.events[:perfil_view]) unless current_user? @profile.user
+    else
+      render "not_found"
+    end
+  end
+
 
   # GET /buscar_full?q=
   # def fullsearch
@@ -87,21 +94,4 @@ class ProfilesController < ApplicationController
   #   render "search"
   # end
 
-  # private
-  #   def scrap_from_instagram(username)
-  #     instagram_scrap = {}
-  #     response = HTTParty.get("https://www.instagram.com/#{username}/?__a=1")
-  #     logger.debug "[PROFILE::INSTAGRAM SCRAPPING] Response: \n#{response}"
-  #     if response["graphql"].present?
-  #       instagram_scrap[:avatar_url] = response["graphql"]["user"]["profile_pic_url"]
-  #       instagram_scrap[:avatar_url_large] = response["graphql"]["user"]["profile_pic_url_hd"]
-  #       if response["graphql"]["user"]["edge_owner_to_timeline_media"]["count"] > 0
-  #         instagram_scrap[:pictures] = []
-  #         response["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"].each do |post|
-  #           instagram_scrap[:pictures].push({original: post["node"]["thumbnail_src"], thumbnail: post["node"]["thumbnail_resources"].first["src"]})
-  #         end
-  #       end
-  #     end
-  #     return instagram_scrap
-  #   end
 end

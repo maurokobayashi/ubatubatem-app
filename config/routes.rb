@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "sair", to: "sessions#destroy", as: "signout"
 
   # Profiles
-  get "profiles/:id", to: "profiles#show"
   get "buscar", to: "profiles#search", as: "buscar"
   get "catalogo", to: "profiles#catalogo", as: "catalogo"
   get "categoria/:alias", to: "profiles#catalogo_categoria", as: "catalogo_categoria"
@@ -21,6 +20,6 @@ Rails.application.routes.draw do
 
 
 
-  # Must be the last one
+  # Profile page - Must be the last one
   get ':username', to: "profiles#show", as: "profile", constraints: { username: /[^\/]+/ } # constraint: accept URLs with dot
 end

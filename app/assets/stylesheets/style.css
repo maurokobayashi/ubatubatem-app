@@ -857,6 +857,7 @@ button:hover, button:active, button:focus {
   padding-right: 8px;
   padding-bottom: env(safe-area-inset-bottom);
 }
+.fixed-footer.with-fixed-bottom {bottom: 57px;}
 
 .fixed-footer > div {
   width: 100%;
