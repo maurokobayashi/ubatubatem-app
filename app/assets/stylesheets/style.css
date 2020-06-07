@@ -1525,6 +1525,14 @@ ion-icon {
   width: 200px !important;
 }
 
+.imaged.w220 {
+  width: 220px !important;
+}
+
+.imaged.w240 {
+  width: 240px !important;
+}
+
 .imaged.img-fluid {
   width: 100%;
 }

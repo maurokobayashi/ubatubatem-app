@@ -10,6 +10,7 @@
     <div class="in">
       <div>
         <%= profile.title %>
+        <%= verified_badge_for profile %>
         <div class="text-muted">
           <%= profile.tagline %>
           <% if sub_categ.ativo? || bairro.present? %>

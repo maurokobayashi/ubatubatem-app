@@ -27,9 +27,7 @@
         <div class="in">
           <h3 class="name">
             <%= @profile.title %>
-            <% if @profile.reivindicado? %>
-            <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
-            <% end %>
+            <%= verified_badge_for @profile %>
           </h3>
           <h5 class="subtext"><%= @profile.tagline %></h5>
         </div>

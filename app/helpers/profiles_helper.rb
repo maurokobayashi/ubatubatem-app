@@ -39,4 +39,8 @@ module ProfilesHelper
     text.html_safe
   end
 
+  def verified_badge_for(profile)
+    "<ion-icon name=\"checkmark-circle\" class=\"text-primary\"></ion-icon>".html_safe if profile.reivindicado?
+  end
+
 end

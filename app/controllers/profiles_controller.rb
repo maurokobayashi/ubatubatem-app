@@ -50,8 +50,10 @@ class ProfilesController < ApplicationController
     @query = params[:q]
     if @query.present?
       @profiles = Profile.active.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
+      @sub_categs = SubCateg.ativo.where("name ILIKE ? OR search_tags ILIKE ?", "%#{@query}%", "%#{@query}%")
     else
       @profiles = Profile.none
+      @sub_categs = SubCateg.none
     end
 
     # TODO: adicionar no fim da fila os profiles da subcategoria (caso a query dê match)
