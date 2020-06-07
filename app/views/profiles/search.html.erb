@@ -15,10 +15,13 @@
     <!-- Sub Categ Results -->
     <% if @sub_categs.count > 0 %>
     <div class="section mt-2">
-      <% @sub_categs.first(5).each do |sub_categ| %>
-      <a href="<%= catalogo_categoria_path sub_categ.alias %>" class="chip bg-white chip-outline mb-1">
-        <span class="chip-label"><%= "#{sub_categ.name.downcase} (#{sub_categ.profile_count})" %></span>
-      </a>
+      <% @sub_categs.each_with_index do |sub_categ, i| %>
+        <% break if i==5 %>
+        <% if sub_categ.profile_count > 0 %>
+          <a href="<%= catalogo_categoria_path sub_categ.alias %>" class="chip bg-white chip-outline mb-1">
+            <span class="chip-label"><%= "#{sub_categ.name.downcase}" %></span>
+          </a>
+        <% end %>
       <% end %>
     </div>
     <% end %>

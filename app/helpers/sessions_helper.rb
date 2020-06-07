@@ -20,7 +20,7 @@ module SessionsHelper
   end
 
   def current_user
-    return @current_user if cookies[:remember_token].blank?
+    return @current_user if cookies[Cookies::REMEMBER_TOKEN[:name]].blank?
     @current_user ||= User.find_by(remember_token: cookies[Cookies::REMEMBER_TOKEN[:name]])
   end
 
@@ -33,7 +33,7 @@ module SessionsHelper
   end
 
   def store_location
-    session[:return_to] = request.original_url
+    session[:return_to] = request.referer
   end
 
 end

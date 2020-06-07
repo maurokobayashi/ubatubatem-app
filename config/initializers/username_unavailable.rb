@@ -9,6 +9,7 @@ USERNAME_UNAVAILABLE = [
   'senha',
   'buscar',
   'catalogo',
+  'salvos',
   'categoria',
   'bairro'
 ]

@@ -2,40 +2,43 @@
 <%= render "app_components/search_header" %>
 
 <div class="appBottomMenu">
-  <a href="<%= root_path %>" class="item vibrate">
+  <a href="<%= root_path %>" class="item vibrate <%= current_page?(root_path) ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="home-outline"></ion-icon>
       <strong>Início</strong>
     </div>
   </a>
-  <a href="<%= catalogo_path %>" class="item vibrate">
+
+  <a href="<%= catalogo_path %>" class="item vibrate <%= current_page?(catalogo_path) || request.path_info.include?('/categoria/') || request.path_info.include?('/bairro/') ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="layers-outline"></ion-icon>
       <strong>Catálogo</strong>
     </div>
   </a>
-  <a href="#" class="item vibrate" onclick="alert('Aqui a galera vai poder adicionar novos negócios ao APP');">
+
+  <a href="#" class="item vibrate toggle-searchbox <%= current_page?(buscar_path) ? 'active' : '' %>">
     <div class="col">
-      <div class="action-button">
-        <ion-icon name="add-outline" role="img" class="md hydrated"></ion-icon>
-      </div>
+        <ion-icon name="search-outline" role="img" class="md hydrated"></ion-icon>
+        <strong>Buscar</strong>
     </div>
   </a>
-  <a href="#" class="item vibrate">
+
+  <a href="<%= salvos_path %>" class="item vibrate">
     <div class="col">
       <ion-icon name="bookmark-outline"></ion-icon>
       <strong>Salvos</strong>
     </div>
   </a>
+
   <% if signed_in? %>
-  <a href="<%= current_user.profile.profile_path %>" class="item vibrate">
+  <a href="<%= current_user.profile.profile_path %>" class="item vibrate <%= current_page?(profile_path current_user.profile.username) ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="person-outline"></ion-icon>
       <strong>Meu Perfil</strong>
     </div>
   </a>
   <% else %>
-  <a href="<%= new_session_path %>" class="item vibrate">
+  <a href="<%= signin_path %>" class="item vibrate <%= current_page?(signin_path) ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="person-add-outline"></ion-icon>
       <strong>Login</strong>
