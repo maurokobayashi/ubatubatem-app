@@ -21,7 +21,7 @@
       <div class="profile-head">
         <div class="avatar">
           <a href="#" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);" data-toggle="modal" data-target="#dialog-avatar">
-            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded" %>
+            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", id:"profile-avatar" %>
           </a>
         </div>
         <div class="in">
@@ -73,8 +73,7 @@
         <% if @profile.whatsapp.present? %>
         <div class="col-6">
           <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
-            <!-- <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon> -->
-            Enviar Mensagem
+            <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon>WhatsApp
           </a>
         </div>
         <% end %>
@@ -100,19 +99,6 @@
             </div>
             <div class="in">
               <div class="text-primary">Editar como administrador</div>
-            </div>
-          </a>
-        </li>
-        <% end %>
-        <% if @profile.whatsapp.present? %>
-        <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
-            <div class="icon-box">
-              <ion-icon name="logo-whatsapp"></ion-icon>
-            </div>
-            <div class="in">
-              <div><%= mask_phone @profile.whatsapp %></div>
-              <span class="text-muted">whatsapp</span>
             </div>
           </a>
         </li>
@@ -161,7 +147,7 @@
         <% end %>
         <% if @profile.instagram_account.present? %>
         <li>
-          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="nofollow" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:instagram_click] %>);">
+          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="noopener" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:instagram_click] %>);">
             <div class="icon-box">
               <ion-icon name="logo-instagram"></ion-icon>
             </div>
@@ -216,6 +202,7 @@
         'styling': true,
         'items': 12,
         'items_per_row': 3,
+        'image_size': 150,
         'margin': 1.2
         });
       });

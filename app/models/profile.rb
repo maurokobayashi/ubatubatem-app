@@ -48,14 +48,16 @@ class Profile < ApplicationRecord
   scope :active, -> { where.not(status: "inativo") }
   scope :order_by_title, -> { order(title: :asc) }
 
-  validates_presence_of :title, :status, :username
-  validates_uniqueness_of :username
-  validates :username, length: { in: 2..30 }
+  validates :title, presence: { message: 'Informe um título' }
+  validates :tagline, presence: { message: 'Informe um subtítulo' }
+  validates :username, presence: { message: 'Informe um username' }
+  validates :username, uniqueness: { message: 'Este username já esta sendo utilizado' }
+  validates :username, length: { in: 2..30, message: 'O username deve ter entre 2 e 30 caracteres' }
   validate :username_format
   validate :username_available
-  validates :title, length: { maximum: TITLE_MAX_LENGTH }
-  validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH }
-  validates :bio, length: { maximum: BIO_MAX_LENGTH }
+  validates :title, length: { maximum: TITLE_MAX_LENGTH, message: 'O título deve possuir no máximo #{TITLE_MAX_LENGTH} caracteres' }
+  validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH, message: 'O subtítulo deve possuir no máximo #{SUBTITLE_MAX_LENGTH} caracteres' }
+  validates :bio, length: { maximum: BIO_MAX_LENGTH, message: 'Sua bio deve possuir no máximo #{BIO_MAX_LENGTH} caracteres' }
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
 
@@ -111,17 +113,15 @@ class Profile < ApplicationRecord
     self.aprovado? || self.reivindicado?
   end
 
-  def url
-    "#{Ubatubatem::Application.config.root_url}/profiles/#{self.id}"
-  end
 
+private
   def username_available
-    errors.add(:username, "não está disponível") if USERNAME_UNAVAILABLE.include?( self.username )
+    errors.add(:username, "Este username já está sendo utilizado") if USERNAME_UNAVAILABLE.include?( self.username )
   end
 
   def username_format
     # seguindo as regras do instagram
-    errors.add(:username, "contém caracteres inválidos") unless !( self.username =~ /^([A-Za-z0-9._](?:(?:[A-Za-z0-9._]|(?:\.(?!\.))){2,28}(?:[A-Za-z0-9._]))?)$/ ).nil?
+    errors.add(:username, "O username contém caracteres inválidos") unless !( self.username =~ /^([A-Za-z0-9._](?:(?:[A-Za-z0-9._]|(?:\.(?!\.))){2,28}(?:[A-Za-z0-9._]))?)$/ ).nil?
   end
 
 

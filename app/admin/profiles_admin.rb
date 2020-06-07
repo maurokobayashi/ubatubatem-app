@@ -26,7 +26,7 @@ Trestle.resource(:profiles) do
     column :title, header: "Negócio", link: false, sort: :title, class: "media-title-column" do |profile|
       safe_join([
         content_tag(:strong, profile.title),
-        content_tag(:small, link_to(profile.username, profile.url, target: "_blank", class: "external-link"), class: "text-muted hidden-xs")
+        content_tag(:small, link_to(profile.username, profile.profile_path, target: "_blank", class: "external-link"), class: "text-muted hidden-xs")
       ], "<br />".html_safe)
     end
     column :sub_categ, sort: :sub_categ_id, link: false

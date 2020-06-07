@@ -62,7 +62,7 @@ Trestle.configure do |config|
   #
   # config.menu do
   #   group "Custom Group" do
-  #     item "Custom Link", "/admin/custom", icon: "fa fa-car", badge: { text: "NEW!", class: "label-success" }, priority: :first
+      # item "Custom Link", "/admin/custom", icon: "fa fa-car", badge: { text: "NEW!", class: "label-success" }, priority: :first
   #   end
   # end
 
