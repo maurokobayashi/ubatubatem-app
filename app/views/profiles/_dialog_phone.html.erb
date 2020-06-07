@@ -1,0 +1,45 @@
+<!-- Dialog Phone -->
+<div class="modal fade dialogbox" id="dialog-phone" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <% if profile.whatsapp.present? %>
+      <div class="modal-icon text-success">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+      </div>
+      <div class="modal-header">
+        <h5 class="modal-title">WhatsApp</h5>
+      </div>
+      <div class="modal-body">
+        <%= profile.title %>
+        <br>
+        <%= mask_phone profile.whatsapp %>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-list">
+          <a href="<%= whatsapp_link profile.whatsapp %>" target="_system" class="btn btn-text-primary btn-block" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:whatsapp_send] %>);">Enviar Mensagem</a>
+          <a href="javascript:;" class="btn btn-text-secondary btn-block" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+      <% elsif @profile.phone_secondary.present? %>
+      <div class="modal-icon text-success">
+        <ion-icon name="call-outline"></ion-icon>
+      </div>
+      <div class="modal-header">
+      <h5 class="modal-title">Telefone</h5>
+      </div>
+      <div class="modal-body">
+        <%= profile.title %>
+        <br>
+        <%= mask_phone profile.phone_secondary %>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-list">
+          <a href="tel:<%= profile.phone_secondary %>" class="btn btn-text-primary btn-block" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_call] %>);">Fazer ligação</a>
+          <a href="javascript:;" class="btn btn-text-secondary btn-block" data-dismiss="modal">Fechar</a>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- * Dialog Phone -->

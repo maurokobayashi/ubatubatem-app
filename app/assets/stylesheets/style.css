@@ -2794,11 +2794,13 @@ a.badge-dark {
 
 .btn-whatsapp {
   color: #fff !important;
-  background: #0ad561;
+  /*background: #0ad561;*/
+  background: #09c75a;
 }
 
 .btn-whatsapp:hover, .btn-whatsapp:active {
-  background: #09bd56;
+  /*background: #09bd56;*/
+  background: #08a54b;
 }
 
 .bg-whatsapp {

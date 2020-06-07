@@ -5,7 +5,7 @@
 
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options_profile] %>
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? && @profile.delivery.has_bairros? %>
-  <%= render("dialog_whatsapp", profile: @profile) if @profile.whatsapp.present? %>
+  <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
@@ -70,8 +70,14 @@
       <% else %>
         <% if @profile.whatsapp.present? %>
         <div class="col-6">
-          <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-whatsapp" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:phone_click] %>);">
+          <a href="#" class="btn btn-whatsapp btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone">
             <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon>WhatsApp
+          </a>
+        </div>
+        <% elsif @profile.phone_secondary.present? %>
+        <div class="col-6">
+          <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone">
+            <ion-icon name="call-outline" role="img" class="md hydrated"></ion-icon>Telefone
           </a>
         </div>
         <% end %>
