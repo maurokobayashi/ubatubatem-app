@@ -1,24 +1,12 @@
-const CacheStatic = 'static-cache-v2';
-const CacheDynamic = 'dynamic-cache-v2';
+const CacheStatic = 'static-cache';
+const CacheDynamic = 'dynamic-cache';
 
 // Cache Assets
 // A list of local resources we always want to be cached.
 const assets = [
-  // 'index.html',
-  // '/',
-  // 'https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap',
-  // 'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js',
-  // 'assets/jquery-3.4.1.min.js',
-  // 'assets/popper.min.js',
-  // 'assets/bootstrap.min.js',
-  // 'assets/owl.carousel.min.js',
-  // 'assets/circle-progress.min.js',
-  // 'assets/jquery.countdown.min.js',
-  // 'assets/base.js',
-  // 'assets/owl.carousel.min.css',
-  // 'assets/owl.theme.min.css',
-  // 'assets/bootstrap.min.css',
-  // 'assets/style.css',
+  '/',
+  'https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap',
+  'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js'
 ];
 
 // Cache Size Limits
@@ -36,7 +24,7 @@ const limitCacheSize = (name, size) => {
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(CacheStatic).then((cache) => {
-      console.log('cache success!');
+      console.log('static cache success!');
       cache.addAll(assets);
     })
   );
@@ -56,21 +44,27 @@ self.addEventListener('activate', evt => {
 
 // Fetch
 self.addEventListener('fetch', evt => {
+  // não cacheia recursos em localhost
   if (evt.request.url.indexOf('localhost:3000') === -1) {
-    evt.respondWith(
-      caches.match(evt.request).then(cacheRes => {
-        return cacheRes || fetch(evt.request).then(fetchRes => {
-          return caches.open(CacheDynamic).then(cache => {
-            cache.put(evt.request.url, fetchRes.clone());
-            limitCacheSize(CacheDynamic, 15);
-            return fetchRes;
-          })
-        });
-      }).catch(() => {
-        if (evt.request.url.indexOf('.html') > -1) {
-          return caches.match('index.html');
-        }
-      })
-    );
+    // não cacheia recursos do tipo html, apenas assets
+    if (evt.request.destination != 'document') {
+      // responde com cache local. se não encontrar, faz um fetch para o servidor e atualiza o cache
+      // problema: se o recurso já está em cache, ele não atualiza com conteúdo novo do servidor
+      evt.respondWith(
+        caches.match(evt.request).then(cacheRes => {
+          return cacheRes || fetch(evt.request).then(fetchRes => {
+            return caches.open(CacheDynamic).then(cache => {
+              cache.put(evt.request.url, fetchRes.clone());
+              // limitCacheSize(CacheDynamic, 50);
+              return fetchRes;
+            })
+          });
+        }).catch(() => {
+          if (evt.request.url.indexOf('.html') > -1) {
+            return caches.match('index.html');
+          }
+        })
+      );
+    }
   }
 });
