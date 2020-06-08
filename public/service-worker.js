@@ -1,10 +1,9 @@
-const CacheStatic = 'static-cache';
+const CacheStatic = 'static-cache'; // for fonts and icons
 const CacheDynamic = 'dynamic-cache';
 
 // Cache Assets
 // A list of local resources we always want to be cached.
 const assets = [
-  '/',
   'https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap',
   'https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js'
 ];
@@ -24,8 +23,8 @@ const limitCacheSize = (name, size) => {
 self.addEventListener('install', evt => {
   evt.waitUntil(
     caches.open(CacheStatic).then((cache) => {
-      console.log('static cache success!');
       cache.addAll(assets);
+      console.log('static cache success!');
     })
   );
 });
