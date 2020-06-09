@@ -1,0 +1,139 @@
+<body>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:options] %>
+  <div class="extraHeader p-0">
+    <ul class="nav nav-tabs lined" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="tab-categorias" data-toggle="tab" href="#categorias" role="tab" aria-selected="true">
+          Básico
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="tab-bairros" data-toggle="tab" href="#bairros" role="tab" aria-selected="false">
+          Horários
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="extra-header-active mt-3 mb-6">
+    <div class="tab-content mt-1">
+
+      <!-- categorias tab -->
+      <div class="tab-pane fade active show" id="categorias" role="tabpanel">
+        <div class="section full mb-2">
+          <div class="section-title">Dados básicos</div>
+          <div class="wide-block pb-1 pt-1">
+
+            <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="sub_categ_id">Categoria</label>
+                  <%= f.collection_select(:sub_categ_id, SubCateg.ativo.all, :id, :name, {include_blank: 'Selecione uma categoria (obrigatório)'}, {class: 'form-control custom-select', required: true}) %>
+                </div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="title">Nome (max. 30)</label>
+                  <%= f.text_field :title, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off" %>
+                  <div class="invalid-feedback">Preencha este campo</div>
+                </div>
+                <div class="input-info">Ex.: Padaria Integrale</div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="tagline">Subtítulo (max. 60)</label>
+                  <%= f.text_field :tagline, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off" %>
+                </div>
+                <div class="input-info">Ex.: Pães artesanais, refeições e produtos locais de Ubatuba</div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="bio">Bio (max. 150)</label>
+                  <%= f.text_area :bio, rows: 3, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                </div>
+                <div class="input-info">Descrição do seu negócio</div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="username">Username (max. 30)</label>
+                  <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off", onkeyup: "updateUsernameExample(this);" %>
+                </div>
+                <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='weight-6'>#{@profile.username || username}</strong>".html_safe %></div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="whatsapp">WhatsApp</label>
+                  <%= f.telephone_field :whatsapp, class: "form-control", placeholder: "recomendado", autocomplete: "off" %>
+                  <script type="text/javascript">
+                    $("#profile_whatsapp").mask("(00) 00000-0000");
+                  </script>
+                </div>
+                <div class="input-info">Clientes poderão enviar mensagens por WhatsApp</div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="phone_secondary">Telefone comercial</label>
+                  <%= f.telephone_field :phone_secondary, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                  <script type="text/javascript">
+                    $("#profile_phone_secondary").mask("(00) 00000-0000");
+                  </script>
+                </div>
+              </div>
+
+              <div class="form-group basic">
+                <div class="input-wrapper">
+                  <label class="label" for="website">Website</label>
+                  <%= f.text_field :website, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                </div>
+              </div>
+
+              <!-- <div class="mt-2">
+                <%#= f.submit "Salvar", class: "btn btn-primary btn-block" %>
+              </div> -->
+
+              <div class="fab-button with-fixed-bottom text bottom-center sm">
+                <input type="submit" class="fab border-none" value="Salvar alterações">
+              </div>
+
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- * categorias tab -->
+
+      <!-- localização tab -->
+      <div class="tab-pane fade" id="bairros" role="tabpanel">
+        <div class="header-large-title">
+          <h1 class="title">Bairros</h1>
+          <h4 class="subtitle">pequenos negócios cadastrados</h4>
+        </div>
+      </div>
+      <!-- * localização tab -->
+
+    </div>
+  </div>
+  <!-- * App Capsule -->
+
+</body>
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+  <% if params[:tab].present? %>
+    $("#tab-<%= params[:tab] %>").click();
+  <% end %>
+
+  <% if params[:list].present? %>
+    $("#list-<%= params[:list] %>").click();
+  <% end %>
+});
+</script>

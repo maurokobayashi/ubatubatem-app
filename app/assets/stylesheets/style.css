@@ -1079,6 +1079,10 @@ button:hover, button:active, button:focus {
   margin-bottom: 40px !important;
 }
 
+.mb-6 {
+  margin-bottom: 48px !important;
+}
+
 .ml-0 {
   margin-left: 0 !important;
 }
@@ -4043,13 +4047,17 @@ textarea,
 }
 
 .form-group .label {
-  font-size: 11px;
+  font-size: 12px;
   margin: 0;
-  font-weight: 500;
-  color: #141515;
+  font-weight: 600;
+  color: #A1A1A2;
   display: block;
   line-height: 1.2em;
   text-align: left;
+}
+.form-group .label-sm {
+  font-size: 11px;
+  font-weight: 500;
 }
 
 .form-group textarea {
@@ -4108,6 +4116,8 @@ textarea,
   color: #141515;
   font-size: 15px;
 }
+.form-sm .form-group.basic .form-control,
+.form-sm .form-group.basic .custom-select {font-size: 13px!important;}
 
 .form-group.basic .form-control:focus,
 .form-group.basic .custom-select:focus {
@@ -5315,6 +5325,7 @@ textarea,
 }
 
 .fab-button .fab {
+  outline: none;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   width: 56px;
   height: 56px;
@@ -5325,6 +5336,7 @@ textarea,
   border-radius: 100%;
   color: #fff !important;
 }
+.fab-button.sm .fab {height: 40px!important;}
 
 .fab-button .fab > ion-icon {
   font-size: 26px;
@@ -5342,6 +5354,7 @@ textarea,
   font-size: 17px;
   padding: 0px 24px;
 }
+.fab-button.sm.text .fab {font-size: 14px!important;}
 
 .fab-button.text .fab > ion-icon {
   margin-right: 6px;
@@ -5436,6 +5449,7 @@ textarea,
   transform: translate(-50%, 0%);
   margin-bottom: env(safe-area-inset-bottom);
 }
+.fab-button.with-fixed-bottom.bottom-center{bottom: 70px!important;}
 
 .fab-button.top-center {
   position: fixed;

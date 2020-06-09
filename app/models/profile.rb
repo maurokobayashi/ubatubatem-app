@@ -45,7 +45,7 @@ class Profile < ApplicationRecord
   TAGLINE_MAX_LENGTH = 60
   BIO_MAX_LENGTH = 150
 
-  scope :active, -> { where.not(status: "inativo") }
+  scope :active, -> { where(status: ["aprovado", "reivindicado"]) }
   scope :order_by_title, -> { order(title: :asc) }
 
   validates :title, presence: { message: 'Informe um título' }

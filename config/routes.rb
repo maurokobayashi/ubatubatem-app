@@ -2,10 +2,8 @@
 Rails.application.routes.draw do
   root "landing_pages#index"
 
-  # Sessions
-  get "entrar", to: "sessions#new", as: "signin"
-  post "create", to: "sessions#create", as: "authenticate"
-  get "sair", to: "sessions#destroy", as: "signout"
+  # Bookmarks
+  get "salvos", to: "bookmarks#index", as: "bookmarks"
 
   # Catalogo
   get "buscar", to: "catalogo#search", as: "buscar"
@@ -13,9 +11,14 @@ Rails.application.routes.draw do
   get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
   get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
 
-  # Bookmarks
-  get "salvos", to: "bookmarks#index", as: "bookmarks"
+  # Profiles
+  get "profiles/:id/edit", to: "profiles#edit", as: "edit_profile"
+  patch "profiles/:id", to: "profiles#update", as: "update_profile"
 
+  # Sessions
+  get "entrar", to: "sessions#new", as: "signin"
+  post "login", to: "sessions#create", as: "authenticate"
+  get "sair", to: "sessions#destroy", as: "signout"
 
   # Statistics
   post "statistics", to: "statistics#track_profile", as:"track_statistic"

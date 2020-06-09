@@ -24,7 +24,7 @@ module SessionsHelper
     @current_user ||= User.find_by(remember_token: cookies[Cookies::REMEMBER_TOKEN[:name]])
   end
 
-  def current_user?(user)
+  def is_current_user?(user)
     user.present? && user == current_user
   end
 
@@ -38,6 +38,10 @@ module SessionsHelper
 
   def store_current_path
     session[:return_to] = request.original_url
+  end
+
+  def get_stored_path
+    session.delete(:return_to)
   end
 
 end

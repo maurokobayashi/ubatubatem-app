@@ -13,6 +13,7 @@
     <div class="col">
       <ion-icon name="layers-outline"></ion-icon>
       <strong>Catálogo</strong>
+      <span class="badge badge-danger"><%= Profile.active.count %></span>
     </div>
   </a>
 
@@ -31,7 +32,8 @@
   </a>
 
   <% if signed_in? %>
-  <a href="<%= current_user.profile.profile_path %>" class="item vibrate <%= current_page?(profile_path current_user.profile.username) ? 'active' : '' %>">
+  <% active = current_page?(profile_path current_user.profile.username) || current_page?(edit_profile_path current_user.profile) ? "active" : "" %>
+  <a href="<%= current_user.profile.profile_path %>" class="item vibrate <%= active %>">
     <div class="col">
       <ion-icon name="person-outline"></ion-icon>
       <strong>Meu Perfil</strong>

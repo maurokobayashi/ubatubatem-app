@@ -9,7 +9,7 @@
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
-  <%= render("action_sheet_statistics", profile: @profile) if current_user? @profile.user %>
+  <%= render("action_sheet_statistics", profile: @profile) if is_current_user? @profile.user %>
   <%= render("app_components/toast_notification", id: "toast-salvar", text: "Salvo na minha lista", color: "primary") %>
 
 
@@ -52,9 +52,9 @@
     <!-- Call to Actions -->
     <div class="section mt-2">
       <div class="row">
-      <% if current_user? @profile.user %>
+      <% if is_current_user? @profile.user %>
         <div class="col-6">
-          <a href="#">
+          <a href="<%= edit_profile_path @profile %>">
             <button type="button" class="btn btn-block btn-sm btn-primary vibrate">Editar perfil</button>
           </a>
         </div>

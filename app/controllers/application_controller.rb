@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 private
   def require_authentication
     store_current_path
-    redirect_to signin_path redirect: false unless signed_in?
+    unless signed_in?
+      flash.notice = FlashMessages::NOT_AUTHENTICATED
+      redirect_to signin_path
+    end
   end
+
 end
