@@ -43,8 +43,8 @@ self.addEventListener('activate', evt => {
 
 // Fetch
 self.addEventListener('fetch', evt => {
-  // não cacheia recursos em localhost
-  if (evt.request.url.indexOf('localhost:3000') === -1) {
+  // não cacheia recursos em localhost ou conteúdos com paginação will_paginate (js)
+  if (evt.request.url.indexOf('localhost:3000') === -1 || evt.request.url.indexOf('&page=') === -1) {
     // não cacheia recursos do tipo html, apenas assets
     if (evt.request.destination != 'document') {
       // responde com cache local. se não encontrar, faz um fetch para o servidor e atualiza o cache

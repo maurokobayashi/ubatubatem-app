@@ -56,7 +56,7 @@ class Profile < ApplicationRecord
   validate :username_format
   validate :username_available
   validates :title, length: { maximum: TITLE_MAX_LENGTH, message: 'O título deve possuir no máximo #{TITLE_MAX_LENGTH} caracteres' }
-  validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH, message: 'O subtítulo deve possuir no máximo #{SUBTITLE_MAX_LENGTH} caracteres' }
+  validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH, message: 'O subtítulo deve possuir no máximo #{TAGLINE_MAX_LENGTH} caracteres' }
   validates :bio, length: { maximum: BIO_MAX_LENGTH, message: 'Sua bio deve possuir no máximo #{BIO_MAX_LENGTH} caracteres' }
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
