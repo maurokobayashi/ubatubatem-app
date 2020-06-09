@@ -1,6 +1,6 @@
 <body>
-  <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:options] %>
-  <div class="extraHeader p-0">
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, back_link: profile_path(@profile.username), right_buttons: [:options] %>
+  <div id="tabs-header" class="extraHeader p-0">
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="tab-categorias" data-toggle="tab" href="#categorias" role="tab" aria-selected="true">
@@ -48,15 +48,15 @@
                   <label class="label" for="tagline">Subtítulo (max. 60)</label>
                   <%= f.text_field :tagline, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off" %>
                 </div>
-                <div class="input-info">Ex.: Pães artesanais, refeições e produtos locais de Ubatuba</div>
+                <div class="input-info">Ex.: Pães artesanais, refeições e produtos locais</div>
               </div>
 
               <div class="form-group basic">
                 <div class="input-wrapper">
                   <label class="label" for="bio">Bio (max. 150)</label>
-                  <%= f.text_area :bio, rows: 3, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                  <%= f.text_area :bio, rows: 4, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
                 </div>
-                <div class="input-info">Descrição do seu negócio</div>
+                <!-- <div class="input-info">Descrição do seu negócio</div> -->
               </div>
 
               <div class="form-group basic">
@@ -75,7 +75,7 @@
                     $("#profile_whatsapp").mask("(00) 00000-0000");
                   </script>
                 </div>
-                <div class="input-info">Clientes poderão enviar mensagens por WhatsApp</div>
+                <!-- <div class="input-info">Clientes poderão enviar mensagens por WhatsApp</div> -->
               </div>
 
               <div class="form-group basic">
@@ -95,14 +95,10 @@
                 </div>
               </div>
 
-              <!-- <div class="mt-2">
-                <%#= f.submit "Salvar", class: "btn btn-primary btn-block" %>
-              </div> -->
-
-              <div class="fab-button with-fixed-bottom text bottom-center sm">
-                <input type="submit" class="fab border-none" value="Salvar alterações">
+              <!-- Submit buttons (fab and static) -->
+              <div id="float-submit-button" class="fab-button with-fixed-bottom text bottom-center sm">
+                <input id="float-submit-input" type="submit" class="fab border-none" value="Salvar alterações">
               </div>
-
 
             <% end %>
           </div>
@@ -128,6 +124,23 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
+  // For better typing experience on mobile
+  $(".form-control").focus(function(e) {
+    $(".appBottomMenu").hide();
+    $("#tabs-header").hide();
+    $("#float-submit-button").removeClass("with-fixed-bottom");
+    $("#float-submit-input").val("OK");
+  });
+  $(".form-control").blur(function(e) {
+    $(".appBottomMenu").show();
+    $("#tabs-header").show();
+    $("#float-submit-button").addClass("with-fixed-bottom");
+    $("#float-submit-input").val("Salvar alterações");
+
+  });
+
+
+  // Active tabs
   <% if params[:tab].present? %>
     $("#tab-<%= params[:tab] %>").click();
   <% end %>
