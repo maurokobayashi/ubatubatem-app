@@ -23,6 +23,18 @@ $(document).ready(function () {
     navigator.vibrate([5]);
   });
 
+  // Show maxlength counter
+  var maxlengthOptions = {
+    alwaysShow: true,
+    validate: true,
+    separator: '/',
+    placement: 'top-right-inside',
+    showCharsTyped: true
+  }
+
+  $('input[maxlength]').maxlength(maxlengthOptions);
+  $('textarea[maxlength]').maxlength(maxlengthOptions);
+
 
   // Fix for # href
   $('a[href="#"]').click(function (e) {

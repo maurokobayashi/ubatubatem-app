@@ -17,6 +17,9 @@ class Bairro < ApplicationRecord
                    :lng_column_name => :lng
 
   has_many :addresses
+
+  scope :order_by_name, -> { order( name: :asc) }
+
   enum regiao: { centro: 0, serra: 1, sul: 2, norte: 3 }
 
   def profile_count

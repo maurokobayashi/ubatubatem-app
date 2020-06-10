@@ -1,15 +1,17 @@
 <body>
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, back_link: profile_path(@profile.username), right_buttons: [:options] %>
+
+  <!-- Tabs Header -->
   <div id="tabs-header" class="extraHeader p-0">
     <ul class="nav nav-tabs lined" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="tab-categorias" data-toggle="tab" href="#categorias" role="tab" aria-selected="true">
-          Básico
+        <a class="nav-link active" id="tab-header-negocio" data-toggle="tab" href="#tab-negocio" role="tab" aria-selected="true">
+          Meu negócio
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="tab-bairros" data-toggle="tab" href="#bairros" role="tab" aria-selected="false">
-          Horários
+        <a class="nav-link" id="tab-header-config" data-toggle="tab" href="#tab-config" role="tab" aria-selected="false">
+          Configurações
         </a>
       </li>
     </ul>
@@ -19,101 +21,226 @@
   <div id="appCapsule" class="extra-header-active mt-3 mb-6">
     <div class="tab-content mt-1">
 
-      <!-- categorias tab -->
-      <div class="tab-pane fade active show" id="categorias" role="tabpanel">
+      <!-- Tab: Negócio -->
+      <div class="tab-pane fade active show" id="tab-negocio" role="tabpanel">
         <div class="section full mb-2">
-          <div class="section-title">Dados básicos</div>
-          <div class="wide-block pb-1 pt-1">
+          <div class="accordion" id="accordion-parent">
 
-            <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+            <!-- * Accordion: Profile -->
+            <div class="item">
+              <div class="accordion-header">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-profile" aria-expanded="false">
+                  Meu negócio
+                </button>
+              </div>
+              <div id="accordion-profile" class="accordion-body collapse" data-parent="#accordion-parent" style="">
+                <div class="accordion-content">
+                  <div class="wide-block pb-2 pt-2">
+                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="sub_categ_id">Categoria</label>
-                  <%= f.collection_select(:sub_categ_id, SubCateg.ativo.all, :id, :name, {include_blank: 'Selecione uma categoria (obrigatório)'}, {class: 'form-control custom-select', required: true}) %>
+                      <% if current_admin? %>
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="sub_categ_id">Categoria*</label>
+                          <%= f.collection_select(:sub_categ_id, SubCateg.ativo.all, :id, :name, {include_blank: 'Selecione uma categoria (obrigatório)'}, {class: 'form-control custom-select', required: true}) %>
+                        </div>
+                      </div>
+                      <% end %>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="username">Username*</label>
+                          <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", maxlength: Profile::USERNAME_MAX_LENGTH, required: true, autocomplete: "off", onkeyup: "updateUsernameExample(this);" %>
+                        </div>
+                        <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='weight-6'>#{@profile.username || username}</strong>".html_safe %></div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="title">Nome do negócio*</label>
+                          <%= f.text_field :title, class: "form-control", placeholder: "obrigatório", required: true, maxlength: Profile::TITLE_MAX_LENGTH, autocomplete: "off" %>
+                        </div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="tagline">Slogan do negócio*</label>
+                          <%= f.text_field :tagline, class: "form-control", placeholder: "obrigatório", required: true, maxlength: Profile::TAGLINE_MAX_LENGTH, autocomplete: "off" %>
+                        </div>
+                        <div class="input-info">Ex.: Pães artesanais, refeições e sucos</div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="bio">Bio</label>
+                          <%= f.text_area :bio, rows: 4, class: "form-control", placeholder: "opcional", maxlength: Profile::BIO_MAX_LENGTH, autocomplete: "off" %>
+                        </div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="whatsapp">WhatsApp (recomendado)</label>
+                          <%= f.telephone_field :whatsapp, class: "form-control", placeholder: "Os clientes poderão te enviar mensagem", autocomplete: "off" %>
+                          <script type="text/javascript">
+                            $("#profile_whatsapp").mask("(00) 00000-0000");
+                          </script>
+                        </div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="phone_secondary">Telefone comercial</label>
+                          <%= f.telephone_field :phone_secondary, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          <script type="text/javascript">
+                            $("#profile_phone_secondary").mask("(00) 00000-0000");
+                          </script>
+                        </div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="website">Website</label>
+                          <%= f.url_field :website, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                        </div>
+                      </div>
+
+                      <!-- Submit button -->
+                      <div class="fab-button with-fixed-bottom text bottom-center sm">
+                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                      </div>
+
+                    <% end %>
+                  </div>
                 </div>
               </div>
+            </div>
+            <!-- * Accordion: Profile -->
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="title">Nome (max. 30)</label>
-                  <%= f.text_field :title, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off" %>
-                  <div class="invalid-feedback">Preencha este campo</div>
-                </div>
-                <div class="input-info">Ex.: Padaria Integrale</div>
+            <!-- Accordion: Address -->
+            <div class="item">
+              <div class="accordion-header">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-address">
+                  Endereço
+                </button>
               </div>
+              <div id="accordion-address" class="accordion-body collapse" data-parent="#accordion-parent">
+                <div class="accordion-content">
+                  <div class="wide-block pb-2 pt-2">
+                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                      <%= f.fields_for :address do |af| %>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="tagline">Subtítulo (max. 60)</label>
-                  <%= f.text_field :tagline, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off" %>
-                </div>
-                <div class="input-info">Ex.: Pães artesanais, refeições e produtos locais</div>
-              </div>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="label" for="bairro_id">Bairro*</label>
+                            <%= af.collection_select(:bairro_id, Bairro.order_by_name, :id, :name, {include_blank: 'Selecione o bairro (obrigatório)'}, {class: 'form-control custom-select', required: true}) %>
+                          </div>
+                        </div>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="bio">Bio (max. 150)</label>
-                  <%= f.text_area :bio, rows: 4, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
-                </div>
-                <!-- <div class="input-info">Descrição do seu negócio</div> -->
-              </div>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="label" for="logradouro">Logradouro</label>
+                            <%= af.text_field :logradouro, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                            <div class="input-info">Rua, Avenida, Praça, etc.</div>
+                          </div>
+                        </div>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="username">Username (max. 30)</label>
-                  <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", required: true, autocomplete: "off", onkeyup: "updateUsernameExample(this);" %>
-                </div>
-                <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='weight-6'>#{@profile.username || username}</strong>".html_safe %></div>
-              </div>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="label" for="numero">Número</label>
+                            <%= af.text_field :numero, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          </div>
+                        </div>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="whatsapp">WhatsApp</label>
-                  <%= f.telephone_field :whatsapp, class: "form-control", placeholder: "recomendado", autocomplete: "off" %>
-                  <script type="text/javascript">
-                    $("#profile_whatsapp").mask("(00) 00000-0000");
-                  </script>
-                </div>
-                <!-- <div class="input-info">Clientes poderão enviar mensagens por WhatsApp</div> -->
-              </div>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="label" for="complemento">Complemento</label>
+                            <%= af.text_field :complemento, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          </div>
+                        </div>
 
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="phone_secondary">Telefone comercial</label>
-                  <%= f.telephone_field :phone_secondary, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
-                  <script type="text/javascript">
-                    $("#profile_phone_secondary").mask("(00) 00000-0000");
-                  </script>
-                </div>
-              </div>
-
-              <div class="form-group basic">
-                <div class="input-wrapper">
-                  <label class="label" for="website">Website</label>
-                  <%= f.text_field :website, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                      <% end %>
+                      <!-- Submit button -->
+                      <div class="fab-button with-fixed-bottom text bottom-center sm">
+                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
+            </div>
+            <!-- * Accordion: Address -->
 
-              <!-- Submit buttons (fab and static) -->
-              <div id="float-submit-button" class="fab-button with-fixed-bottom text bottom-center sm">
-                <input id="float-submit-input" type="submit" class="fab border-none" value="Salvar alterações">
+            <!-- Accordion: Horarios -->
+            <div class="item">
+              <div class="accordion-header">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-horarios">
+                  Horário de funcionamento
+                </button>
               </div>
+              <div id="accordion-horarios" class="accordion-body collapse" data-parent="#accordion-parent">
+                <div class="accordion-content">
+                  <div class="wide-block pb-2 pt-2">
+                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm form-no-clean" do |f| %>
+                      <%= f.fields_for :opening_hours do |ohf| %>
 
-            <% end %>
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="form-group boxed">
+                              <div class="input-wrapper">
+                                <label class="label" for="day">Dia</label>
+                                <%= ohf.select(:day, OpeningHour.days.map{|d| [OpeningHour.day_to_s(d.first), d.first]}, {include_blank: 'Selecione'}, {class: 'form-control custom-select', required: true}) %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-group boxed">
+                              <div class="input-wrapper">
+                                <label class="label" for="opens_at">Abertura</label>
+                                <%= ohf.time_field :opens_at, class: "form-control", required: true, autocomplete: "off" %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="form-group boxed">
+                              <div class="input-wrapper">
+                                <label class="label" for="closes_at">Fechamento</label>
+                                <%= ohf.time_field :closes_at, class: "form-control", required: true, autocomplete: "off" %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mb-2">
+                          <%= ohf.check_box :_destroy %>
+                          <%= ohf.label :_destroy, "Fechado" %>
+                        </div>
+
+                      <% end %>
+                      <!-- Submit button -->
+                      <div class="fab-button with-fixed-bottom text bottom-center sm">
+                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- * Accordion: Horarios -->
+
           </div>
         </div>
       </div>
-      <!-- * categorias tab -->
+      <!-- * Tab: Negócio -->
 
-      <!-- localização tab -->
-      <div class="tab-pane fade" id="bairros" role="tabpanel">
+
+
+      <!-- Tab: Configuracoes -->
+      <div class="tab-pane fade" id="tab-config" role="tabpanel">
         <div class="header-large-title">
-          <h1 class="title">Bairros</h1>
-          <h4 class="subtitle">pequenos negócios cadastrados</h4>
+          <h1 class="title">Configurações</h1>
         </div>
       </div>
-      <!-- * localização tab -->
+      <!-- * Tab: Configuracoes -->
 
     </div>
   </div>
@@ -128,15 +255,26 @@ $(document).ready(function () {
   $(".form-control").focus(function(e) {
     $(".appBottomMenu").hide();
     $("#tabs-header").hide();
-    $("#float-submit-button").removeClass("with-fixed-bottom");
-    $("#float-submit-input").val("OK");
+    $(".fab-button").each(function(index) {
+      $(this).removeClass("with-fixed-bottom");
+    })
+    $("input[type=submit]").each(function(index) {
+      $(this).removeClass("bg-success");
+      $(this).addClass("bg-primary");
+      $(this).val("OK");
+    })
   });
   $(".form-control").blur(function(e) {
     $(".appBottomMenu").show();
     $("#tabs-header").show();
-    $("#float-submit-button").addClass("with-fixed-bottom");
-    $("#float-submit-input").val("Salvar alterações");
-
+    $(".fab-button").each(function(index) {
+      $(this).addClass("with-fixed-bottom");
+    })
+    $("input[type=submit]").each(function(index) {
+      $(this).removeClass("bg-primary");
+      $(this).addClass("bg-success");
+      $(this).val("Salvar alterações");
+    })
   });
 
 

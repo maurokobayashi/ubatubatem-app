@@ -19,7 +19,11 @@ class OpeningHour < ApplicationRecord
   enum day: { seg: 0, ter: 1, qua: 2, qui: 3, sex:4, sab:5, dom:6 }
 
   def day_to_s
-    case self.day.to_sym
+    OpeningHour.day_to_s seld.day
+  end
+
+  def self.day_to_s(day)
+    case day.try(:to_sym)
       when :seg
         "Segunda"
       when :ter

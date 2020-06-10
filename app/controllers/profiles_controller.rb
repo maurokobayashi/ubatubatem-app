@@ -44,7 +44,12 @@ class ProfilesController < ApplicationController
 
 private
   def profile_params
-    params.require(:profile).permit(:username, :title, :tagline, :bio, :whatsapp, :phone_secondary, :status, :website, :avatar_url, :sub_categ_id, :user_id)
+    params.require(:profile).permit(
+      :username, :title, :tagline, :bio, :whatsapp, :phone_secondary,
+      :status, :website, :avatar_url, :sub_categ_id, :user_id,
+      address_attributes: [:id, :bairro_id, :logradouro, :numero, :complemento], # important: include nested object's id to force update instead of delete and insert
+      opening_hours_attributes: [:_destroy, :id, :day, :opens_at, :closes_at] #important: _destroy (true) means the object should be destroyed
+    )
   end
 
   def authorized?

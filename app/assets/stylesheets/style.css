@@ -44,6 +44,7 @@ body {
 .font-14{font-size:14px!important;}
 .font-15{font-size:15px!important;}
 .font-16{font-size:16px!important;}
+.input-maxlength{font-size: 11px; color: #fff; font-weight: 600; padding: 3px 5px; line-height: 1em; border-radius: 5px;}
 .instagram_gallery .instagram-image img{
   height: auto;
   border-radius: 6px;
@@ -4117,7 +4118,9 @@ textarea,
   font-size: 15px;
 }
 .form-sm .form-group.basic .form-control,
-.form-sm .form-group.basic .custom-select {height: 36px; font-size: 13px!important;}
+.form-sm .form-group.basic .custom-select,
+.form-sm .form-group.boxed .form-control,
+.form-sm .form-group.boxed .custom-select {height: 36px; font-size: 13px!important;}
 
 .form-group.basic .form-control:focus,
 .form-group.basic .custom-select:focus {
@@ -4125,7 +4128,8 @@ textarea,
   box-shadow: inset 0 -1px 0 0 #1E74FD;
 }
 
-.form-group.basic textarea.form-control {
+.form-group.basic textarea.form-control,
+.form-group.boxed textarea.form-control {
   height: auto!important;
   min-height: 90px;
   padding: 7px 40px 7px 0;
@@ -4150,7 +4154,7 @@ textarea,
 
 .form-group.boxed {
   margin: 0;
-  padding: 8px 0;
+  padding: 10px 0;
 }
 
 .form-group.boxed .form-control {
@@ -4160,7 +4164,9 @@ textarea,
   border-radius: 6px;
   padding: 0 40px 0 16px;
 }
-.form-group.boxed.sm .form-control{height: 36px!important;}
+.form-group.boxed.sm .form-control {height: 36px!important;}
+.form-sm .form-group.boxed .form-control {padding-left: 10px!important; padding-right: 32px!important;}
+.form-sm.form-no-clean .form-group.boxed .form-control {padding-right: 10px!important;}
 
 .form-group.boxed .form-control:focus {
   border-color: #1E74FD;

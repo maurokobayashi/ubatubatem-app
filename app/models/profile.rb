@@ -32,18 +32,21 @@ class Profile < ApplicationRecord
   #     }
   #   }
 
-  has_one :instagram_account, dependent: :destroy
-  has_one :address, dependent: :destroy
-  has_one :bairro, through: :address
-  has_one :delivery, dependent: :destroy
-  has_many :opening_hours, dependent: :destroy
-  has_many :statistics, dependent: :destroy
-  belongs_to :sub_categ, optional: true
-  belongs_to :user, optional: true
-
   TITLE_MAX_LENGTH = 30
   TAGLINE_MAX_LENGTH = 60
   BIO_MAX_LENGTH = 150
+  USERNAME_MAX_LENGTH = 30
+
+  has_one :instagram_account, dependent: :destroy
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address
+  has_one :bairro, through: :address
+  has_one :delivery, dependent: :destroy
+  has_many :opening_hours, -> { order(day: :asc) }, dependent: :destroy
+  accepts_nested_attributes_for :opening_hours, allow_destroy: true, reject_if: lambda {|attr| attr['day'].blank?}
+  has_many :statistics, dependent: :destroy
+  belongs_to :sub_categ, optional: true
+  belongs_to :user, optional: true
 
   scope :active, -> { where(status: ["aprovado", "reivindicado"]) }
   scope :order_by_title, -> { order(title: :asc) }
@@ -52,7 +55,7 @@ class Profile < ApplicationRecord
   validates :tagline, presence: { message: 'Informe um subtítulo' }
   validates :username, presence: { message: 'Informe um username' }
   validates :username, uniqueness: { message: 'Este username já esta sendo utilizado' }
-  validates :username, length: { in: 2..30, message: 'O username deve ter entre 2 e 30 caracteres' }
+  validates :username, length: { in: 2..USERNAME_MAX_LENGTH, message: 'O username deve ter entre 2 e #{USERNAME_MAX_LENGTH} caracteres' }
   validate :username_format
   validate :username_available
   validates :title, length: { maximum: TITLE_MAX_LENGTH, message: 'O título deve possuir no máximo #{TITLE_MAX_LENGTH} caracteres' }
