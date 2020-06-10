@@ -5,3 +5,8 @@ copyToClipboard = function(elementId) {
   element.blur();
   document.execCommand("copy");
 }
+
+updateTextFromInput = function(input, containerSelector) {
+  content = $(input).val();
+  $(containerSelector).html(content);
+}

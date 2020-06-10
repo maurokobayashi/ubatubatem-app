@@ -11,7 +11,12 @@
 #  updated_at        :datetime         not null
 #
 class InstagramAccount < ApplicationRecord
+
+  USERNAME_MAX_LENGTH = 30
+
   belongs_to :profile, dependent: :destroy
+
+  validates :username, uniqueness: { message: 'Este Instagram já está cadastrado' }
 
   def has_permissions?
     self.access_token.present?

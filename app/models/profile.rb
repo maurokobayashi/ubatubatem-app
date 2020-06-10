@@ -38,6 +38,7 @@ class Profile < ApplicationRecord
   USERNAME_MAX_LENGTH = 30
 
   has_one :instagram_account, dependent: :destroy
+  accepts_nested_attributes_for :instagram_account
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address
   has_one :bairro, through: :address

@@ -30,7 +30,8 @@
             <div class="item">
               <div class="accordion-header">
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-profile" aria-expanded="false">
-                  Meu negócio
+                  <ion-icon name="person-outline" role="img" class="md hydrated"></ion-icon>
+                  Perfil
                 </button>
               </div>
               <div id="accordion-profile" class="accordion-body collapse" data-parent="#accordion-parent" style="">
@@ -50,9 +51,9 @@
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="username">Username*</label>
-                          <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", maxlength: Profile::USERNAME_MAX_LENGTH, required: true, autocomplete: "off", onkeyup: "updateUsernameExample(this);" %>
+                          <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", maxlength: Profile::USERNAME_MAX_LENGTH, required: true, autocomplete: "off", onkeyup: "updateTextFromInput(this, '#username-example');" %>
                         </div>
-                        <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='weight-6'>#{@profile.username || username}</strong>".html_safe %></div>
+                        <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='text-dark'>#{@profile.username || username}</strong>".html_safe %></div>
                       </div>
 
                       <div class="form-group boxed">
@@ -116,10 +117,56 @@
             </div>
             <!-- * Accordion: Profile -->
 
+            <!-- Accordion: Instagram -->
+            <div class="item">
+              <div class="accordion-header">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-instagram">
+                  <ion-icon name="logo-instagram" role="img" class="md hydrated"></ion-icon>
+                  Instagram
+                </button>
+              </div>
+              <div id="accordion-instagram" class="accordion-body collapse" data-parent="#accordion-parent">
+                <div class="accordion-content">
+                  <div class="wide-block pb-2 pt-2">
+                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+
+                      <!-- update avatar_url when instagram scrapping request is done -->
+                      <%= f.hidden_field :avatar_url, id: "profile_avatar_url" %>
+
+                      <%= f.fields_for :instagram_account do |iaf| %>
+                        <div class="form-group boxed">
+                          <div class="input-wrapper">
+                            <label class="label" for="username">Usuário Instagram</label>
+                            <%= iaf.text_field :username, class: "form-control", placeholder: "recomendado", maxlength: InstagramAccount::USERNAME_MAX_LENGTH, autocomplete: "off", onkeyup: "updateTextFromInput(this,'#instagram-user-example');", onchange: "scrapDataFromInstagram(this)"; %>
+                            <div class="input-info">
+                              www.instagram.com/<strong id="instagram-user-example" class="text-dark"><%= @profile.try(:instagram_account).try(:username) || "usuario" %></strong>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="section full mt-1 font-12 bg-white">
+                          <div class="row">
+                            <div id="instagram-container" class="instagram_feed"></div>
+                          </div>
+                        </div>
+                      <% end %>
+
+                      <!-- Submit button -->
+                      <div class="fab-button with-fixed-bottom text bottom-center sm">
+                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- * Accordion: Instagram -->
+
             <!-- Accordion: Address -->
             <div class="item">
               <div class="accordion-header">
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-address">
+                  <ion-icon name="location-outline" role="img" class="md hydrated"></ion-icon>
                   Endereço
                 </button>
               </div>
@@ -174,6 +221,7 @@
             <div class="item">
               <div class="accordion-header">
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-horarios">
+                  <ion-icon name="time-outline" role="img" class="md hydrated"></ion-icon>
                   Horário de funcionamento
                 </button>
               </div>
@@ -195,7 +243,7 @@
                           <div class="col-4">
                             <div class="form-group boxed">
                               <div class="input-wrapper">
-                                <label class="label" for="opens_at">Abertura</label>
+                                <label class="label" for="opens_at">Abre</label>
                                 <%= ohf.time_field :opens_at, class: "form-control", required: true, autocomplete: "off" %>
                               </div>
                             </div>
@@ -203,17 +251,19 @@
                           <div class="col-4">
                             <div class="form-group boxed">
                               <div class="input-wrapper">
-                                <label class="label" for="closes_at">Fechamento</label>
+                                <label class="label" for="closes_at">Fecha</label>
                                 <%= ohf.time_field :closes_at, class: "form-control", required: true, autocomplete: "off" %>
                               </div>
                             </div>
                           </div>
                         </div>
 
-                        <div class="mb-2">
+                        <div class="mba-2">
                           <%= ohf.check_box :_destroy %>
                           <%= ohf.label :_destroy, "Fechado" %>
                         </div>
+
+                        <div class="divider mt-2 mb-2"></div>
 
                       <% end %>
                       <!-- Submit button -->
@@ -251,6 +301,14 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
+
+  scrapDataFromInstagram = function(input) {
+    var username = $(input).val();
+    if(username.length > 2) {
+      showInstagramProfile(username, '#instagram-container');
+    }
+  }
+
   // For better typing experience on mobile
   $(".form-control").focus(function(e) {
     $(".appBottomMenu").hide();
