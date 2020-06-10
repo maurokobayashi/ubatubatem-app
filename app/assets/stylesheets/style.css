@@ -3031,6 +3031,12 @@ a.badge-dark {
   justify-content: center;
 }
 
+.accordion .accordion-header .btn .badge {
+  position: absolute;
+  right: 40px;
+  top: 22px;
+}
+
 .accordion .item:last-child .accordion-header .btn:before {
   display: none;
 }

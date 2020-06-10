@@ -30,8 +30,8 @@
             <div class="item">
               <div class="accordion-header">
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-profile" aria-expanded="false">
-                  <ion-icon name="person-outline" role="img" class="md hydrated"></ion-icon>
-                  Perfil
+                  <ion-icon name="person-circle-outline" role="img" class="md hydrated"></ion-icon>
+                  Página do perfil
                 </button>
               </div>
               <div id="accordion-profile" class="accordion-body collapse" data-parent="#accordion-parent" style="">
@@ -123,6 +123,9 @@
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-instagram">
                   <ion-icon name="logo-instagram" role="img" class="md hydrated"></ion-icon>
                   Instagram
+                  <% if @profile.instagram_account.try(:username).blank? %>
+                  <span class="badge badge-danger badge-empty"></span>
+                  <% end %>
                 </button>
               </div>
               <div id="accordion-instagram" class="accordion-body collapse" data-parent="#accordion-parent">
@@ -168,6 +171,9 @@
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-address">
                   <ion-icon name="location-outline" role="img" class="md hydrated"></ion-icon>
                   Endereço
+                  <% if @profile.address.try(:bairro).blank? %>
+                  <span class="badge badge-danger badge-empty"></span>
+                  <% end %>
                 </button>
               </div>
               <div id="accordion-address" class="accordion-body collapse" data-parent="#accordion-parent">
@@ -223,6 +229,9 @@
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-horarios">
                   <ion-icon name="time-outline" role="img" class="md hydrated"></ion-icon>
                   Horário de funcionamento
+                  <% if @profile.opening_hours.blank? %>
+                  <span class="badge badge-danger badge-empty"></span>
+                  <% end %>
                 </button>
               </div>
               <div id="accordion-horarios" class="accordion-body collapse" data-parent="#accordion-parent">
