@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body mb-2 align-left">
         <ul class="font-13">
-          <% profile.opening_hours.order(:day).each do |oh| %>
+          <% profile.opening_hours.each do |oh| %>
           <li><%= oh.humanize %></li>
           <% end %>
         </ul>
