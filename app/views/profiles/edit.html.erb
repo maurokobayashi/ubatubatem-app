@@ -380,6 +380,11 @@
 
 $(document).ready(function () {
 
+  mp_track("<%= MixPanel::PROFILE_EDIT_VIEW %>", {
+    "param_user_id": "<%= @profile.id %>",
+    "param_username": "<%= @profile.username %>"
+  });
+
   scrapDataFromInstagram = function(input) {
     var username = $(input).val();
     if(username.length > 2) {
@@ -422,5 +427,6 @@ $(document).ready(function () {
   <% if params[:list].present? %>
     $("#list-<%= params[:list] %>").click();
   <% end %>
+
 });
 </script>

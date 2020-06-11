@@ -10,7 +10,7 @@
       <div class="modal-body">
         <ul class="action-button-list">
           <li>
-            <a href="<%= share_whatsapp_link link %>" target="_system" class="btn btn-list vibrate">
+            <a href="<%= share_whatsapp_link link %>" target="_system" class="btn btn-list vibrate" onclick="mp_track('<%= MixPanel::SHARE_CLICK %>')">
               <span><ion-icon name="logo-whatsapp"></ion-icon>WhatsApp</span>
             </a>
           </li>

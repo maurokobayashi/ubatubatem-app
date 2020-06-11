@@ -1,3 +1,5 @@
+<% result_count = @profiles.count %>
+
 <body>
 
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options] %>
@@ -27,9 +29,9 @@
     <!-- * Sub Categ Results -->
 
     <!-- Profile Results -->
-    <% if @profiles.count > 0 %>
+    <% if result_count > 0 %>
     <div class="listview-title mt-1">
-      <div><%= pluralize(@profiles.count, "resultado", "resultados") %> para <strong class="text-primary">"<%= @query %>"</strong></div>
+      <div><%= pluralize(result_count, "resultado", "resultados") %> para <strong class="text-primary">"<%= @query %>"</strong></div>
     </div>
     <ul class="listview image-listview media search-result mt-1 mb-2">
       <% @profiles.each do |profile| %>
@@ -53,3 +55,14 @@
   <!-- * App Capsule -->
 
 </body>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  <% if @query.present? %>
+  mp_track("<%= MixPanel::SEARCH_RESULTS_VIEW %>", {
+    "param_query": "<%= @query %>",
+    "param_result_qty": "<%= result_count %>"
+  });
+  <% end %>
+});
+</script>

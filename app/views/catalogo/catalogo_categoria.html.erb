@@ -1,4 +1,4 @@
-<body data-mp-track-visit="catalogo_categoria">
+<body>
 
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options], back_link: "#{catalogo_path}?tab=categorias&list=#{@sub_categ.categ.alias}" %>
 
@@ -7,6 +7,7 @@
 
     <!-- Search Results -->
     <% if @profiles.count > 0 %>
+
     <div class="header-large-title">
       <h1 class="title"><%= @sub_categ.name %></h1>
       <h4 class="subtitle"><%= pluralize(@profiles.count, "negócio cadastrado", "negócios cadastrados") %></h4>
@@ -18,27 +19,6 @@
     </ul>
     <%= will_paginate @profiles, renderer: WillPaginateInfinite::InfinitePagination %>
 
-    <% else %>
-
-    <!-- Suggestions -->
-    <div class="section mt-2">
-      <a href="#" class="chip bg-white chip-outline">
-        <span class="chip-label">sushi</span>
-      </a>
-      <a href="#" class="chip bg-white chip-outline">
-        <span class="chip-label">pães</span>
-      </a>
-      <a href="#" class="chip bg-white chip-outline">
-        <span class="chip-label">crochê</span>
-      </a>
-      <a href="#" class="chip bg-white chip-outline">
-        <span class="chip-label">doces</span>
-      </a>
-      <a href="#" class="chip bg-white chip-outline">
-        <span class="chip-label">artesanato</span>
-      </a>
-    </div>
-
     <% end %>
 
 
@@ -46,3 +26,11 @@
   <!-- * App Capsule -->
 
 </body>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  mp_track("<%= MixPanel::CATALOGO_CATEGORIA_VIEW %>", {
+    "param_categoria": "<%= @sub_categ.name %>"
+  });
+});
+</script>

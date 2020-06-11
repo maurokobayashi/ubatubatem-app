@@ -20,7 +20,7 @@
     <div class="section mb-1">
       <div class="profile-head">
         <div class="avatar">
-          <a href="#" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);" data-toggle="modal" data-target="#dialog-avatar">
+          <a href="#" onclick="mp_track('<%= MixPanel::PROFILE_AVATAR_CLICK %>');" data-toggle="modal" data-target="#dialog-avatar">
             <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", id:"profile-avatar" %>
           </a>
         </div>
@@ -59,7 +59,7 @@
           </a>
         </div>
         <div class="col-6">
-          <a href="#" data-toggle="modal" data-target="#action-sheet-statistics">
+          <a href="#" data-toggle="modal" data-target="#action-sheet-statistics" onclick="mp_track('<%= MixPanel::PROFILE_STATISTICS_CLICK %>');">
             <button type="button" class="btn btn-block btn-sm btn-outline-primary">Estatísticas</button>
           </a>
         </div>
@@ -70,19 +70,19 @@
       <% else %>
         <% if @profile.whatsapp.present? %>
         <div class="col-6">
-          <a href="#" class="btn btn-whatsapp btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone">
+          <a href="#" class="btn btn-whatsapp btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone" onclick="mp_track('<%= MixPanel::PROFILE_WHATSAPP_CLICK %>')">
             <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon>WhatsApp
           </a>
         </div>
         <% elsif @profile.phone_secondary.present? %>
         <div class="col-6">
-          <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone">
+          <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone" onclick="mp_track('<%= MixPanel::PROFILE_PHONE_CLICK %>')">
             <ion-icon name="call-outline" role="img" class="md hydrated"></ion-icon>Telefone
           </a>
         </div>
         <% end %>
         <div class="col-6">
-          <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="toastbox('toast-salvar', 3000);">
+          <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="toastbox('toast-salvar', 3000); mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
             <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
             Salvar
           </a>
@@ -125,7 +125,7 @@
         <% end %>
         <% if @profile.opening_hours.present? %>
         <li>
-          <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios">
+          <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios" onclick="mp_track('<%= MixPanel::PROFILE_OPENING_HOURS_CLICK %>');">
             <div class="icon-box">
               <ion-icon name="time-outline"></ion-icon>
             </div>
@@ -138,7 +138,7 @@
         <% end %>
         <% if @profile.address.present? %>
         <li>
-        <a href="#" class="item" data-toggle="modal" data-target="#dialog-address" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:address_click] %>);">
+        <a href="#" class="item" data-toggle="modal" data-target="#dialog-address" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:address_click] %>); mp_track('<%= MixPanel::PROFILE_ADDRESS_CLICK %>');">
             <div class="icon-box">
               <ion-icon name="location-outline"></ion-icon>
             </div>
@@ -151,7 +151,7 @@
         <% end %>
         <% if @profile.instagram_account.present? %>
         <li>
-          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="noopener" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:instagram_click] %>);">
+          <a href="<%= "https://www.instagram.com/#{@profile.instagram_account.username}" %>" target="_system" class="item" rel="noopener" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:instagram_click] %>); mp_track('<%= MixPanel::PROFILE_INSTAGRAM_CLICK %>');">
             <div class="icon-box">
               <ion-icon name="logo-instagram"></ion-icon>
             </div>
@@ -181,7 +181,7 @@
     <!-- Photos -->
     <div class="section full mt-3 pt-2 pb-2 pr-2 pl-2 bg-white">
       <div class="row">
-        <div id="instagram-feed" class="instagram_feed" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>);"></div>
+        <div id="instagram-feed" class="instagram_feed" onclick="trackProfile(<%= @profile.id %>, <%= Statistic.events[:foto_click] %>); mp_track('<%= MixPanel::PROFILE_PHOTO_CLICK %>');"></div>
       </div>
     </div>
     <!-- * Photos -->
@@ -192,14 +192,12 @@
 
 </body>
 
-<%#= javascript_include_tag 'InstagramFeed.min', 'data-turbolinks-track': 'reload' %>
-
 <script type="text/javascript">
   (function($){
     $(window).on('load', function(){
       mp_track("<%= MixPanel::PROFILE_VIEW %>", {
-        "user_id": "<%= @profile.id %>",
-        "username": "<%= @profile.username %>"
+        "param_user_id": "<%= @profile.id %>",
+        "param_username": "<%= @profile.username %>"
       });
 
       showInstagramFeed('<%= @profile.instagram_account.username %>', '#instagram-feed');

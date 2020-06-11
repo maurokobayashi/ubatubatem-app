@@ -27,7 +27,7 @@
   </div>
   <div class="right">
     <% if _right_buttons.include? :share_profile %>
-    <a href="#" data-toggle="modal" data-target="#action-sheet-share-profile" class="headerButton">
+    <a href="#" data-toggle="modal" data-target="#action-sheet-share-profile" class="headerButton" onclick="mp_track('<%= MixPanel::SHARE_CLICK %>')">
       <ion-icon name="share-social-outline"></ion-icon>
     </a>
     <% end %>

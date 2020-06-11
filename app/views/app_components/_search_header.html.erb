@@ -16,6 +16,6 @@
 
 <script type="text/javascript">
   trackSearch = function() {
-    mp_track( "<%= MixPanel::SEARCH_SUBMIT %>", {"param_query": $("#search-input-header").val()} );
+    mp_track( "<%= MixPanel::SEARCH_SUBMIT %>", {"param_query": "$('#search-input-header').val();"} );
   }
 </script>

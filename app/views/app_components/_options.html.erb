@@ -10,7 +10,7 @@
       <div class="modal-body">
         <ul class="action-button-list">
           <li>
-            <a href="#" data-toggle="modal" data-target="#action-sheet-share" data-dismiss="modal" class="btn btn-list vibrate">
+            <a href="#" data-toggle="modal" data-target="#action-sheet-share" data-dismiss="modal" class="btn btn-list vibrate" onclick="mp_track('<%= MixPanel::SHARE_CLICK %>')">
               <span>
                 <ion-icon name="share-social-outline" role="img" class="md hydrated"></ion-icon>
                 Compartilhar
@@ -19,7 +19,7 @@
           </li>
           <% if signed_in? %>
           <li>
-            <a href="<%= signout_path %>" class="btn btn-list text-danger vibrate">
+            <a href="<%= signout_path %>" class="btn btn-list text-danger vibrate" onclick="mp_track('<%= MixPanel::SIGNOUT_SUBMIT %>');">
               <span>
                 <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="copy outline"></ion-icon>
                 Sair da conta
