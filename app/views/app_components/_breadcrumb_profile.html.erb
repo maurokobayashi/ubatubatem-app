@@ -3,10 +3,10 @@
   bairro = profile.bairro
 %>
 <nav class="breadcrumb-sm" aria-label="breadcrumb">
-  <a href="<%= catalogo_path %>">Ubatuba</a>
   <% if bairro.present? %>
-  <span>></span>
-  <a href="<%= catalogo_bairro_path bairro.name.parameterize %>"><%= bairro.name %></a>
+    <a href="<%= catalogo_bairro_path bairro.alias %>"><%= bairro.name %></a>
+  <% else %>
+    <a href="<%= catalogo_path %>">Ubatuba</a>
   <% end %>
   <% if sub_categ.ativo? %>
     <span>></span>

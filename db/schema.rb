@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_07_135005) do
+ActiveRecord::Schema.define(version: 2020_06_10_210731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_06_07_135005) do
     t.integer "sub_categ_id", default: 1, null: false
     t.string "username"
     t.integer "user_id"
+    t.string "search_tags"
+    t.integer "employees_qty"
     t.index ["username"], name: "index_profiles_on_username"
   end
 

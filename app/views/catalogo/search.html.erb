@@ -1,6 +1,6 @@
 <body>
 
-  <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:options] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:options] %>
 
   <!-- App Capsule -->
   <div id="appCapsule" class="mb-5">
@@ -15,8 +15,7 @@
     <!-- Sub Categ Results -->
     <% if @sub_categs.count > 0 %>
     <div class="section mt-2">
-      <% @sub_categs.each_with_index do |sub_categ, i| %>
-        <% break if i==5 %>
+      <% @sub_categs.each do |sub_categ| %>
         <% if sub_categ.profile_count > 0 %>
           <a href="<%= catalogo_categoria_path sub_categ.alias %>" class="chip bg-white chip-outline mb-1">
             <span class="chip-label"><%= "#{sub_categ.name.downcase}" %></span>

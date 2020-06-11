@@ -8,13 +8,11 @@ class CatalogoController < ApplicationController
   def catalogo_bairro
     @bairro = Bairro.find_by_alias params[:alias]
     if @bairro.present?
-      @profiles = Profile.active.joins(:bairro).where(bairros: {alias: params[:alias]})
+      @profiles = SearchCatalogo.profiles_from_bairro @bairro, params[:page]
+      @categs = Categ.ativo.all.order(:order, :name)
     else
       redirect_to catalogo_path and return
     end
-
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
-    @categs = Categ.ativo.all.order(:order, :name)
 
     respond_to do |format|
       format.html
@@ -26,12 +24,10 @@ class CatalogoController < ApplicationController
   def catalogo_categoria
     @sub_categ = SubCateg.find_by_alias params[:alias]
     if @sub_categ.present?
-      @profiles = Profile.active.where(sub_categ: @sub_categ)
+      @profiles = SearchCatalogo.profiles_from_sub_categ @sub_categ, params[:page]
     else
       redirect_to catalogo_path and return
     end
-
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
 
     respond_to do |format|
       format.html
@@ -45,47 +41,22 @@ class CatalogoController < ApplicationController
     @bairros = Bairro.all.order(:regiao, :id)
   end
 
-  # GET /buscar?q=
+  # GET /buscar?q='a'&page=1
   def search
     @query = params[:q]
     if @query.present?
-      @profiles = Profile.active.where("title ILIKE ? OR tagline ILIKE ? OR username ILIKE ?", "%#{@query}%", "%#{@query}%", "%#{@query}%")
-      @sub_categs = SubCateg.ativo.where("name ILIKE ? OR search_tags ILIKE ?", "%#{@query}%", "%#{@query}%")
+      @profiles = SearchCatalogo.profiles_broad_match @query, params[:page]
+      @sub_categs = SearchCatalogo.sub_categs @query
     else
       # will_paginate needs it
       @profiles = Profile.none
       @sub_categs = SubCateg.none
     end
 
-    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
-
     respond_to do |format|
       format.html
       format.js
     end
   end
-
-
-
-
-    # GET /buscar_full?q=
-  # def fullsearch
-  #   per_page = 10
-  #   @query = params[:q]
-  #   if @query.present?
-  #     @profiles = Profile.search_full(@query)
-  #   else
-  #     @profiles = Profile.none
-  #   end
-
-  #   @profiles = @profiles.paginate(:page => params[:page], :per_page => per_page)
-
-  #   respond_to do |format|
-  #     format.html
-  #     format.js
-  #   end
-
-  #   render "search"
-  # end
 
 end

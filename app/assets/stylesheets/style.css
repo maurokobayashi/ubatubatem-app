@@ -22,7 +22,7 @@ body {
 .border-none{border:none!important;}
 .breadcrumb-sm{color: #A1A1A2!important;}
 .breadcrumb-sm{font-size: 12px;}
-.breadcrumb-sm span{font-size: 80%; margin-left: 2px; margin-right: 2px; position: relative; top: -1px; color: #4F5050;}
+.breadcrumb-sm span{font-size: 80%; margin-left: 1px; margin-right: 1px; position: relative; top: -1px; color: #4F5050;}
 .click-animated {
   position: relative;
   cursor: pointer;
@@ -1361,7 +1361,7 @@ mark {
 
 strong,
 b {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .page-title {

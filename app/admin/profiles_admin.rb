@@ -67,6 +67,8 @@ Trestle.resource(:profiles) do
         col(sm: 6) { telephone_field :whatsapp, prepend: status_tag(icon("fa fa-phone"), :success), label: "WhatsApp" }
         col(sm: 6) { telephone_field :phone_secondary, prepend: status_tag(icon("fa fa-phone"), :secondary), label: "Telefone 2" }
       end
+      text_area :search_tags, append: "max. 150", label: "Termos de busca", placeholder: "Palavras-chave separadas por vírgula"
+      number_field :employees_qty, label: "Quantas pessoas trabalham no negócio?"
       text_field :website
       text_field :avatar_url
       select :user_id, User.all.to_a.unshift(User.new)

@@ -1,4 +1,5 @@
 <%
+  _title = defined?(title) ? title : "ubatuba tem"
   _classes = defined?(classes) ? classes : ""
   _right_buttons = defined?(right_buttons) ? right_buttons : []
   _left_button = defined?(left_button) ? left_button : ""
@@ -22,7 +23,7 @@
     <% end %>
   </div>
   <div class="pageTitle">
-    ubatuba tem
+    <%= _title %>
   </div>
   <div class="right">
     <% if _right_buttons.include? :share_profile %>

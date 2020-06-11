@@ -1,5 +1,5 @@
 <body>
-  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, back_link: profile_path(@profile.username), right_buttons: [:options] %>
+  <%= render "app_components/header", title: "editar perfil", classes: "bg-primary text-light flat", left_button: :back, back_link: profile_path(@profile.username), right_buttons: [:options] %>
 
   <!-- Tabs Header -->
   <div id="tabs-header" class="extraHeader p-0">
@@ -53,7 +53,7 @@
                           <label class="label" for="username">Username*</label>
                           <%= f.text_field :username, class: "form-control", placeholder: "obrigatório", maxlength: Profile::USERNAME_MAX_LENGTH, required: true, autocomplete: "off", onkeyup: "updateTextFromInput(this, '#username-example');" %>
                         </div>
-                        <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='text-dark'>#{@profile.username || username}</strong>".html_safe %></div>
+                        <div class="input-info"><%= "#{unmask_url Ubatubatem::Application.config.root_url}/<strong id='username-example' class='text-primary'>#{@profile.username || username}</strong>".html_safe %></div>
                       </div>
 
                       <div class="form-group boxed">
@@ -68,7 +68,7 @@
                           <label class="label" for="tagline">Slogan do negócio*</label>
                           <%= f.text_field :tagline, class: "form-control", placeholder: "obrigatório", required: true, maxlength: Profile::TAGLINE_MAX_LENGTH, autocomplete: "off" %>
                         </div>
-                        <div class="input-info">Ex.: Pães artesanais, refeições e sucos</div>
+                        <div class="input-info">Ex: Pães artesanais de fermentação natural</div>
                       </div>
 
                       <div class="form-group boxed">
@@ -80,8 +80,9 @@
 
                       <div class="form-group boxed">
                         <div class="input-wrapper">
-                          <label class="label" for="whatsapp">WhatsApp (recomendado)</label>
-                          <%= f.telephone_field :whatsapp, class: "form-control", placeholder: "Os clientes poderão te enviar mensagem", autocomplete: "off" %>
+                          <label class="label" for="whatsapp">WhatsApp</label>
+                          <%= f.telephone_field :whatsapp, class: "form-control", placeholder: "recomendado", autocomplete: "off" %>
+                          <div class="input-info">Clientes poderão lhe enviar mensagens via WhatsApp</div>
                           <script type="text/javascript">
                             $("#profile_whatsapp").mask("(00) 00000-0000");
                           </script>
@@ -102,6 +103,13 @@
                         <div class="input-wrapper">
                           <label class="label" for="website">Website</label>
                           <%= f.url_field :website, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                        </div>
+                      </div>
+
+                      <div class="form-group boxed">
+                        <div class="input-wrapper">
+                          <label class="label" for="website">Quantas pessoas trabalham no negócio?</label>
+                          <%= f.number_field :employees_qty, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
                         </div>
                       </div>
 
@@ -142,7 +150,7 @@
                             <label class="label" for="username">Usuário Instagram</label>
                             <%= iaf.text_field :username, class: "form-control", placeholder: "recomendado", maxlength: InstagramAccount::USERNAME_MAX_LENGTH, autocomplete: "off", onkeyup: "updateTextFromInput(this,'#instagram-user-example');", onchange: "scrapDataFromInstagram(this)"; %>
                             <div class="input-info">
-                              www.instagram.com/<strong id="instagram-user-example" class="text-dark"><%= @profile.try(:instagram_account).try(:username) || "usuario" %></strong>
+                              www.instagram.com/<strong id="instagram-user-example" class="text-primary"><%= @profile.try(:instagram_account).try(:username) || "usuario" %></strong>
                             </div>
                           </div>
                         </div>
@@ -197,17 +205,22 @@
                           </div>
                         </div>
 
-                        <div class="form-group boxed">
-                          <div class="input-wrapper">
-                            <label class="label" for="numero">Número</label>
-                            <%= af.text_field :numero, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="form-group boxed">
+                              <div class="input-wrapper">
+                                <label class="label" for="numero">Número</label>
+                                <%= af.text_field :numero, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-
-                        <div class="form-group boxed">
-                          <div class="input-wrapper">
-                            <label class="label" for="complemento">Complemento</label>
-                            <%= af.text_field :complemento, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          <div class="col-6">
+                            <div class="form-group boxed">
+                              <div class="input-wrapper">
+                                <label class="label" for="complemento">Complemento</label>
+                                <%= af.text_field :complemento, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
@@ -286,6 +299,42 @@
             </div>
             <!-- * Accordion: Horarios -->
 
+            <!-- Accordion: SearchTags -->
+            <div class="item">
+              <div class="accordion-header">
+                <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-searchtags">
+                  <ion-icon name="search-outline" role="img" class="md hydrated"></ion-icon>
+                  Termos de busca
+                  <% if @profile.search_tags.blank? %>
+                  <span class="badge badge-danger badge-empty"></span>
+                  <% end %>
+                </button>
+              </div>
+              <div id="accordion-searchtags" class="accordion-body collapse" data-parent="#accordion-parent">
+                <div class="accordion-content">
+                  <div class="wide-block pb-2 pt-2">
+                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                      Quando as pessoas buscarem por alguma dessas palavras, seu perfil irá aparecer.
+                      <div class="form-group boxed mt-1">
+                        <div class="input-wrapper">
+                          <label class="label" for="logradouro">Palavras-chave separadas por vírgula</label>
+                          <%= f.text_area :search_tags, rows: 3, class: "form-control", placeholder: "Ex: pizzaria, pizzas, esfirras, vegetariano, jantar, itaguá", maxlength: Profile::SEARCH_TAGS_MAX_LENGTH, autocomplete: "off" %>
+                          <div class="input-info">Ex: pizzaria, pizzas, esfirras, vegetariano, jantar, itaguá </div>
+                        </div>
+                      </div>
+
+                      <!-- Submit button -->
+                      <div class="fab-button with-fixed-bottom text bottom-center sm">
+                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                      </div>
+
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- * Accordion: SearchTags -->
+
           </div>
         </div>
       </div>
@@ -295,9 +344,30 @@
 
       <!-- Tab: Configuracoes -->
       <div class="tab-pane fade" id="tab-config" role="tabpanel">
-        <div class="header-large-title">
-          <h1 class="title">Configurações</h1>
-        </div>
+        <div class="listview-title mt-1">Configurações</div>
+        <ul class="listview simple-listview">
+          <li>
+            <div>Toogle 1</div>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch1">
+              <label class="custom-control-label" for="customSwitch1"></label>
+            </div>
+          </li>
+          <li>
+            <div>Toogle 2</div>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
+              <label class="custom-control-label" for="customSwitch2"></label>
+            </div>
+          </li>
+          <li>
+            <div>Toogle 3</div>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="customSwitch3">
+              <label class="custom-control-label" for="customSwitch3"></label>
+            </div>
+          </li>
+        </ul>
       </div>
       <!-- * Tab: Configuracoes -->
 

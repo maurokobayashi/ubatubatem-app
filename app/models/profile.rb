@@ -16,6 +16,8 @@
 #  sub_categ_id    :integer          default(1), not null
 #  username        :string
 #  user_id         :integer
+#  search_tags     :string
+#  employees_qty   :integer
 #
 class Profile < ApplicationRecord
   # include PgSearch::Model
@@ -36,6 +38,7 @@ class Profile < ApplicationRecord
   TAGLINE_MAX_LENGTH = 60
   BIO_MAX_LENGTH = 150
   USERNAME_MAX_LENGTH = 30
+  SEARCH_TAGS_MAX_LENGTH = 150
 
   has_one :instagram_account, dependent: :destroy
   accepts_nested_attributes_for :instagram_account
@@ -62,6 +65,7 @@ class Profile < ApplicationRecord
   validates :title, length: { maximum: TITLE_MAX_LENGTH, message: 'O título deve possuir no máximo #{TITLE_MAX_LENGTH} caracteres' }
   validates :tagline, length: { maximum: TAGLINE_MAX_LENGTH, message: 'O subtítulo deve possuir no máximo #{TAGLINE_MAX_LENGTH} caracteres' }
   validates :bio, length: { maximum: BIO_MAX_LENGTH, message: 'Sua bio deve possuir no máximo #{BIO_MAX_LENGTH} caracteres' }
+  validates :search_tags, length: { maximum: SEARCH_TAGS_MAX_LENGTH, message: 'Os termos de busca devem possuir no máximo #{SEARCH_TAGS_MAX_LENGTH} caracteres' }
 
   enum status: { novo: 0, aprovado: 1, reivindicado: 2, inativo: 3 }
 
