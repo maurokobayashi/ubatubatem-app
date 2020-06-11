@@ -1,6 +1,6 @@
 <!-- Search Component -->
 <div id="search" class="appHeader">
-  <form class="search-form" action="<%= buscar_path %>" autocomplete="off">
+  <form class="search-form" action="<%= buscar_path %>" autocomplete="off" onsubmit="trackSearch();">
     <div class="form-group searchbox">
       <input type="text" id="search-input-header" name="q" class="form-control" style="font-size:14px;" placeholder="Buscar...">
       <i class="input-icon">
@@ -13,3 +13,9 @@
   </form>
 </div>
 <!-- * Search Component -->
+
+<script type="text/javascript">
+  trackSearch = function() {
+    mp_track( "<%= MixPanel::SEARCH_SUBMIT %>", {"param_query": $("#search-input-header").val()} );
+  }
+</script>

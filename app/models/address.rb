@@ -13,5 +13,5 @@ class Address < ApplicationRecord
   belongs_to :profile
   belongs_to :bairro
 
-  validates :bairro, presence: { message: 'Informe um bairro' }
+  validates :bairro, presence: { message: 'Informe um bairro' }, on: :update
 end

@@ -16,7 +16,7 @@ class InstagramAccount < ApplicationRecord
 
   belongs_to :profile, dependent: :destroy
 
-  validates :username, uniqueness: { message: 'Este Instagram já está cadastrado' }
+  validates :username, uniqueness: { message: 'Este Instagram já está cadastrado' }, on: :update
 
   def has_permissions?
     self.access_token.present?

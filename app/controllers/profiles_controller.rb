@@ -8,7 +8,11 @@ class ProfilesController < ApplicationController
   def edit
     @profile = Profile.find(params[:id])
 
-    unless @profile.present? && authorized?
+    if @profile.present? && authorized?
+      # setup nested_attributes
+      Address.create(profile: @profile) if @profile.address.blank?
+      InstagramAccount.create(profile: @profile) if @profile.instagram_account.blank?
+    else
       flash.alert = FlashMessages::NOT_AUTHORIZED
       redirect_back fallback_location: root_path
     end

@@ -9,6 +9,12 @@ if ('serviceWorker' in navigator) {
 
 $(document).ready(function () {
 
+  // MixPanel automatic tracks
+  mp_track_visit = $("body").data("mp-track-visit");
+  if(mp_track_visit != undefined) {
+    mp_track("visit."+mp_track_visit, {});
+  }
+
   // Page Loader with preload
   setTimeout(() => {
     $("#loader").fadeToggle(300);

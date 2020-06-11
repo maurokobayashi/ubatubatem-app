@@ -74,7 +74,7 @@
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="bio">Bio</label>
-                          <%= f.text_area :bio, rows: 4, class: "form-control", placeholder: "opcional", maxlength: Profile::BIO_MAX_LENGTH, autocomplete: "off" %>
+                          <%= f.text_area :bio, rows: 4, class: "form-control", placeholder: "", maxlength: Profile::BIO_MAX_LENGTH, autocomplete: "off" %>
                         </div>
                       </div>
 
@@ -92,7 +92,7 @@
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="phone_secondary">Telefone comercial</label>
-                          <%= f.telephone_field :phone_secondary, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          <%= f.telephone_field :phone_secondary, class: "form-control", placeholder: "", autocomplete: "off" %>
                           <script type="text/javascript">
                             $("#profile_phone_secondary").mask("(00) 00000-0000");
                           </script>
@@ -102,14 +102,14 @@
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="website">Website</label>
-                          <%= f.url_field :website, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          <%= f.url_field :website, class: "form-control", placeholder: "", autocomplete: "off" %>
                         </div>
                       </div>
 
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="website">Quantas pessoas trabalham no negócio?</label>
-                          <%= f.number_field :employees_qty, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                          <%= f.number_field :employees_qty, class: "form-control", placeholder: "", autocomplete: "off" %>
                         </div>
                       </div>
 
@@ -200,8 +200,7 @@
                         <div class="form-group boxed">
                           <div class="input-wrapper">
                             <label class="label" for="logradouro">Logradouro</label>
-                            <%= af.text_field :logradouro, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
-                            <div class="input-info">Rua, Avenida, Praça, etc.</div>
+                            <%= af.text_field :logradouro, class: "form-control", placeholder: "Rua, avenida, praça, etc.", autocomplete: "off" %>
                           </div>
                         </div>
 
@@ -210,7 +209,7 @@
                             <div class="form-group boxed">
                               <div class="input-wrapper">
                                 <label class="label" for="numero">Número</label>
-                                <%= af.text_field :numero, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                                <%= af.text_field :numero, class: "form-control", placeholder: "", autocomplete: "off" %>
                               </div>
                             </div>
                           </div>
@@ -218,7 +217,7 @@
                             <div class="form-group boxed">
                               <div class="input-wrapper">
                                 <label class="label" for="complemento">Complemento</label>
-                                <%= af.text_field :complemento, class: "form-control", placeholder: "opcional", autocomplete: "off" %>
+                                <%= af.text_field :complemento, class: "form-control", placeholder: "", autocomplete: "off" %>
                               </div>
                             </div>
                           </div>

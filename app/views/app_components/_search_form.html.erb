@@ -3,13 +3,19 @@
   _size = defined?(size) ? size : ""
   _classes = defined?(classes) ? classes : ""
 %>
-<form class="search-form" action="<%= buscar_path %>" autocomplete="off">
+<form class="search-form" action="<%= buscar_path %>" autocomplete="off" onsubmit="trackSearch();">
   <div class="form-group boxed <%= _size %>">
     <div class="input-wrapper">
-      <input type="text" name="q" class="form-control <%= _classes %>" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="Buscar..." value="<%= _query %>">
+      <input type="text" id="search-input" name="q" class="form-control <%= _classes %>" style="border-radius:100px; border-color:#cecece; font-size:13px;" placeholder="Buscar..." value="<%= _query %>">
       <i class="clear-input">
         <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
       </i>
     </div>
   </div>
 </form>
+
+<script type="text/javascript">
+  trackSearch = function() {
+    mp_track( "<%= MixPanel::SEARCH_SUBMIT %>", {"param_query": $("#search-input").val()} );
+  }
+</script>

@@ -197,6 +197,11 @@
 <script type="text/javascript">
   (function($){
     $(window).on('load', function(){
+      mp_track("<%= MixPanel::PROFILE_VIEW %>", {
+        "user_id": "<%= @profile.id %>",
+        "username": "<%= @profile.username %>"
+      });
+
       showInstagramFeed('<%= @profile.instagram_account.username %>', '#instagram-feed');
     });
   })(jQuery);
