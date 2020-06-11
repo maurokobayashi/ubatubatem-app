@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
   get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
 
+  # Features (profile)
+  patch "features/:id", to: "features#update", as: "update_feature"
+
   # Profiles
   get "profiles/:id/edit", to: "profiles#edit", as: "edit_profile"
   patch "profiles/:id", to: "profiles#update", as: "update_profile"

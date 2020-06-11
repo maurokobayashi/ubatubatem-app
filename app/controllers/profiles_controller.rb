@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
     if @profile.present? && authorized?
       # setup nested_attributes
       Address.create(profile: @profile) if @profile.address.blank?
+      Feature.create(profile: @profile) if @profile.feature.blank?
       InstagramAccount.create(profile: @profile) if @profile.instagram_account.blank?
     else
       flash.alert = FlashMessages::NOT_AUTHORIZED
@@ -37,7 +38,7 @@ class ProfilesController < ApplicationController
         flash.notice = FlashMessages::PROFILE_UPDATE_SUCCESS
         redirect_back fallback_location: edit_profile_path(@profile)
       else
-        flash.warn = FlashMessages::PROFILE_UPDATE_ERROR
+        flash.alert = FlashMessages::PROFILE_UPDATE_ERROR
         redirect_back fallback_location: edit_profile_path(@profile)
       end
     else
@@ -51,8 +52,8 @@ private
     params.require(:profile).permit(
       :avatar_url, :bio, :employees_qty, :phone_secondary, :search_tags, :status, :sub_categ_id,
       :tagline, :title, :user_id, :username, :website, :whatsapp,
-      instagram_account_attributes: [:id, :username, :instagram_user_id, :access_token],
       address_attributes: [:id, :bairro_id, :logradouro, :numero, :complemento], # important: include nested object's id to force update instead of delete and insert
+      instagram_account_attributes: [:id, :username, :instagram_user_id, :access_token],
       opening_hours_attributes: [:_destroy, :id, :day, :opens_at, :closes_at] #important: _destroy (true) means the object should be destroyed
     )
   end

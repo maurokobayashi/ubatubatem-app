@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_210731) do
+ActiveRecord::Schema.define(version: 2020_06_11_194657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,22 @@ ActiveRecord::Schema.define(version: 2020_06_10_210731) do
     t.boolean "has_retirada", default: false
     t.boolean "has_ponto_comercial", default: false
     t.integer "bairro_ids", default: [], array: true
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.integer "profile_id", null: false
+    t.boolean "delivery", default: false
+    t.boolean "ponto_comercial", default: false
+    t.boolean "produtor_local", default: false
+    t.boolean "vegetariano", default: false
+    t.boolean "natural", default: false
+    t.boolean "vegano", default: false
+    t.boolean "organico", default: false
+    t.boolean "lactose", default: false
+    t.boolean "gluten", default: false
+    t.boolean "diabetico", default: false
+    t.boolean "plus_size", default: false
+    t.index ["profile_id"], name: "index_features_on_profile_id"
   end
 
   create_table "instagram_accounts", force: :cascade do |t|

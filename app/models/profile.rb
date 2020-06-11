@@ -40,12 +40,13 @@ class Profile < ApplicationRecord
   USERNAME_MAX_LENGTH = 30
   SEARCH_TAGS_MAX_LENGTH = 150
 
-  has_one :instagram_account, dependent: :destroy
-  accepts_nested_attributes_for :instagram_account
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address
   has_one :bairro, through: :address
   has_one :delivery, dependent: :destroy
+  has_one :feature, dependent: :destroy
+  has_one :instagram_account, dependent: :destroy
+  accepts_nested_attributes_for :instagram_account
   has_many :opening_hours, -> { order(day: :asc) }, dependent: :destroy
   accepts_nested_attributes_for :opening_hours, allow_destroy: true, reject_if: lambda {|attr| attr['day'].blank?}
   has_many :statistics, dependent: :destroy
@@ -96,6 +97,34 @@ class Profile < ApplicationRecord
 
   def initials
     title.split.first(2).map(&:first).join
+  end
+
+  def is_alimentacao?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "alimentacao"
+  end
+
+  def is_moda?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "moda"
+  end
+
+  def is_saude_e_beleza?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "saude-e-beleza"
+  end
+
+  def is_pets?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "pets"
+  end
+
+  def is_feito_a_mao?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "feito-a-mao"
+  end
+
+  def is_lojas?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "lojas"
+  end
+
+  def is_servicos?
+    self.sub_categ.present? && self.sub_categ.categ.alias == "servicos"
   end
 
   def open?
