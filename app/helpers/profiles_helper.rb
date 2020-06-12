@@ -14,7 +14,8 @@ module ProfilesHelper
     address_line+=address.logradouro if address.logradouro.present?
     address_line+=", #{address.numero}" if address.numero.present?
     address_line+=" (#{address.complemento})" if address.complemento.present?
-    address_line+=" - #{address.bairro.name}" if address.bairro.present?
+    address_line+=" - " unless address_line == ""
+    address_line+=address.bairro.name if address.bairro.present?
   end
 
   def humanize_opening_hours(profile)

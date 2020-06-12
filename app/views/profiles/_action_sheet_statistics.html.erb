@@ -60,7 +60,7 @@
           <% if @profile.website.present? %>
           <li>
             <a href="#" class="btn btn-list">
-              <span><ion-icon name="link-outline"></ion-icon>Cliques no link</span>
+              <span><ion-icon name="link-outline"></ion-icon>Cliques no site</span>
               <span class="text-muted"><%= Statistic.where(profile: profile).link_click.count %></span>
             </a>
           </li>

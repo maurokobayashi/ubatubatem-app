@@ -3,7 +3,7 @@
 
 <body>
 
-  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options_profile] %>
+  <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options] %>
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? && @profile.delivery.has_bairros? %>
   <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
@@ -95,34 +95,6 @@
     <!-- Link List -->
     <div class="section full mt-3">
       <ul class="listview listview-sm image-listview">
-        <% if current_admin? %>
-        <li>
-          <a href="<%= "#{trestle_path}/profiles/#{@profile.id}" %>" target="_blank" class="item">
-            <div class="icon-box">
-              <ion-icon name="key-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div class="text-primary">Editar como administrador</div>
-            </div>
-          </a>
-        </li>
-        <% end %>
-        <% if @profile.delivery.present? %>
-        <% delivery_info = @profile.delivery.has_bairros? %>
-        <li>
-          <a href="#" class="item" <%= delivery_info ? "data-toggle=modal data-target=#dialog-delivery" : "" %> >
-            <div class="icon-box">
-              <ion-icon name="bicycle-outline"></ion-icon>
-            </div>
-            <div class="in">
-              <div><%= humanize_delivery_mode @profile.delivery %></div>
-              <% if delivery_info %>
-              <span class="text-muted">cobertura</span>
-              <% end %>
-            </div>
-          </a>
-        </li>
-        <% end %>
         <% if @profile.opening_hours.present? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios" onclick="mp_track('<%= MixPanel::PROFILE_OPENING_HOURS_CLICK %>');">
@@ -131,7 +103,6 @@
             </div>
             <div class="in">
               <div><%= humanize_opening_hours @profile %></div>
-              <span class="text-muted">horários</span>
             </div>
           </a>
         </li>
@@ -144,7 +115,6 @@
             </div>
             <div class="in">
               <div><%= humanize_address @profile.address %></div>
-              <span class="text-muted">mapa</span>
             </div>
           </a>
         </li>
@@ -157,7 +127,6 @@
             </div>
             <div class="in">
               <div><%= "@#{@profile.instagram_account.username}" %></div>
-              <span class="text-muted">instagram</span>
             </div>
           </a>
         </li>
@@ -170,7 +139,18 @@
             </div>
             <div class="in">
               <div><%= unmask_url @profile.website %></div>
-              <span class="text-muted">site</span>
+            </div>
+          </a>
+        </li>
+        <% end %>
+        <% if current_admin? %>
+        <li>
+          <a href="<%= edit_profile_path @profile %>" class="item">
+            <div class="icon-box">
+              <ion-icon name="key-outline"></ion-icon>
+            </div>
+            <div class="in">
+              <div class="text-primary">Editar como administrador</div>
             </div>
           </a>
         </li>
