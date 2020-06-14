@@ -12,7 +12,7 @@ module Ubatubatem
     config.load_defaults 6.0
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    config.time_zone = 'Brasilia'
+    config.time_zone = 'America/Sao_Paulo'
 
   end
 end

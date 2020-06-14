@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_194657) do
+ActiveRecord::Schema.define(version: 2020_06_14_134949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_194657) do
     t.boolean "gluten", default: false
     t.boolean "diabetico", default: false
     t.boolean "plus_size", default: false
+    t.boolean "plastico", default: false
     t.index ["profile_id"], name: "index_features_on_profile_id"
   end
 

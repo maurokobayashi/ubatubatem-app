@@ -1,6 +1,6 @@
 Trestle.resource(:features) do
   menu do
-    item :features, icon: "fa fa-star"
+    item :features, icon: "fa fa-cog", label: "Configurações", group: "dados da conta"
   end
 
   # Customize the table columns shown on the index view.

@@ -367,7 +367,14 @@
                 </div>
               </li>
               <li>
-                <div>Sou artista ou produtor local</div>
+                <div>Não utilizo embalagens plásticas</div>
+                <div class="custom-control custom-switch">
+                  <%= f.check_box :plastico, class: "custom-control-input" %>
+                  <label class="custom-control-label" for="feature_plastico"></label>
+                </div>
+              </li>
+              <li>
+                <div>Meus fornecedores são produtores locais</div>
                 <div class="custom-control custom-switch">
                   <%= f.check_box :produtor_local, class: "custom-control-input" %>
                   <label class="custom-control-label" for="feature_produtor_local"></label>
@@ -422,6 +429,17 @@
               </li>
               <% end %>
             </ul>
+
+            <% if @profile.is_moda? || true  %>
+            <div class="listview-title mt-2">Moda</div>
+            <ul class="listview simple-listview font-13">
+              <li>
+                <div>Ofereço produtos Plus Size</div>
+                <div class="custom-control custom-switch">
+                  <%= f.check_box :vegetariano, class: "custom-control-input" %>
+                  <label class="custom-control-label" for="feature_vegetariano"></label>
+                </div>
+              </li>
         <% end %>
       </div>
       <!-- * Tab: Configuracoes -->
