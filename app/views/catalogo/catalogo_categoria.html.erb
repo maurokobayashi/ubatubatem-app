@@ -9,8 +9,32 @@
     <% if @profiles.count > 0 %>
 
     <div class="header-large-title">
-      <h1 class="title"><%= @sub_categ.name %></h1>
-      <h4 class="subtitle"><%= pluralize(@profiles.count, "negócio cadastrado", "negócios cadastrados") %></h4>
+      <h1 class="title">
+        <%= @sub_categ.name %>
+        <% if params[:bairro].present? %>
+        <a href="<%= catalogo_categoria_path %>" class="btn btn-sm btn-outline pr-0 float-right text-primary">
+          ver tudo
+        </a>
+        <% else %>
+          <div class="dropdown float-right">
+            <button class="btn btn-sm btn-outline dropdown-toggle text-primary pr-0" type="button" data-toggle="dropdown">
+              filtrar
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <% @filtros.each do |filtro| %>
+              <a href="<%= catalogo_categoria_path bairro: filtro[1] %>" class="dropdown-item">
+                <%= filtro[0] %>
+              </a>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <!-- * Filter -->
+      </h1>
+      <h4 class="subtitle">
+        <%= pluralize(@profiles.count, "negócio cadastrado", "negócios cadastrados") + (params[:bairro].present? ? " em #{@profiles.first.bairro.name}" : "") %>
+      </h4>
+
     </div>
     <ul class="listview image-listview media search-result mt-2 mb-2">
       <% @profiles.each do |profile| %>

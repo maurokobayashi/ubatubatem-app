@@ -350,96 +350,99 @@
 
         <%= form_with model: @profile.feature, url: update_feature_path, class: "form-sm form-no-clean" do |f| %>
 
-            <div class="listview-title">Geral</div>
-            <ul class="listview simple-listview font-13">
-              <li>
-                <div>Faço entregas Delivery</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :delivery, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_delivery"></label>
-                </div>
-              </li>
-              <li>
-                <div>Possuo ponto comercial</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :ponto_comercial, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_ponto_comercial"></label>
-                </div>
-              </li>
-              <li>
-                <div>Não utilizo embalagens plásticas</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :plastico, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_plastico"></label>
-                </div>
-              </li>
-              <li>
-                <div>Meus fornecedores são produtores locais</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :produtor_local, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_produtor_local"></label>
-                </div>
-              </li>
-            </ul>
+          <div class="listview-title">Geral</div>
+          <ul class="listview simple-listview font-13">
+            <li>
+              <div>Faço entregas Delivery</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :delivery, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_delivery"></label>
+              </div>
+            </li>
+            <li>
+              <div>Possuo ponto comercial</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :ponto_comercial, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_ponto_comercial"></label>
+              </div>
+            </li>
+            <li>
+              <div>Não utilizo embalagens plásticas</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :plastico, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_plastico"></label>
+              </div>
+            </li>
+            <li>
+              <div>Meus fornecedores são produtores locais</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :produtor_local, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_produtor_local"></label>
+              </div>
+            </li>
+          </ul>
 
-            <% if @profile.is_alimentacao? || true  %>
-            <div class="listview-title mt-2">Alimentação</div>
-            <ul class="listview simple-listview font-13">
-              <li>
-                <div>Ofereço produtos vegetarianos</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :vegetariano, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_vegetariano"></label>
-                </div>
-              </li>
-              <li>
-                <div>Ofereço produtos veganos</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :vegano, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_vegano"></label>
-                </div>
-              </li>
-              <li>
-                <div>Ofereço produtos 100% naturais</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :natural, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_natural"></label>
-                </div>
-              </li>
-              <li>
-                <div>Ofereço produtos sem gúten</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :gluten, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_gluten"></label>
-                </div>
-              </li>
-              <li>
-                <div>Ofereço produtos sem lactose</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :lactose, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_lactose"></label>
-                </div>
-              </li>
-              <li>
-                <div>Ofereço produtos sem açúcares</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :diabetico, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_diabetico"></label>
-                </div>
-              </li>
-              <% end %>
-            </ul>
+          <% if @profile.is_alimentacao? || true  %>
+          <div class="listview-title mt-2">Alimentação</div>
+          <ul class="listview simple-listview font-13">
+            <li>
+              <div>Ofereço produtos vegetarianos</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :vegetariano, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_vegetariano"></label>
+              </div>
+            </li>
+            <li>
+              <div>Ofereço produtos veganos</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :vegano, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_vegano"></label>
+              </div>
+            </li>
+            <li>
+              <div>Ofereço produtos 100% naturais</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :natural, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_natural"></label>
+              </div>
+            </li>
+            <li>
+              <div>Ofereço produtos sem gúten</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :gluten, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_gluten"></label>
+              </div>
+            </li>
+            <li>
+              <div>Ofereço produtos sem lactose</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :lactose, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_lactose"></label>
+              </div>
+            </li>
+            <li>
+              <div>Ofereço produtos sem açúcares</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :diabetico, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_diabetico"></label>
+              </div>
+            </li>
+            <% end %>
+          </ul>
 
-            <% if @profile.is_moda? || true  %>
-            <div class="listview-title mt-2">Moda</div>
-            <ul class="listview simple-listview font-13">
-              <li>
-                <div>Ofereço produtos Plus Size</div>
-                <div class="custom-control custom-switch">
-                  <%= f.check_box :vegetariano, class: "custom-control-input" %>
-                  <label class="custom-control-label" for="feature_vegetariano"></label>
-                </div>
-              </li>
+          <% if @profile.is_moda? || true  %>
+          <div class="listview-title mt-2">Moda</div>
+          <ul class="listview simple-listview font-13">
+            <li>
+              <div>Ofereço produtos Plus Size</div>
+              <div class="custom-control custom-switch">
+                <%= f.check_box :plus_size, class: "custom-control-input" %>
+                <label class="custom-control-label" for="feature_plus_size"></label>
+              </div>
+            </li>
+          </ul>
+          <% end %>
+
         <% end %>
       </div>
       <!-- * Tab: Configuracoes -->

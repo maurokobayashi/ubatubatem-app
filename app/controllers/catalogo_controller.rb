@@ -4,12 +4,12 @@ class CatalogoController < ApplicationController
 
   ###############################################
 
-  # GET /bairro/:alias => lista todos os perfis de uma subcategoria
+  # GET /bairro/:alias?categoria=:c => lista todos os perfis de uma subcategoria
   def catalogo_bairro
     @bairro = Bairro.find_by_alias params[:alias]
     if @bairro.present?
-      @profiles = SearchCatalogo.profiles_from_bairro @bairro, params[:page]
-      @categs = Categ.ativo.all.order(:order, :name)
+      @profiles = SearchCatalogo.profiles_from_bairro @bairro, params
+      @filtros = @profiles.map{ |p| [p.sub_categ.name, p.sub_categ.alias] if p.sub_categ.present? && p.sub_categ.ativo? }.compact.uniq.sort
     else
       redirect_to catalogo_path and return
     end
@@ -20,11 +20,12 @@ class CatalogoController < ApplicationController
     end
   end
 
-  # GET /categoria/:alias => lista todos os perfis de uma subcategoria
+  # GET /categoria/:alias?bairro=b => lista todos os perfis de uma subcategoria
   def catalogo_categoria
     @sub_categ = SubCateg.find_by_alias params[:alias]
     if @sub_categ.present?
-      @profiles = SearchCatalogo.profiles_from_sub_categ @sub_categ, params[:page]
+      @profiles = SearchCatalogo.profiles_from_sub_categ @sub_categ, params
+      @filtros = @profiles.map{ |p| [p.bairro.name, p.bairro.alias] if p.bairro.present? }.compact.uniq.sort
     else
       redirect_to catalogo_path and return
     end
@@ -45,7 +46,7 @@ class CatalogoController < ApplicationController
   def search
     @query = params[:q]
     if @query.present?
-      @profiles = SearchCatalogo.profiles_broad_match @query, params[:page]
+      @profiles = SearchCatalogo.profiles_broad_match @query, params
       @sub_categs = SearchCatalogo.sub_categs @query
     else
       # will_paginate needs it

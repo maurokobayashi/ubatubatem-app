@@ -7,6 +7,7 @@
 #  delivery        :boolean          default(FALSE)
 #  ponto_comercial :boolean          default(FALSE)
 #  produtor_local  :boolean          default(FALSE)
+#  plastico        :boolean          default(FALSE)
 #  vegetariano     :boolean          default(FALSE)
 #  natural         :boolean          default(FALSE)
 #  vegano          :boolean          default(FALSE)

@@ -38,6 +38,7 @@ body {
   transition: transform .5s ease-out;
 }.click-animated:hover:before{transform: scaleX(1);}
 .display-block{display:block!important;}
+.float-right{position: relative; float: right;}
 .font-11{font-size:11px!important;}
 .font-12{font-size:12px!important;}
 .font-13{font-size:13px!important;}

@@ -3,6 +3,7 @@
 //= require jquery.instagramFeed
 //= require js.cookie.min
 //= require mixpanel
+//= require popper.min
 //= require bootstrap.min
 //= require owl.carousel.min
 //= require will_paginate_infinite_custom
