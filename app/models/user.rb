@@ -17,6 +17,10 @@ class User < ApplicationRecord
   include Trestle::Auth::ModelMethods
   include Trestle::Auth::ModelMethods::Rememberable
 
+  # bookmarks many to many association
+  has_many :bookmarks, dependent: :destroy
+  has_many :profiles, through: :bookmarks, dependent: :destroy
+
   has_one :profile, dependent: :destroy
 
   def self.authenticate(_username, _password)

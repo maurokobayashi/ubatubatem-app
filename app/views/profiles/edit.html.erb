@@ -26,8 +26,12 @@
       <!-- Tab: Negócio -->
       <div class="tab-pane fade active show" id="tab-negocio" role="tabpanel">
         <div class="section full mb-2">
-          <div class="accordion" id="accordion-parent">
+          <div class="section">
+              <% completion_rate = @profile.completion_progress %>
+              <%= progress_bar completion_rate, "Seu perfil está quase copleto", true, "progress-sm" %>
+            </div>
 
+          <div class="accordion mt-2" id="accordion-parent">
             <!-- * Accordion: Profile -->
             <div class="item">
               <div class="accordion-header">
@@ -463,7 +467,7 @@ $(document).ready(function () {
     "param_username": "<%= @profile.username %>"
   });
 
-  // OnToggle features updating
+  // Update Features on Toggle change
   $(".custom-control-input").change(function(e){
     var checkBoxElement = $(e.target);
     var key = checkBoxElement.attr("id").replace("feature_", "");

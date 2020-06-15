@@ -1,3 +1,5 @@
+<% _signed_in = signed_in? %>
+
 <!-- App Bottom Menu -->
 <%= render "app_components/search_header" %>
 
@@ -24,14 +26,23 @@
     </div>
   </a>
 
+  <% if _signed_in %>
   <a href="<%= bookmarks_path %>" class="item vibrate <%= current_page?(bookmarks_path) ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="bookmark-outline"></ion-icon>
       <strong>Salvos</strong>
     </div>
   </a>
+  <% else %>
+  <a href="<%= explorar_path %>" class="item vibrate <%= current_page?(explorar_path) ? 'active' : '' %>">
+    <div class="col">
+      <ion-icon name="compass-outline"></ion-icon>
+      <strong>Explorar</strong>
+    </div>
+  </a>
+  <% end %>
 
-  <% if signed_in? %>
+  <% if _signed_in %>
   <% active = current_page?(profile_path current_user.profile.username) || current_page?(edit_profile_path current_user.profile) ? "active" : "" %>
   <a href="<%= current_user.profile.profile_path %>" class="item vibrate <%= active %>">
     <div class="col">

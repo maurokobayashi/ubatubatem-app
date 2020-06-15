@@ -8,6 +8,7 @@ USERNAME_UNAVAILABLE = [
   'sair',
   'senha',
   'buscar',
+  'explorar',
   'catalogo',
   'salvos',
   'categoria',

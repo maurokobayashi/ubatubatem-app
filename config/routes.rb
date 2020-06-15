@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   # Bookmarks
   get "salvos", to: "bookmarks#index", as: "bookmarks"
+  post "bookmarks", to: "bookmarks#create", as: "create_bookmark"
 
   # Catalogo
   get "buscar", to: "catalogo#search", as: "buscar"
+  get "explorar", to: "catalogo#explore", as: "explorar"
   get "catalogo", to: "catalogo#index", as: "catalogo"
   get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
   get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
 
   # Sessions
   get "entrar", to: "sessions#new", as: "signin"
-  post "login", to: "sessions#create", as: "authenticate"
+  post "sessions", to: "sessions#create", as: "authenticate"
   get "sair", to: "sessions#destroy", as: "signout"
 
   # Statistics

@@ -36,6 +36,11 @@ class CatalogoController < ApplicationController
     end
   end
 
+  # GET /explorar
+  def explore
+    @profiles = Profile.active.sample(10)
+  end
+
   # GET /catalogo
   def index
     @categs = Categ.ativo.all.order(:order, :name)

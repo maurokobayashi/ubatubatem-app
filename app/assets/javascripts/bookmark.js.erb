@@ -1,0 +1,16 @@
+saveBookmark = function(profileId) {
+  var data = {bookmark: {'profile_id': profileId}};
+  $.ajax({
+    type: 'POST',
+    url: '<%= ::Rails.application.routes.url_helpers.create_bookmark_path %>',
+    contentType: 'application/json',
+    data: JSON.stringify(data),
+  }).done(function (msg) {
+    $("#toast-text").html("<%= FlashMessages::BOOKMARK_CREATED %>")
+    toastbox('toast-bookmark', 3000);
+  }).fail(function (msg) {
+    $("#toast-text").html("<%= FlashMessages::BOOKMARK_CREATE_ERROR %>")
+    toastbox('toast-bookmark', 3000);
+  });
+
+}

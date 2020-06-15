@@ -15,6 +15,12 @@
           </li>
           <li>
             <a href="#" class="btn btn-list">
+              <span><ion-icon name="bookmark-outline"></ion-icon>Salvo em listas</span>
+              <span class="text-muted"><%= Bookmark.where(profile: profile).count %></span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="btn btn-list">
               <span><ion-icon name="images-outline"></ion-icon>Fotos visualizadas</span>
               <span class="text-muted"><%= Statistic.where(profile: profile).foto_click.count %></span>
             </a>

@@ -10,7 +10,7 @@
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
   <%= render("action_sheet_statistics", profile: @profile) if is_current_user? @profile.user %>
-  <%= render("app_components/toast_notification", id: "toast-salvar", text: "Salvo na minha lista", color: "primary") %>
+  <%= render("app_components/toast_notification", id: "toast-bookmark", text: "Salvo na minha lista", color: "primary") %>
 
 
   <!-- App Capsule -->
@@ -64,10 +64,6 @@
             <button type="button" class="btn btn-block btn-sm btn-outline-primary">Estatísticas</button>
           </a>
         </div>
-        <div class="mt-1" style="display: none;">
-          <% completion_rate = @profile.completion_progress %>
-          <%= progress_bar completion_rate, "Faltam algumas informações no seu perfil", true, "progress-sm" %>
-        </div>
       <!-- Visitor -->
       <% else %>
         <% if @profile.whatsapp.present? %>
@@ -84,7 +80,7 @@
         </div>
         <% end %>
         <div class="col-6">
-          <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="toastbox('toast-salvar', 3000); mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
+          <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="saveBookmark(<%= @profile.id %>); mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
             <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
             Salvar
           </a>
