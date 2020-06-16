@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   # Users
   get "cadastrar", to: "users#new", as: "new_user"
+  get "senha", to: "users#password_forgot", as: "password_forgot"
 
 
 

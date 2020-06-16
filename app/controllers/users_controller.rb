@@ -5,4 +5,9 @@ class UsersController < ApplicationController
 
   end
 
+  # GET /senha
+  def password_forgot
+
+  end
+
 end

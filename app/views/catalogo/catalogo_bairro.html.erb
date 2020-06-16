@@ -1,4 +1,7 @@
-<% result_qty = @profiles.count %>
+<%
+  result_qty = @profiles.count
+  filtro_categoria = params[:categoria]
+%>
 
 <body>
 
@@ -12,31 +15,29 @@
 
     <div class="header-large-title">
       <h1 class="title">
-        <%= @bairro.name %>
-        <!-- Filter -->
-        <% if params[:categoria].present? %>
-        <a href="<%= catalogo_bairro_path %>" class="btn btn-sm btn-outline pr-0 float-right text-primary">
+        <%= "#{@bairro.name} (#{result_qty})" %>
+      </h1>
+      <!-- Filter -->
+      <h4 class="subtitle">
+        <% if filtro_categoria.present? %>
+        <%= @profiles.first.sub_categ.name %> -
+        <a href="<%= catalogo_bairro_path %>" class="text-primary">
           ver tudo
         </a>
         <% else %>
-          <div class="dropdown float-right">
-            <button class="btn btn-sm btn-outline dropdown-toggle text-primary pr-0" type="button" data-toggle="dropdown">
-              filtrar
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <% @filtros.each do |filtro| %>
-              <a href="<%= catalogo_bairro_path categoria: filtro[1] %>" class="dropdown-item">
-                <%= filtro[0] %>
-              </a>
-              <% end %>
-            </div>
-          </div>
+        <a href="#" class="dropdown-toggle text-primary" data-toggle="dropdown">
+          Filtrar por categoria
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <% @filtros.each do |filtro| %>
+          <a href="<%= catalogo_bairro_path categoria: filtro[1] %>" class="dropdown-item">
+            <%= filtro[0] %>
+          </a>
+          <% end %>
+        </div>
         <% end %>
-        <!-- * Filter -->
-      </h1>
-      <h4 class="subtitle">
-        <%= params[:categoria].present? ? "#{result_qty} #{@profiles.first.sub_categ.name.downcase}" : pluralize(result_qty, "negócio cadastrado", "negócios cadastrados") %>
       </h4>
+      <!-- * Filter -->
     </div>
 
     <ul class="listview image-listview media search-result mt-2 mb-2">

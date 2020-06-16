@@ -1431,6 +1431,9 @@ figure.codebox code {
 ion-icon {
   --ionicon-stroke-width: 32px;
 }
+ion-icon.sm {
+  font-size: 13px!important;
+}
 
 .demoIcons {
   font-size: 32px;

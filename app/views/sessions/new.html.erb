@@ -5,7 +5,7 @@
 
     <div class="login-form">
       <div class="section">
-        <%= image_tag "signin_illustration.jpg", class: "form-image" %>
+        <%= image_tag "signin_illustration.jpg", class: "form-image imaged w160" %>
       </div>
       <div class="section mt-3">
         <h2>Acesse sua conta</h2>
@@ -29,14 +29,11 @@
               </i>
             </div>
           </div>
-
-          <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">Acessar conta</button>
-          <div class="form-links mt-2">
-            <div>
-              <a href="esqueci_senha.html">Esqueci minha senha</a>
-            </div>
-            <div><a href="signin.html" class="text-muted">Criar uma conta</a></div>
+          <div class="form-links">
+            <div><a href="<%= password_forgot_path %>" class="text-muted">Esqueci a minha senha</a></div>
           </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">Acessar conta</button>
+          <a class="btn btn-outline-primary btn-block btn-md text-primary mt-2">Criar uma nova conta</a>
 
         </form>
       </div>

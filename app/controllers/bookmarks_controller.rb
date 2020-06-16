@@ -46,9 +46,15 @@ class BookmarksController < ApplicationController
     end
   end
 
+  # GET /salvos?categoria=:c
   def index
-    # todo: create bookmark model has_one profile and order by created_at
-    @profiles = current_user.profiles.order(id: :desc).paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
+    @profiles = current_user.profiles.order(id: :desc)
+    if params[:categoria].present?
+      @profiles = @profiles.joins(:sub_categ).where(sub_categs: {alias: params[:categoria]})
+    end
+    @profiles = @profiles.paginate(:page => params[:page], :per_page => RESULTS_PER_PAGE)
+
+    @filtros = @profiles.map{ |p| [p.sub_categ.name, p.sub_categ.alias] if p.sub_categ.present? && p.sub_categ.ativo? }.compact.uniq.sort
   end
 
 private

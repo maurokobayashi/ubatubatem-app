@@ -1,4 +1,7 @@
-<% result_qty = @profiles.count %>
+<%
+  result_qty = @profiles.count
+  filtro_categoria = params[:categoria]
+%>
 
 <body>
   <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:options] %>
@@ -8,8 +11,28 @@
     <div class="tab-content mt-1">
 
       <div class="header-large-title">
-        <h1 class="title">Salvos</h1>
-        <h4 class="subtitle"><%= pluralize(result_qty, "pequeno negócio salvo", "pequenos negócios salvos") %></h4>
+        <h1 class="title">Minha lista (<%= result_qty %>)</h1>
+        <!-- Filter -->
+        <h4 class="subtitle">
+          <% if filtro_categoria.present? %>
+          <%= @profiles.first.sub_categ.name %> -
+          <a href="<%= bookmarks_path %>" class="text-primary">
+            ver tudo
+          </a>
+          <% else %>
+          <a href="#" class="dropdown-toggle text-primary" data-toggle="dropdown">
+            Filtrar por categoria
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <% @filtros.each do |filtro| %>
+            <a href="<%= bookmarks_path categoria: filtro[1] %>" class="dropdown-item">
+              <%= filtro[0] %>
+            </a>
+            <% end %>
+          </div>
+          <% end %>
+        </h4>
+        <!-- * Filter -->
       </div>
 
       <!-- Profile Results -->
