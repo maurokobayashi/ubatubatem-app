@@ -23,6 +23,10 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  def bookmarked?(profile)
+    self.bookmarks.exists?(profile: profile)
+  end
+
   def self.authenticate(_username, _password)
     username = _username.strip.downcase
     password = _password.strip.downcase

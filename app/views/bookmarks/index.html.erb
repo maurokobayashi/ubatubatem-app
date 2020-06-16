@@ -1,3 +1,5 @@
+<% result_qty = @profiles.count %>
+
 <body>
   <%= render "app_components/header", classes: "bg-primary text-light flat", right_buttons: [:options] %>
 
@@ -7,11 +9,11 @@
 
       <div class="header-large-title">
         <h1 class="title">Salvos</h1>
-        <h4 class="subtitle"><%= pluralize(@profiles.count, "pequeno negócio salvo", "pequenos negócios salvos") %></h4>
+        <h4 class="subtitle"><%= pluralize(result_qty, "pequeno negócio salvo", "pequenos negócios salvos") %></h4>
       </div>
 
       <!-- Profile Results -->
-      <% if @profiles.count > 0 %>
+      <% if result_qty > 0 %>
       <ul class="listview image-listview media search-result mt-2 mb-2">
         <% @profiles.each do |profile| %>
           <%= render 'catalogo/search_result', profile: profile %>

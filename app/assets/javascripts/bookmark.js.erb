@@ -4,12 +4,32 @@ saveBookmark = function(profileId) {
     type: 'POST',
     url: '<%= ::Rails.application.routes.url_helpers.create_bookmark_path %>',
     contentType: 'application/json',
-    data: JSON.stringify(data),
-  }).done(function (msg) {
-    $("#toast-text").html("<%= FlashMessages::BOOKMARK_CREATED %>")
+    data: JSON.stringify(data)
+  }).done(function (response) {
+    $("#toast-text-save").html(response['msg'])
+    $("#btn-save-bookmark").addClass("hidden");
+    $("#btn-remove-bookmark").removeClass("hidden");
     toastbox('toast-bookmark', 3000);
-  }).fail(function (msg) {
-    $("#toast-text").html("<%= FlashMessages::BOOKMARK_CREATE_ERROR %>")
+  }).fail(function (response) {
+    $("#toast-text-save").html(response['msg'])
+    toastbox('toast-bookmark', 3000);
+  });
+}
+removeBookmark = function(profileId) {
+  var data = {bookmark: {'profile_id': profileId}};
+  $.ajax({
+    type: 'DELETE',
+    url: '<%= ::Rails.application.routes.url_helpers.destroy_bookmark_path %>',
+    contentType: 'application/json',
+    data: JSON.stringify(data)
+  }).done(function (response) {
+    console.log(response);
+    $("#toast-text-save").html(response['msg'])
+    toastbox('toast-bookmark', 3000);
+    $("#btn-save-bookmark").removeClass("hidden");
+    $("#btn-remove-bookmark").addClass("hidden");
+  }).fail(function (response) {
+    $("#toast-text-save").html(response['msg'])
     toastbox('toast-bookmark', 3000);
   });
 

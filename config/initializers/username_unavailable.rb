@@ -6,6 +6,7 @@ USERNAME_UNAVAILABLE = [
   '404',
   'entrar',
   'sair',
+  'cadastrar',
   'senha',
   'buscar',
   'explorar',

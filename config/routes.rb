@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Bookmarks
   get "salvos", to: "bookmarks#index", as: "bookmarks"
   post "bookmarks", to: "bookmarks#create", as: "create_bookmark"
+  delete "bookmarks", to: "bookmarks#destroy", as: "destroy_bookmark"
 
   # Catalogo
   get "buscar", to: "catalogo#search", as: "buscar"
@@ -26,9 +27,10 @@ Rails.application.routes.draw do
   get "sair", to: "sessions#destroy", as: "signout"
 
   # Statistics
-  post "statistics", to: "statistics#track_profile", as:"track_statistic"
+  post "statistics", to: "statistics#track_profile", as: "track_statistic"
 
-
+  # Users
+  get "cadastrar", to: "users#new", as: "new_user"
 
 
 

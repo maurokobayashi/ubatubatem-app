@@ -1,16 +1,20 @@
+<%
+  _signed_in = signed_in?
+  _is_current_user = is_current_user? @profile.user
+%>
 <% @tag_title = "#{@profile.title} - #{@profile.tagline} | #{@profile.address.present? ? @profile.address.bairro.name+', ' : ''}Ubatuba-SP" %>
 <% @tag_description = "Conheça #{Profile.count} pequenos negócios com o charme de Ubatuba-SP." %>
 
 <body>
-
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options] %>
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? && @profile.delivery.has_bairros? %>
   <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
   <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
-  <%= render("action_sheet_statistics", profile: @profile) if is_current_user? @profile.user %>
-  <%= render("app_components/toast_notification", id: "toast-bookmark", text: "Salvo na minha lista", color: "primary") %>
+  <%= render("action_sheet_statistics", profile: @profile) if _is_current_user %>
+  <%= render("app_components/signin_required") unless _signed_in %>
+  <%= render("app_components/toast_notification", id: "toast-bookmark", text_id: "toast-text-save", color: "primary") %>
 
 
   <!-- App Capsule -->
@@ -49,11 +53,12 @@
     <% end %>
     <!-- * Bio -->
 
+
     <!-- Call to Actions -->
     <div class="section mt-2">
       <div class="row">
       <!-- Profile Owner -->
-      <% if is_current_user? @profile.user %>
+      <% if _is_current_user %>
         <div class="col-6">
           <a href="<%= edit_profile_path @profile %>">
             <button type="button" class="btn btn-block btn-sm btn-primary vibrate">Editar perfil</button>
@@ -66,29 +71,42 @@
         </div>
       <!-- Visitor -->
       <% else %>
-        <% if @profile.whatsapp.present? %>
+        <!-- WhatsApp / Phone -->
         <div class="col-6">
+        <% if @profile.whatsapp.present? %>
           <a href="#" class="btn btn-whatsapp btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone" onclick="mp_track('<%= MixPanel::PROFILE_WHATSAPP_CLICK %>')">
             <ion-icon name="logo-whatsapp" role="img" class="md hydrated"></ion-icon>WhatsApp
           </a>
-        </div>
         <% elsif @profile.phone_secondary.present? %>
-        <div class="col-6">
           <a href="#" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-phone" onclick="mp_track('<%= MixPanel::PROFILE_PHONE_CLICK %>')">
             <ion-icon name="call-outline" role="img" class="md hydrated"></ion-icon>Telefone
           </a>
-        </div>
         <% end %>
+        </div>
+        <!-- Salvar -->
         <div class="col-6">
-          <a href="#" class="btn btn-outline-primary btn-sm btn-block vibrate" onclick="saveBookmark(<%= @profile.id %>); mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
+          <% if _signed_in %>
+          <% bookmarked = current_user.bookmarked? @profile %>
+          <a href="#" id="btn-remove-bookmark" class="btn btn-outline-primary btn-sm btn-block <%= bookmarked ? '' : 'hidden' %>" onclick="removeBookmark(<%= @profile.id %>);">
+            <ion-icon name="bookmark" role="img" class="md hydrated"></ion-icon>
+            Salvo
+          </a>
+          <a href="#" id="btn-save-bookmark" class="btn btn-outline-primary btn-sm btn-block mt-0 <%= bookmarked ? 'hidden' : '' %>" onclick="saveBookmark(<%= @profile.id %>); mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
             <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
             Salvar
           </a>
+          <% else %>
+          <a href="#" class="btn btn-outline-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-signin-required"  onclick="mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
+            <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
+            Salvar
+          </a>
+          <% end %>
         </div>
       <% end %>
       </div>
     </div>
     <!-- * Call To Actions -->
+
 
     <!-- Link List -->
     <div class="section full mt-3">

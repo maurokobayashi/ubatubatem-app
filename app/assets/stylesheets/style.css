@@ -45,6 +45,7 @@ body {
 .font-14{font-size:14px!important;}
 .font-15{font-size:15px!important;}
 .font-16{font-size:16px!important;}
+.hidden{display: none!important;}
 .input-maxlength{font-size: 11px; color: #fff; font-weight: 600; padding: 3px 5px; line-height: 1em; border-radius: 5px;}
 .instagram_gallery .instagram-image img{
   height: auto;

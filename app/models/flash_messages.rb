@@ -5,6 +5,8 @@ class FlashMessages
   # redirect_to :profiles_path, notice: FlashMessages::LORENIPSUN
   BOOKMARK_CREATED = "Salvo em minha lista"
   BOOKMARK_CREATE_ERROR = "Não foi possível salvar em minha lista"
+  BOOKMARK_REMOVED = "Removido da minha lista"
+  BOOKMARK_REMOVE_ERROR = "Não foi possível remover da minha lista"
 
   NOT_AUTHENTICATED = "Você precisa estar logado em sua conta"
   NOT_AUTHORIZED = "Você não possui autorização para isso"
