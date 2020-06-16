@@ -12,33 +12,30 @@ class SessionsController < ApplicationController
 
   # POST /login
   def create
-    username = session_params[:username].strip.downcase
+    login = session_params[:login].strip.downcase
     password = session_params[:password].strip.downcase
+    redirect_path = get_stored_path || root_path
 
-    profile = Profile.find_by(username: username)
-    if profile.present?
-      user = profile.user
-      if user.present?
-        if user.authenticate(session_params[:password])
-          @user = user
-          sign_in @user
-          flash.notice = FlashMessages::SIGNIN_SUCCESS
-          logger.info("[SIGNIN::SUCCESS] User: #{@user.id} - #{@user.profile.username}")
-          redirect_to (get_stored_path || profile.profile_path)
-        else
-          flash.alert = FlashMessages::SIGNIN_INVALID_PASSWORD
-          logger.info("[SIGNIN::ERROR] Params: #{session_params}. Motivo: #{FlashMessages::SIGNIN_INVALID_PASSWORD}")
-        end
+    user = User.left_outer_joins(:profile).where(email: login)
+      .or(User.left_outer_joins(:profile).where(profiles: {username: login}))
+      .first
 
-      # Profile não tem user
+    if user.present?
+      if user.authenticate(session_params[:password])
+        @user = user
+        sign_in @user
+        flash.notice = FlashMessages::SIGNIN_SUCCESS
+        logger.info("[SIGNIN::SUCCESS] User: #{@user.id} - #{@user.email}")
+        redirect_to (user.profile.present? ? user.profile.profile_path : redirect_path)
       else
-        # TODO
+        flash.alert = FlashMessages::SIGNIN_INVALID_PASSWORD
+        logger.info("[SIGNIN::ERROR] Params: #{session_params}. Motivo: #{FlashMessages::SIGNIN_INVALID_PASSWORD}")
+        redirect_back fallback_location: signin_path
       end
-    # username não existe
     else
       flash.alert = FlashMessages::SIGNIN_INVALID_USERNAME
       logger.info("[SIGNIN::ERROR] Params: #{session_params}. Motivo: #{FlashMessages::SIGNIN_INVALID_USERNAME}")
-      return
+      redirect_back fallback_location: signin_path
     end
   end
 
@@ -53,7 +50,7 @@ class SessionsController < ApplicationController
 
 private
   def session_params
-    params.require(:session).permit(:username, :email, :password)
+    params.require(:session).permit(:login, :password)
   end
 
 end

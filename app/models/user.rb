@@ -23,23 +23,32 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  def self.authenticate(_login, _password)
+    login = _login.strip.downcase
+    password = _password.strip.downcase
+    signed_user = nil
+
+    user = User.left_outer_joins(:profile).where(email: login)
+      .or(User.left_outer_joins(:profile).where(profiles: {username: login}))
+      .first
+
+    if user.present? && user.authenticate(password)
+      signed_user = user
+    end
+
+    return signed_user
+  end
+
   def bookmarked?(profile)
     self.bookmarks.exists?(profile: profile)
   end
 
-  def self.authenticate(_username, _password)
-    username = _username.strip.downcase
-    password = _password.strip.downcase
-    signed_user = nil
+  def is_business
+    self.profile.present?
+  end
 
-    profile = Profile.find_by(username: username)
-    if profile.present?
-      user = profile.user
-      if user.present? && user.authenticate(password)
-        signed_user = user
-      end
-    end
-    return signed_user
+  def is_consumer
+    !is_business
   end
 
   def refresh_remember_token

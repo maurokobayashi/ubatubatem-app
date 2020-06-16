@@ -1,7 +1,7 @@
 # Users
 User.delete_all
 User.create(email: "mauro.kobayashi@gmail.com", password: "ubatuba2018", first_name: "Mauro", last_name: "Kobayashi", admin: true)
-User.create(email: "lunapedricci@gmail.com", password: "lunapedricci@gmail.com", first_name: "Luna", last_name: "Pedricci", admn: true)
+User.create(email: "lunapedricci@gmail.com", password: "ubatuba2018", first_name: "Luna", last_name: "Pedricci", admin: true)
 
 # Categs e Subcategs
 Categ.delete_all
