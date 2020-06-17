@@ -68,3 +68,15 @@ self.addEventListener('fetch', evt => {
     }
   }
 });
+
+
+let deferredPrompt;
+self.addEventListener('beforeinstallprompt', evt => {
+  // Prevent the mini-infobar from appearing on mobile
+  // e.preventDefault();
+  // Stash the event so it can be triggered later.
+  deferredPrompt = evt;
+  // Update UI notify the user they can install the PWA
+  // showInstallPromotion();
+  console.log("beforeinstallprompt");
+});
