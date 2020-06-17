@@ -1,13 +1,13 @@
 <%
   _title = defined?(@tag_title) ? @tag_title : "Ubatuba Tem - Pequenos Negócios em Ubatuba"
   _description = defined?(@tag_description) ? @tag_description : "Catálogo colaborativo de pequenos comerciantes, produtores e artistas de Ubatuba"
-  _theme_color = defined?(theme_color) ? theme_color : "#000000"
+  _theme_color = defined?(theme_color) ? theme_color : "#4da069"
   _keywords = defined?(keywords) ? keywords : "ubatuba, comércio, restaurantes, lojas"
   _og_properties = defined?(og_properties) ? og_properties : {
-    image: "https://instagram.fcgh12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/90962734_2256251341349035_2598005891781361664_n.jpg?_nc_ht=instagram.fcgh12-1.fna.fbcdn.net&_nc_ohc=e0K26EHW1WEAX_N7ab9&oh=0643588c86c57196df0627e2da1423cc&oe=5F04891A",
-    type: "image/jpg",
-    width: "247",
-    height: "247",
+    image: "assets/icon/512x512.png",
+    type: "image/png",
+    width: "512",
+    height: "512",
     locale: "pt_BR",
     url: root_url,
     title: _title,
@@ -22,8 +22,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/192x192.png"> -->
-    <!-- <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/192x192.png">
+    <link rel="icon" type="image/png" href="assets/favicon.png" sizes="32x32">
     <title><%= _title %></title>
     <%= tag :meta, name: "theme-color", content: _theme_color %>
     <%= tag :meta, name: "description", content: _description %>

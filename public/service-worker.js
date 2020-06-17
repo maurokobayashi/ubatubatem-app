@@ -13,6 +13,7 @@ const limitCacheSize = (name, size) => {
   caches.open(name).then(cache => {
     cache.keys().then(keys => {
       if (keys.length > size) {
+        console.log("Cache limit reached. Deleting...")
         cache.delete(keys[0]).then(limitCacheSize(name, size));
       }
     });
@@ -44,7 +45,7 @@ self.addEventListener('activate', evt => {
 // Fetch
 self.addEventListener('fetch', evt => {
   // não cacheia recursos em localhost ou conteúdos com paginação will_paginate (js)
-  if (evt.request.url.indexOf('localhost:3000') === -1 && evt.request.url.indexOf('page=') === -1) {
+  if (evt.request.url.indexOf('localhost:3000') === -1 && evt.request.url.indexOf('page=') === -1 && evt.request.url.indexOf('cdninstagram.com') === -1) {
     // não cacheia recursos do tipo html, apenas assets
     if (evt.request.destination != 'document') {
       // responde com cache local. se não encontrar, faz um fetch para o servidor e atualiza o cache
@@ -54,7 +55,7 @@ self.addEventListener('fetch', evt => {
           return cacheRes || fetch(evt.request).then(fetchRes => {
             return caches.open(CacheDynamic).then(cache => {
               cache.put(evt.request.url, fetchRes.clone());
-              // limitCacheSize(CacheDynamic, 50);
+              limitCacheSize(CacheDynamic, 200);
               return fetchRes;
             })
           });
