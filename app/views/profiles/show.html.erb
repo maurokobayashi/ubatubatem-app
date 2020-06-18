@@ -11,7 +11,7 @@
   <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
-  <%= render("dialog_avatar", image_src: @profile.avatar_url) %>
+  <%= render("dialog_avatar", image_src: image_path(@profile.avatar)) %>
   <%= render("action_sheet_statistics", profile: @profile) if _is_current_user %>
   <%= render("app_components/signin_required") unless _signed_in %>
   <%= render("app_components/toast_notification", id: "toast-bookmark", text_id: "toast-text-save", color: "primary") %>
@@ -25,7 +25,7 @@
       <div class="profile-head">
         <div class="avatar">
           <a href="#" onclick="mp_track('<%= MixPanel::PROFILE_AVATAR_CLICK %>');" data-toggle="modal" data-target="#dialog-avatar">
-            <%= image_tag @profile.avatar_url, class: "imaged w64 rounded", id:"profile-avatar" %>
+            <%= image_tag @profile.avatar, class: "imaged w64 rounded", id:"profile-avatar" %>
           </a>
         </div>
         <div class="in">
@@ -196,7 +196,7 @@
         "param_username": "<%= @profile.username %>"
       });
 
-      showInstagramFeed('<%= @profile.instagram_account.username %>', '#instagram-feed');
+      showInstagramFeed('<%= @profile.instagram_account.username %>', <%= @profile.id %>, '#instagram-feed');
     });
   })(jQuery);
 </script>

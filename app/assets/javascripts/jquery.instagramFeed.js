@@ -60,15 +60,19 @@
           (d += "</div>"));
           g("#profile_avatar_url").val(b.profile_pic_url);
         k = "undefined" !== typeof n[a.image_size] ? n[a.image_size] : n[640];
+
+        /*gambiarra pra atualizar o avatar*/
+        var current_avatar = g("#profile-avatar").attr("src");
+        if (current_avatar != b.profile_pic_url) {
+          updateProfileAvatar(a.profile_id, b.profile_pic_url, b.profile_pic_url_hd);
+        }
+
         if (a.display_gallery)
           if ("undefined" !== typeof b.is_private && !0 === b.is_private) d += "<p class='instagram_private'><strong>O instagram de " + username + " é privado</strong></p>";
           else {
             e = (b.edge_owner_to_timeline_media || b.edge_hashtag_to_media).edges;
             h = e.length > a.items ? a.items : e.length;
             d += "<div class='instagram_gallery'>";
-            /*gambiarra pra atualizar o avatar*/
-            g("#profile-avatar").attr("src", b.profile_pic_url);
-            g("#profile-avatar-hd").attr("src", b.profile_pic_url_hd);
             for (c = 0; c < h; c++) {
               var m = "https://www.instagram.com/p/" + e[c].node.shortcode;
               switch (e[c].node.__typename) {

@@ -16,7 +16,7 @@ class SubCateg < ApplicationRecord
   enum status: { sugerido: 0, ativo: 1, inativo: 2 }
 
   def profile_count
-    self.profiles.count
+    self.profiles.active.count
   end
 
 end

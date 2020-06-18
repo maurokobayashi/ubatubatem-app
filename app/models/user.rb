@@ -12,6 +12,7 @@
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  admin                     :boolean          default(FALSE)
+#  last_login                :datetime
 #
 class User < ApplicationRecord
   include Trestle::Auth::ModelMethods
@@ -51,7 +52,15 @@ class User < ApplicationRecord
     !is_business
   end
 
+  def new_profiles_count
+    Profile.active.where("created_at > ?", self.last_login).count
+  end
+
   def refresh_remember_token
     self.update(remember_token: SecureRandom.urlsafe_base64)
+  end
+
+  def update_last_login
+    self.update(last_login: DateTime.now)
   end
 end

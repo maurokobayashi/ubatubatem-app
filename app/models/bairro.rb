@@ -23,7 +23,7 @@ class Bairro < ApplicationRecord
   enum regiao: { centro: 0, serra: 1, sul: 2, norte: 3 }
 
   def profile_count
-    Profile.joins(:bairro).where(bairros: {id: self.id}).count
+    Profile.joins(:bairro).active.where(bairros: {id: self.id}).count
   end
 
 end

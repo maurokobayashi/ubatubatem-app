@@ -36,13 +36,9 @@ class CatalogoController < ApplicationController
     end
   end
 
-  # GET /explorar
-  def explore
-    @profiles = Profile.active.sample(10)
-  end
-
   # GET /catalogo
   def index
+    current_user.update_last_login
     @categs = Categ.ativo.all.order(:order, :name)
     @bairros = Bairro.all.order(:regiao, :id)
   end

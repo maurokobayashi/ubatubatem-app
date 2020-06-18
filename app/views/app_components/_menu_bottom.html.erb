@@ -1,4 +1,7 @@
-<% _signed_in = signed_in? %>
+<%
+  _signed_in = signed_in?
+  _current_user = current_user
+%>
 
 <!-- App Bottom Menu -->
 <%= render "app_components/search_header" %>
@@ -15,7 +18,12 @@
     <div class="col">
       <ion-icon name="layers-outline"></ion-icon>
       <strong>Catálogo</strong>
-      <span class="badge badge-danger"><%= Profile.active.count %></span>
+      <% if _signed_in %>
+        <% new_profiles_count = _current_user.new_profiles_count %>
+        <% if new_profiles_count > 0 %>
+        <span class="badge badge-danger"><%= new_profiles_count %></span>
+        <% end %>
+      <% end %>
     </div>
   </a>
 
@@ -26,33 +34,32 @@
     </div>
   </a>
 
-  <a href="<%= explorar_path %>" class="item vibrate <%= current_page?(explorar_path) ? 'active' : '' %>">
-    <div class="col">
-      <ion-icon name="compass-outline"></ion-icon>
-      <strong>Explorar</strong>
-    </div>
-  </a>
-
   <!-- Signed in -->
   <% if _signed_in %>
-    <!-- Business -->
-    <% if current_user.is_business %>
-    <% active = current_page?(profile_path current_user.profile.username) || current_page?(edit_profile_path current_user.profile) ? "active" : "" %>
-    <a href="<%= current_user.profile.profile_path %>" class="item vibrate <%= active %>">
-      <div class="col">
-        <ion-icon name="person-outline"></ion-icon>
-        <strong>Meu Perfil</strong>
-      </div>
-    </a>
-    <!-- Consumer -->
-    <% else %>
-    <a href="<%= bookmarks_path %>" class="item vibrate <%= current_page?(bookmarks_path) ? 'active' : '' %>">
+  <a href="<%= bookmarks_path %>" class="item vibrate <%= current_page?(bookmarks_path) ? 'active' : '' %>">
     <div class="col">
       <ion-icon name="bookmark-outline"></ion-icon>
       <strong>Salvos</strong>
     </div>
   </a>
-    <% end %>
+  <!-- Business -->
+  <% if _current_user.is_business %>
+  <% active = current_page?(profile_path _current_user.profile.username) || current_page?(edit_profile_path _current_user.profile) ? "active" : "" %>
+  <a href="<%= _current_user.profile.profile_path %>" class="item vibrate <%= active %>">
+    <div class="col">
+      <ion-icon name="person-outline"></ion-icon>
+      <strong>Meu perfil</strong>
+    </div>
+  </a>
+  <!-- Consumer -->
+  <% else %>
+  <a href="<%= edit_user_path %>" class="item vibrate <%= active %>">
+    <div class="col">
+      <ion-icon name="settings-outline"></ion-icon>
+      <strong>Minha conta</strong>
+    </div>
+  </a>
+  <% end %>
   <!-- Not signed in -->
   <% else %>
   <a href="<%= signin_path %>" class="item vibrate <%= current_page?(signin_path) ? 'active' : '' %>">

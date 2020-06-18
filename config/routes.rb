@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   # Catalogo
   get "buscar", to: "catalogo#search", as: "buscar"
-  get "explorar", to: "catalogo#explore", as: "explorar"
   get "catalogo", to: "catalogo#index", as: "catalogo"
   get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
   get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
   # Profiles
   get "profiles/:id/edit", to: "profiles#edit", as: "edit_profile"
   patch "profiles/:id", to: "profiles#update", as: "update_profile"
+  patch "profiles/:id/avatar", to: "profiles#update_avatar", as: "update_profile_avatar"
 
   # Sessions
   get "entrar", to: "sessions#new", as: "signin"
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   # Users
   get "cadastrar", to: "users#new", as: "new_user"
+  get "minha_conta", to: "users#edit", as: "edit_user"
   get "senha", to: "users#password_forgot", as: "password_forgot"
 
 

@@ -1,5 +1,6 @@
-showInstagramFeed = function(username, containerSelector) {
+showInstagramFeed = function(username, profileId, containerSelector) {
   $.instagramFeed({
+    'profile_id': profileId,
     'username': username,
     'container': containerSelector,
     'display_profile': false,
@@ -23,5 +24,21 @@ showInstagramProfile = function(username, containerSelector) {
     'display_gallery': false,
     'callback': null,
     'styling': true
+  });
+}
+
+updateProfileAvatar = function(profileId, avatarUrl, avatarUrlHd) {
+  var data = {profile: {'avatar_url': avatarUrl}};
+  $.ajax({
+    type: 'PATCH',
+    url: 'profiles/'+profileId+'/avatar',
+    contentType: 'application/json',
+    data: JSON.stringify(data)
+  }).done(function (response) {
+    console.log(response['msg'])
+    $("#profile-avatar").attr("src", avatarUrl);
+    $("#profile-avatar-hd").attr("src", avatarUrlHd);
+  }).fail(function (response) {
+    $("#toast-text-save").html(response['msg'])
   });
 }

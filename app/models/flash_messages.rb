@@ -13,6 +13,8 @@ class FlashMessages
 
   PROFILE_UPDATE_SUCCESS = "Seu perfil foi atualizado"
   PROFILE_UPDATE_ERROR = "Não foi possível atualizar seu perfil"
+  PROFILE_AVATAR_UPDATE_SUCCESS = "O avatar foi atualizado"
+  PROFILE_AVATAR_UPDATE_ERROR = "O avatar não foi atualizado"
 
   SIGNIN_INVALID_USERNAME = "Usuário não existe"
   SIGNIN_INVALID_PASSWORD = "Senha inválida"

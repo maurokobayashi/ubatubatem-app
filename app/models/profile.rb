@@ -73,6 +73,10 @@ class Profile < ApplicationRecord
 
   ###########################################################################
 
+  def avatar
+    self.avatar_url || "avatar_empty"
+  end
+
   def closed?
     !open?
   end
