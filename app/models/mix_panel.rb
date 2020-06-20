@@ -17,6 +17,7 @@ class MixPanel
   PROFILE_PHOTO_CLICK = "click.profile_photo"
   PROFILE_STATISTICS_CLICK = "click.profile_statistics"
   PROFILE_WHATSAPP_CLICK = "click.profile_whatsapp"
+  PROFILE_CLAIM_CLICK = "click.profile_claim"
 
   # Search events
   SEARCH_SUBMIT = "submit.search"

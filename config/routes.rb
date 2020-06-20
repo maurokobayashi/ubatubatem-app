@@ -2,6 +2,9 @@
 Rails.application.routes.draw do
   root "landing_pages#index"
 
+  # Public content
+  get "sobre-nos", to: "landing_pages#about_us", as: "about_us"
+
   # Bookmarks
   get "salvos", to: "bookmarks#index", as: "bookmarks"
   post "bookmarks", to: "bookmarks#create", as: "create_bookmark"
@@ -17,7 +20,6 @@ Rails.application.routes.draw do
   patch "features/:id", to: "features#update", as: "update_feature"
 
   # Profiles
-  get "profiles/:id/edit", to: "profiles#edit", as: "edit_profile"
   patch "profiles/:id", to: "profiles#update", as: "update_profile"
   patch "profiles/:id/avatar", to: "profiles#update_avatar", as: "update_profile_avatar"
 
@@ -31,11 +33,13 @@ Rails.application.routes.draw do
 
   # Users
   get "cadastrar", to: "users#new", as: "new_user"
-  get "minha_conta", to: "users#edit", as: "edit_user"
-  get "senha", to: "users#password_forgot", as: "password_forgot"
+  get "minha-conta", to: "users#edit", as: "edit_user"
+  get "esqueci-senha", to: "users#password_forgot", as: "password_forgot"
 
 
 
   # Profile page - Must be the last one
   get ':username', to: "profiles#show", as: "profile", constraints: { username: /[^\/]+/ } # constraint: accept URLs with dot
+  get ":username/editar", to: "profiles#edit", as: "edit_profile", constraints: { username: /[^\/]+/ }
+  get ":username/reivindicar", to: "profiles#claim", as: "claim_profile", constraints: { username: /[^\/]+/ }
 end

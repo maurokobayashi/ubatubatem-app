@@ -60,7 +60,7 @@
       <!-- Profile Owner -->
       <% if _is_current_user %>
         <div class="col-6">
-          <a href="<%= edit_profile_path @profile %>">
+          <a href="<%= edit_profile_path  @profile.username %>">
             <button type="button" class="btn btn-block btn-sm btn-primary vibrate">Editar perfil</button>
           </a>
         </div>
@@ -96,7 +96,7 @@
             Salvar
           </a>
           <% else %>
-          <a href="#" class="btn btn-outline-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-signin-required"  onclick="mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
+          <a href="#" class="btn btn-outline-primary btn-sm btn-block" data-toggle="modal" data-target="#dialog-signin-required" onclick="mp_track('<%= MixPanel::PROFILE_BOOKMARK_CLICK %>');">
             <ion-icon name="bookmark-outline" role="img" class="md hydrated"></ion-icon>
             Salvar
           </a>
@@ -161,7 +161,7 @@
         <% end %>
         <% if current_admin? %>
         <li>
-          <a href="<%= edit_profile_path @profile %>" class="item">
+          <a href="<%= edit_profile_path(id: @profile.id) %>" class="item">
             <div class="icon-box">
               <ion-icon name="key-outline"></ion-icon>
             </div>
@@ -181,6 +181,29 @@
       </div>
     </div>
     <!-- * Photos -->
+
+
+    <!-- Claim -->
+    <% unless @profile.reivindicado? %>
+    <div class="section mt-4">
+      <div class="card text-center">
+        <div class="card-body pb-4">
+          <%= image_tag "illustration-claim", class: "imaged w100" %>
+          <h5 class="card-title mt-2">
+            Este é o seu negócio?
+          </h5>
+          <p class="card-text">
+            Reivindique este perfil para atualizar as informações, visualizar as estatísticas de acesso e mais. É grátis, lógico :)
+          </p>
+          <a href="<%= claim_profile_path @profile.username %>" class="btn btn-block btn-primary mt-2" onclick="mp_track('<%= MixPanel::PROFILE_CLAIM_CLICK %>');">
+            Reivindicar perfil
+          </a>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <!-- * Claim -->
+
 
   </div>
   <!-- * App Capsule -->

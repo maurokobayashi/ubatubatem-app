@@ -43,7 +43,7 @@
               <div id="accordion-profile" class="accordion-body collapse" data-parent="#accordion-parent" style="">
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
-                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                    <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm" do |f| %>
 
                       <% if current_admin? %>
                       <div class="form-group boxed">
@@ -145,7 +145,7 @@
               <div id="accordion-instagram" class="accordion-body collapse" data-parent="#accordion-parent">
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
-                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                    <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm" do |f| %>
 
                       <!-- update avatar_url when instagram scrapping request is done -->
                       <%= f.hidden_field :avatar_url, id: "profile_avatar_url" %>
@@ -193,7 +193,7 @@
               <div id="accordion-address" class="accordion-body collapse" data-parent="#accordion-parent">
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
-                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                    <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm" do |f| %>
                       <%= f.fields_for :address do |af| %>
 
                         <div class="form-group boxed">
@@ -255,7 +255,7 @@
               <div id="accordion-horarios" class="accordion-body collapse" data-parent="#accordion-parent">
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
-                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm form-no-clean" do |f| %>
+                    <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm form-no-clean" do |f| %>
                       <%= f.fields_for :opening_hours do |ohf| %>
 
                         <div class="row">
@@ -318,7 +318,7 @@
               <div id="accordion-searchtags" class="accordion-body collapse" data-parent="#accordion-parent">
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
-                    <%= form_with model: @profile, url: update_profile_path, class: "form-sm" do |f| %>
+                    <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm" do |f| %>
                       <span class="font-13 text-primary">Quando as pessoas buscarem por alguma dessas palavras, seu perfil irá aparecer.</span>
                       <div class="form-group boxed mt-1">
                         <div class="input-wrapper">
@@ -352,7 +352,7 @@
 
         <% categ = @profile.sub_categ.try(:categ) %>
 
-        <%= form_with model: @profile.feature, url: update_feature_path, class: "form-sm form-no-clean" do |f| %>
+        <%= form_with model: @profile.feature, url: update_feature_path(@profile), class: "form-sm form-no-clean" do |f| %>
 
           <div class="listview-title">Geral</div>
           <ul class="listview simple-listview font-13">

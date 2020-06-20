@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       flash.notice = FlashMessages::SIGNIN_SUCCESS
       redirect_to (get_stored_path || root_path)
     else
-      store_referer_path
+      params[:return_to].present? ? store_return_to_path(params[:return_to]) : store_referer_path
     end
   end
 

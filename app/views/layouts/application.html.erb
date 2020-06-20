@@ -13,6 +13,7 @@
     title: _title,
     description: _description
   }
+  _noindex = defined?(@tag_noindex) ? true : false
 %>
 
 <!DOCTYPE html>
@@ -22,8 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon/192x192.png">
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/192x192.png">
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
     <title><%= _title %></title>
     <%= tag :meta, name: "theme-color", content: _theme_color %>
     <%= tag :meta, name: "description", content: _description %>
@@ -36,8 +37,13 @@
     <%= tag :meta, property: "og:url", content: _og_properties[:url] %>
     <%= tag :meta, property: "og:title", content: _og_properties[:title] %>
     <%= tag :meta, property: "og:locale", content: _og_properties[:locale] %>
-
     <link rel="manifest" href="/__manifest.json">
+
+    <% if _noindex %>
+      <%= tag :meta, name: "robots", content: "noindex" %>
+      <%= tag :meta, name: "googlebot", content: "noindex" %>
+    <% end %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

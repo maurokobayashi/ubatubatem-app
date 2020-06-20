@@ -17,6 +17,14 @@
               </span>
             </a>
           </li>
+          <li>
+            <a href="<%= about_us_path %>" class="btn btn-list vibrate">
+              <span>
+                <ion-icon name="information-circle-outline" role="img" class="md hydrated"></ion-icon>
+                Sobre nós
+              </span>
+            </a>
+          </li>
           <% if signed_in? %>
           <li>
             <a href="<%= signout_path %>" class="btn btn-list text-danger vibrate" onclick="mp_track('<%= MixPanel::SIGNOUT_SUBMIT %>');">

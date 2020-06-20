@@ -40,6 +40,10 @@ module SessionsHelper
     session[:return_to] = request.original_url
   end
 
+  def store_return_to_path(return_to)
+    session[:return_to] = return_to
+  end
+
   def get_stored_path
     session.delete(:return_to)
   end

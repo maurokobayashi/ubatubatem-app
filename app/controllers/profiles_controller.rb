@@ -5,9 +5,9 @@ class ProfilesController < ApplicationController
 
   RESULTS_PER_PAGE = 10
 
-  # GET /profiles/:id/edit
+  # GET /:username/editar
   def edit
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_by(username: params[:username])
 
     if @profile.present? && authorized?
       # setup nested_attributes
