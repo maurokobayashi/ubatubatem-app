@@ -18,7 +18,7 @@ Trestle.configure do |config|
 
   # Speficy a favicon to be used within the admin.
   #
-  # config.favicon = "favicon.ico"
+  config.favicon = "favicon.png"
 
   # Set the text shown in the page footer within the admin.
   # Defaults to 'Powered by Trestle'.
