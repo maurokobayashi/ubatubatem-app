@@ -38,7 +38,7 @@ class CatalogoController < ApplicationController
 
   # GET /catalogo
   def index
-    current_user.update_last_login
+    current_user.update_last_login if signed_in?
     @categs = Categ.ativo.all.order(:order, :name)
     @bairros = Bairro.all.order(:regiao, :id)
   end
