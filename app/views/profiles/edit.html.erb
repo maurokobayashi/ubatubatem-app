@@ -121,7 +121,7 @@
 
                       <!-- Submit button -->
                       <div class="fab-button with-fixed-bottom text bottom-center sm">
-                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                        <input type="submit" class="fab border-none bg-primary" value="Salvar alterações">
                       </div>
 
                     <% end %>
@@ -322,7 +322,7 @@
                       <span class="font-13 text-primary">Quando as pessoas buscarem por alguma dessas palavras, seu perfil irá aparecer.</span>
                       <div class="form-group boxed mt-1">
                         <div class="input-wrapper">
-                          <label class="label" for="logradouro">Palavras-chave separadas por vírgula</label>
+                          <label class="label" for="logradouro">Digite as palavras-chave separadas por vírgula</label>
                           <%= f.text_area :search_tags, rows: 3, class: "form-control", placeholder: "Ex: pizzaria, pizzas, esfirras, vegetariano, jantar, itaguá", maxlength: Profile::SEARCH_TAGS_MAX_LENGTH, autocomplete: "off" %>
                           <div class="input-info">Ex: pizzaria, pizzas, esfirras, vegetariano, jantar, itaguá </div>
                         </div>
@@ -503,8 +503,8 @@ $(document).ready(function () {
       $(this).removeClass("with-fixed-bottom");
     })
     $("input[type=submit]").each(function(index) {
-      $(this).removeClass("bg-success");
-      $(this).addClass("bg-primary");
+      $(this).removeClass("bg-primary");
+      $(this).addClass("bg-secondary");
       $(this).val("OK");
     })
   });
@@ -515,8 +515,8 @@ $(document).ready(function () {
       $(this).addClass("with-fixed-bottom");
     })
     $("input[type=submit]").each(function(index) {
-      $(this).removeClass("bg-primary");
-      $(this).addClass("bg-success");
+      $(this).removeClass("bg-secondary");
+      $(this).addClass("bg-primary");
       $(this).val("Salvar alterações");
     })
   });

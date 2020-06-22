@@ -1,7 +1,14 @@
 class MixPanel
 
+  # Visit events
+  CATALOGO_VIEW = "catalogo"
+  HOME_VIEW = "home"
+  PROFILE_CLAIM_VIEW = "profile_claim"
+  SIGNIN_VIEW = "signin"
+  SIGNUP_VIEW = "signup"
+
+
   # Catalogo events
-  CATALOGO_VIEW = "visit.catalogo"
   CATALOGO_CATEGORIA_VIEW = "visit.catalogo_categoria"
   CATALOGO_BAIRRO_VIEW = "visit.catalogo_bairro"
 
@@ -17,7 +24,6 @@ class MixPanel
   PROFILE_PHOTO_CLICK = "click.profile_photo"
   PROFILE_STATISTICS_CLICK = "click.profile_statistics"
   PROFILE_WHATSAPP_CLICK = "click.profile_whatsapp"
-  PROFILE_CLAIM_CLICK = "click.profile_claim"
 
   # Search events
   SEARCH_SUBMIT = "submit.search"
@@ -26,9 +32,9 @@ class MixPanel
   # Share events
   SHARE_CLICK = "click.share"
 
-  # Authentication events
-  SIGNIN_VIEW = "visit.signin"
+  # Sign in/out/up events
   SIGNIN_SUBMIT = "submit.signin"
   SIGNOUT_SUBMIT = "submit.signout"
+  SIGNUP_SUBMIT = "submit.signup"
 
 end

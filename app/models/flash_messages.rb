@@ -20,4 +20,7 @@ class FlashMessages
   SIGNIN_INVALID_PASSWORD = "Senha inválida"
   SIGNIN_SUCCESS = "Conectado à sua conta"
   SIGNOUT_SUCCESS = "Você saiu da sua conta"
+  SIGNUP_SUCCESS = "Sua conta foi criada"
+  SIGNUP_ALREADY_EXISTS = "Você já possui uma conta, faça o login"
+  SIGNUP_PASSWORD_UNMATCH = "As senhas informadas não batem"
 end

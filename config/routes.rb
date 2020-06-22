@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   # Users
   get "cadastrar", to: "users#new", as: "new_user"
+  post "signup", to: "users#create", as: "create_user"
   get "minha-conta", to: "users#edit", as: "edit_user"
   get "esqueci-senha", to: "users#password_forgot", as: "password_forgot"
 

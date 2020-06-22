@@ -1,6 +1,6 @@
 <% @tag_noindex = true %>
 
-<body>
+<body data-mp-track-visit="<%= MixPanel::PROFILE_CLAIM_VIEW %>">
   <%= render "app_components/header", classes: "bg-primary text-light flat", title: "reivindicar perfil", left_button: :back %>
 
   <!-- App Capsule -->
@@ -9,7 +9,8 @@
     <% if signed_in? %>
 
     <% else %>
-
+      <a href="<%= new_user_path %>" class="btn btn-block btn-primary mt-3">Criar uma nova conta</a>
+      <a href="<%= signin_path %>" class="btn btn-block btn-outline-primary text-primary">Acessar a minha conta</a>
     <% end %>
 
   </div>

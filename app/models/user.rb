@@ -24,6 +24,11 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
 
+  validates :email, presence: { message: 'Informe um email' }
+  validates :password_digest, presence: { message: 'Informe uma senha' }
+
+  ###########################################################################
+
   def self.authenticate(_login, _password)
     login = _login.strip.downcase
     password = _password.strip.downcase

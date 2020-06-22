@@ -1,0 +1,50 @@
+<body data-mp-track-visit="<%= MixPanel::SIGNUP_VIEW %>">
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="pt-4 mb-2">
+
+    <div class="login-form">
+      <div class="section">
+        <%= image_tag "illustration-signup", class: "form-image imaged w160" %>
+      </div>
+      <div class="section mt-2">
+        <h2>Criar minha conta</h2>
+      </div>
+      <div class="section mt-1 mb-5">
+        <%= form_with model: @user, url: create_user_path, onsubmit: "mp_track('#{MixPanel::SIGNUP_SUBMIT}');" do |f| %>
+          <div class="form-group boxed">
+            <div class="input-wrapper">
+              <%= f.text_field :email, class: "form-control", placeholder: "Seu email", required: true %>
+              <i class="clear-input">
+                <ion-icon name="close-circle"></ion-icon>
+              </i>
+            </div>
+          </div>
+          <div class="form-group boxed">
+            <div class="input-wrapper">
+              <%= f.text_field :password, class: "form-control", placeholder: "Escolha uma senha", required: true, autocomplete: "off" %>
+              <i class="clear-input">
+                <ion-icon name="close-circle"></ion-icon>
+              </i>
+            </div>
+          </div>
+          <div class="form-group boxed pt-0">
+            <div class="input-wrapper">
+              <%= f.text_field :password_confirmation, class: "form-control", placeholder: "Confirme a senha", required: true, autocomplete: "off" %>
+              <i class="clear-input">
+                <ion-icon name="close-circle"></ion-icon>
+              </i>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg mt-2">Criar nova conta</button>
+          <a href="<%= signin_path %>" class="btn btn-outline-primary btn-block btn-md text-primary mt-2">Já possuo uma conta</a>
+
+        <% end %>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- * App Capsule -->
+
+</body>

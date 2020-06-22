@@ -55,7 +55,7 @@ self.addEventListener('fetch', evt => {
           return cacheRes || fetch(evt.request).then(fetchRes => {
             return caches.open(CacheDynamic).then(cache => {
               cache.put(evt.request.url, fetchRes.clone());
-              limitCacheSize(CacheDynamic, 200);
+              // limitCacheSize(CacheDynamic, 200);
               return fetchRes;
             })
           });
