@@ -10,7 +10,7 @@
   <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? && @profile.delivery.has_bairros? %>
   <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
-  <%= render("dialog_horarios", profile: @profile) if @profile.opening_hours.present? %>
+  <%= render("dialog_horarios", profile: @profile) if @profile.has_set_opening_hours? %>
   <%= render("dialog_avatar", image_src: image_path(@profile.avatar)) %>
   <%= render("action_sheet_statistics", profile: @profile) if _is_current_user %>
   <%= render("app_components/signin_required") unless _signed_in %>
@@ -111,7 +111,7 @@
     <!-- Link List -->
     <div class="section full mt-3">
       <ul class="listview listview-sm image-listview">
-        <% if @profile.opening_hours.present? %>
+        <% if @profile.has_set_opening_hours? %>
         <li>
           <a href="#" class="item" data-toggle="modal" data-target="#dialog-horarios" onclick="mp_track('<%= MixPanel::PROFILE_OPENING_HOURS_CLICK %>');">
             <div class="icon-box">
