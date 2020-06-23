@@ -14,7 +14,7 @@
   <%= render("dialog_avatar", image_src: image_path(@profile.avatar)) %>
   <%= render("action_sheet_statistics", profile: @profile) if _is_current_user %>
   <%= render("app_components/signin_required") unless _signed_in %>
-  <%= render("app_components/toast_notification", id: "toast-bookmark", text_id: "toast-text-save", color: "primary") %>
+  <%= render("app_components/toast_notification", id: "toast-bookmark", text_id: "toast-text-save", color: "dark-transparent") %>
 
 
   <!-- App Capsule -->
