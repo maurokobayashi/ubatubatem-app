@@ -20,10 +20,12 @@ class User < ApplicationRecord
 
   # bookmarks many to many association
   has_many :bookmarks, dependent: :destroy
+  has_many :claims, dependent: :destroy
+  has_one :profile, dependent: :destroy
+
   has_many :profiles, through: :bookmarks, dependent: :destroy
   alias_attribute :saved_profiles, :profiles
 
-  has_one :profile, dependent: :destroy
 
   validates :email, presence: { message: 'Informe um email' }
   validates :password_digest, presence: { message: 'Informe uma senha' }

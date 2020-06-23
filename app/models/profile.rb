@@ -44,6 +44,7 @@ class Profile < ApplicationRecord
   accepts_nested_attributes_for :address
   has_one :bairro, through: :address
   has_many :bookmarks, dependent: :destroy
+  has_many :claims, dependent: :destroy
   has_one :delivery, dependent: :destroy
   has_one :feature, dependent: :destroy
   has_one :instagram_account, dependent: :destroy
