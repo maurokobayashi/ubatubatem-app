@@ -1,17 +1,21 @@
 # a) names reserved for app routes
 # b) names blocked for any other reason
 USERNAME_UNAVAILABLE = [
-  'admin',
-  'index',
   '404',
-  'entrar',
-  'sair',
-  'cadastrar',
-  'senha',
+  'admin',
+  'bairro',
   'buscar',
-  'explorar',
+  'cadastrar',
   'catalogo',
-  'salvos',
   'categoria',
-  'bairro'
+  'entrar',
+  'esqueci-senha',
+  'explorar',
+  'index',
+  'minha-conta',
+  'ping',
+  'salvos',
+  'sair',
+  'senha',
+  'sobre-nos'
 ]

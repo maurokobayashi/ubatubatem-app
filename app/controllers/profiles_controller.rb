@@ -21,6 +21,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  # GET /ping
+  def random
+    profile = Profile.order("RANDOM()").limit(1).first
+    redirect_to profile_path(profile.username)
+  end
+
   # GET /:username
   def show
     @profile = Profile.find_by(username: params[:username])

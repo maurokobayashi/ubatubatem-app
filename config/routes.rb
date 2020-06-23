@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "landing_pages#index"
 
   # Public content
+  get "ping", to: "profiles#random", as: "random_profile"
   get "sobre-nos", to: "landing_pages#about_us", as: "about_us"
 
   # Bookmarks
