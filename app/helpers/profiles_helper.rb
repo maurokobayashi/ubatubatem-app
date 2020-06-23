@@ -21,7 +21,7 @@ module ProfilesHelper
   def humanize_opening_hours(profile)
     text = ""
     current_opening_day = @profile.current_opening_day
-    opens_today = current_opening_day.present?
+    opens_today = current_opening_day.present? && !current_opening_day.closed?
     opened_now = profile.open?
 
     if opens_today
