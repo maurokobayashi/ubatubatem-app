@@ -48,7 +48,7 @@ class BookmarksController < ApplicationController
 
   # GET /salvos?categoria=:c
   def index
-    @profiles = current_user.profiles.order(id: :desc)
+    @profiles = current_user.saved_profiles.order(id: :desc)
     if params[:categoria].present?
       @profiles = @profiles.joins(:sub_categ).where(sub_categs: {alias: params[:categoria]})
     end

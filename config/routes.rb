@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   get "categoria/:alias", to: "catalogo#catalogo_categoria", as: "catalogo_categoria"
   get "bairro/:alias", to: "catalogo#catalogo_bairro", as: "catalogo_bairro"
 
+  # Claims
+  get ":username/reivindicar", to: "claims#new", as: "new_claim", constraints: { username: /[^\/]+/ }
+  post "claims", to: "claims#create", as: "create_claim"
+  get "claims/:id", to: "claims#show", as: "claim"
+  get "reivindicar/:uuid", to: "caims#confirm", as: "confirm_claim"
+
   # Features (profile)
   patch "features/:id", to: "features#update", as: "update_feature"
 
@@ -43,5 +49,4 @@ Rails.application.routes.draw do
   # Profile page - Must be the last one
   get ':username', to: "profiles#show", as: "profile", constraints: { username: /[^\/]+/ } # constraint: accept URLs with dot
   get ":username/editar", to: "profiles#edit", as: "edit_profile", constraints: { username: /[^\/]+/ }
-  get ":username/reivindicar", to: "profiles#claim", as: "claim_profile", constraints: { username: /[^\/]+/ }
 end

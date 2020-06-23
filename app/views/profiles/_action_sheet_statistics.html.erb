@@ -44,7 +44,7 @@
           <% if profile.instagram_account.present? %>
           <li>
             <a href="#" class="btn btn-list">
-              <span><ion-icon name="logo-instagram"></ion-icon>Clicks no Instagram</span>
+              <span><ion-icon name="logo-instagram"></ion-icon>Cliques no Instagram</span>
               <span class="text-muted"><%= Statistic.where(profile: profile).instagram_click.count %></span>
             </a>
           </li>
@@ -52,7 +52,7 @@
           <% if profile.address.present? %>
           <li>
             <a href="#" class="btn btn-list">
-              <span><ion-icon name="location-outline"></ion-icon>Clicks no endereço</span>
+              <span><ion-icon name="location-outline"></ion-icon>Cliques no endereço</span>
               <span class="text-muted"><%= Statistic.where(profile: profile).address_click.count %></span>
             </a>
           </li>

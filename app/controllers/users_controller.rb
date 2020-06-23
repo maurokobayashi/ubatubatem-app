@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   # GET /cadastrar
   def new
-    store_referer_path
+    params[:return_to].present? ? store_return_to_path(params[:return_to]) : store_referer_path
     @user = User.new
   end
 

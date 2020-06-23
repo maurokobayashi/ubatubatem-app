@@ -2,8 +2,8 @@ class MixPanel
 
   # Visit events
   CATALOGO_VIEW = "catalogo"
+  CLAIM_VIEW = "claim_request"
   HOME_VIEW = "home"
-  PROFILE_CLAIM_VIEW = "profile_claim"
   SIGNIN_VIEW = "signin"
   SIGNUP_VIEW = "signup"
 
@@ -11,6 +11,10 @@ class MixPanel
   # Catalogo events
   CATALOGO_CATEGORIA_VIEW = "visit.catalogo_categoria"
   CATALOGO_BAIRRO_VIEW = "visit.catalogo_bairro"
+
+  # Claim events
+  CLAIM_REQUEST_SUBMIT = "submit.claim_request"
+  CLAIM_REQUEST_LINK_CLICK = "click.claim_request_link"
 
   # Profile events
   PROFILE_VIEW = "visit.profile"

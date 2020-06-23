@@ -8,6 +8,9 @@ class FlashMessages
   BOOKMARK_REMOVED = "Removido da minha lista"
   BOOKMARK_REMOVE_ERROR = "Não foi possível remover da minha lista"
 
+  CLAIM_USER_ALREADY_HAS_PROFILE = "Você já possui um perfil reivindicado"
+  CLAIM_PROFILE_ALREADY_CLAIMED = "Este perfil já foi reivindicado por outro usuário"
+
   NOT_AUTHENTICATED = "Você precisa estar logado em sua conta"
   NOT_AUTHORIZED = "Você não possui autorização para isso"
 

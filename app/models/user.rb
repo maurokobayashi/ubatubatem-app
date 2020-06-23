@@ -21,6 +21,7 @@ class User < ApplicationRecord
   # bookmarks many to many association
   has_many :bookmarks, dependent: :destroy
   has_many :profiles, through: :bookmarks, dependent: :destroy
+  alias_attribute :saved_profiles, :profiles
 
   has_one :profile, dependent: :destroy
 
@@ -49,12 +50,12 @@ class User < ApplicationRecord
     self.bookmarks.exists?(profile: profile)
   end
 
-  def is_business
+  def is_business?
     self.profile.present?
   end
 
-  def is_consumer
-    !is_business
+  def is_consumer?
+    !is_business?
   end
 
   def new_profiles_count

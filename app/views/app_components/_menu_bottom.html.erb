@@ -43,7 +43,7 @@
     </div>
   </a>
   <!-- Business -->
-  <% if _current_user.is_business %>
+  <% if _current_user.is_business? %>
   <% active = current_page?(profile_path _current_user.profile.username) || current_page?(edit_profile_path _current_user.profile.username) ? "active" : "" %>
   <a href="<%= _current_user.profile.profile_path %>" class="item vibrate <%= active %>">
     <div class="col">
