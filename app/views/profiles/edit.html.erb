@@ -247,7 +247,7 @@
                 <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#accordion-horarios">
                   <ion-icon name="time-outline" role="img" class="md hydrated"></ion-icon>
                   Horário de funcionamento
-                  <% if @profile.opening_hours.blank? %>
+                  <% unless @profile.has_set_opening_hours? %>
                   <span class="badge badge-danger badge-empty"></span>
                   <% end %>
                 </button>
@@ -323,11 +323,11 @@
                 <div class="accordion-content">
                   <div class="wide-block pb-2 pt-2">
                     <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm" do |f| %>
-                      <span class="font-13 text-primary">Quando as pessoas buscarem por alguma dessas palavras, seu perfil irá aparecer.</span>
+                      <span class="font-13 text-dark">Quando as pessoas buscarem por alguma dessas palavras, seu perfil irá aparecer.</span>
                       <div class="form-group boxed mt-1">
                         <div class="input-wrapper">
                           <label class="label" for="logradouro">Digite as palavras-chave separadas por vírgula</label>
-                          <%= f.text_area :search_tags, rows: 3, class: "form-control", placeholder: "palavra 1, palavra 2, palavra 3, etc.", maxlength: Profile::SEARCH_TAGS_MAX_LENGTH, autocomplete: "off" %>
+                          <%= f.text_area :search_tags, rows: 3, class: "form-control", placeholder: "", maxlength: Profile::SEARCH_TAGS_MAX_LENGTH, autocomplete: "off" %>
                           <div class="input-info">Ex: pizzaria, pizzas, esfirras, vegetariano, jantar, itaguá </div>
                         </div>
                       </div>

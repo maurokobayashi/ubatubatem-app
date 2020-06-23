@@ -86,11 +86,11 @@ class Profile < ApplicationRecord
     rate+= 10 if title.present?
     rate+= 10 if tagline.present? && tagline != title
     rate+= 10 if bio.present?
-    rate+= 10 if instagram_account.present? && instagram_account.has_permissions?
+    rate+= 10 if instagram_account.present?
     rate+= 10 if whatsapp.present?
     rate+= 10 if address.present? && address.bairro.present?
-    rate+= 10 if delivery.present? && delivery.is_configured?
-    rate+= 10 if opening_hours.present?
+    rate+= 10 if self.has_set_opening_hours?
+    rate+= 10 if search_tags.present?
     rate+= 10 if sub_categ.present?
     rate+= 10 if self.reivindicado?
     rate
@@ -98,6 +98,10 @@ class Profile < ApplicationRecord
 
   def current_opening_day
     opening_hours.select{|oh| oh.wday == DateTime.now.wday}.last if opening_hours.present?
+  end
+
+  def has_set_opening_hours?
+    self.opening_hours.present? && self.opening_hours.any? { |oh| !oh.closed? }
   end
 
   def initials
@@ -152,7 +156,7 @@ class Profile < ApplicationRecord
   end
 
   def setup_opening_hours
-    example = OpeningHour.new(opens_at: Time.new(2000, 01, 01, 8, 0, 0, Time.find_zone("America/Sao_Paulo")), closes_at: Time.new(2000, 01, 01, 18, 0, 0, Time.find_zone("America/Sao_Paulo")))
+    example = OpeningHour.new(opens_at: Time.new(2000, 01, 01, 9, 0, 0, Time.find_zone("America/Sao_Paulo")), closes_at: Time.new(2000, 01, 01, 20, 0, 0, Time.find_zone("America/Sao_Paulo")))
 
     if self.opening_hours.blank?
       self.opening_hours = []

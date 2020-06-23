@@ -26,15 +26,15 @@ class OpeningHour < ApplicationRecord
   def self.day_to_s(day)
     case day.try(:to_sym)
       when :seg
-        "Segunda"
+        "Segunda-feira"
       when :ter
-        "Terça"
+        "Terça-feira"
       when :qua
-        "Quarta"
+        "Quarta-feira"
       when :qui
-        "Quinta"
+        "Quinta-feira"
       when :sex
-        "Sexta"
+        "Sexta-feira"
       when :sab
         "Sábado"
       when :dom
