@@ -51,6 +51,7 @@ body {
   height: auto;
   border-radius: 6px;
 }
+.padding-none{padding: 0px!important;}
 .weight-4{font-weight:400!important;}
 .weight-5{font-weight:500!important;}
 .weight-6{font-weight:600!important;}
@@ -1734,6 +1735,10 @@ a.badge-dark {
   position: relative;
   min-height: 50px;
 }
+.listview-sm > li {
+  min-height: 30px;
+}
+
 .image-listview.listview-sm, .image-listview.listview-md > li .item{
   padding-top:5px;
   padding-bottom:5px;
@@ -4468,6 +4473,10 @@ textarea,
 .custom-control .custom-control-input:checked ~ .custom-control-label:before {
   background: #4da069 !important;
   border-color: #4da069 !important;
+}
+.custom-control .custom-control-input.danger:checked ~ .custom-control-label.danger:before {
+  background: #EC4433 !important;
+  border-color: #EC4433 !important;
 }
 
 .custom-control .custom-control-input:checked ~ .custom-control-label:after {

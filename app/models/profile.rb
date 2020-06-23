@@ -151,6 +151,24 @@ class Profile < ApplicationRecord
     "#{Ubatubatem::Application.config.root_url}/#{self.username}"
   end
 
+  def setup_opening_hours
+    example = OpeningHour.new(opens_at: Time.new(2000, 01, 01, 8, 0, 0, Time.find_zone("America/Sao_Paulo")), closes_at: Time.new(2000, 01, 01, 18, 0, 0, Time.find_zone("America/Sao_Paulo")))
+
+    if self.opening_hours.blank?
+      self.opening_hours = []
+    else
+      example = opening_hours.first
+    end
+
+    self.opening_hours.push OpeningHour.create(day: 0, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.seg? }
+    self.opening_hours.push OpeningHour.create(day: 1, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.ter? }
+    self.opening_hours.push OpeningHour.create(day: 2, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.qua? }
+    self.opening_hours.push OpeningHour.create(day: 3, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.qui? }
+    self.opening_hours.push OpeningHour.create(day: 4, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.sex? }
+    self.opening_hours.push OpeningHour.create(day: 5, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.sab? }
+    self.opening_hours.push OpeningHour.create(day: 6, opens_at: example.opens_at, closes_at: example.closes_at) unless self.opening_hours.any? { |oh| oh.dom? }
+  end
+
   def show?
     self.aprovado? || self.reivindicado?
   end

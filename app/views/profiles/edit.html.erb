@@ -108,7 +108,7 @@
                       <div class="form-group boxed">
                         <div class="input-wrapper">
                           <label class="label" for="website">Website</label>
-                          <%= f.url_field :website, class: "form-control", placeholder: "", autocomplete: "off" %>
+                          <%= f.text_field :website, class: "form-control", placeholder: "", autocomplete: "off" %>
                         </div>
                       </div>
 
@@ -258,39 +258,43 @@
                     <%= form_with model: @profile, url: update_profile_path(@profile), class: "form-sm form-no-clean" do |f| %>
                       <%= f.fields_for :opening_hours do |ohf| %>
 
-                        <div class="row">
-                          <div class="col-4">
-                            <div class="form-group boxed">
-                              <div class="input-wrapper">
-                                <label class="label" for="day">Dia</label>
-                                <%= ohf.select(:day, OpeningHour.days.map{|d| [OpeningHour.day_to_s(d.first), d.first]}, {include_blank: 'Selecione'}, {class: 'form-control custom-select', required: true}) %>
+                      <div class="card mb-3">
+                        <div class="card-header weight-6">
+                          <%= "#{OpeningHour.day_to_s(ohf.object.day)}  #{ohf.object.closed? ? '(fechado)' : ''}" %>
+                          <%= ohf.hidden_field :day %>
+                        </div>
+                        <div class="card-body pt-1 pb-1">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="form-group boxed">
+                                <div class="input-wrapper">
+                                  <label class="label" for="opens_at">Abre às</label>
+                                  <%= ohf.time_field :opens_at, class: "form-control", required: true, autocomplete: "off" %>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="form-group boxed">
-                              <div class="input-wrapper">
-                                <label class="label" for="opens_at">Abre</label>
-                                <%= ohf.time_field :opens_at, class: "form-control", required: true, autocomplete: "off" %>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-4">
-                            <div class="form-group boxed">
-                              <div class="input-wrapper">
-                                <label class="label" for="closes_at">Fecha</label>
-                                <%= ohf.time_field :closes_at, class: "form-control", required: true, autocomplete: "off" %>
+                            <div class="col-6">
+                              <div class="form-group boxed">
+                                <div class="input-wrapper">
+                                  <label class="label" for="closes_at">Fecha às</label>
+                                  <%= ohf.time_field :closes_at, class: "form-control", required: true, autocomplete: "off" %>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                        <div class="mba-2">
-                          <%= ohf.check_box :_destroy %>
-                          <%= ohf.label :_destroy, "Fechado" %>
+                        <div class="card-footer">
+                          <ul class="listview listview-sm simple-listview border-none">
+                            <li class="padding-none">
+                              <div>Não abre hoje</div>
+                              <div class="custom-control custom-switch">
+                                <%= ohf.check_box :closed, class: "custom-control-input danger" %>
+                                <%= ohf.label :closed, "&nbsp;".html_safe, class: "custom-control-label danger" %>
+                              </div>
+                            </li>
+                          </ul>
                         </div>
-
-                        <div class="divider mt-2 mb-2"></div>
+                      </div>
 
                       <% end %>
                       <!-- Submit button -->

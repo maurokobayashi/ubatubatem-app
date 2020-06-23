@@ -60,7 +60,7 @@
     <%= render("app_components/toast_notification", id: "toast-flash", text: flash.notice || flash.alert, color: flash.alert ? "danger" : "primary") %>
     <script type="text/javascript">
       $(document).ready(function () {
-        toastbox("toast-flash", 5000);
+        toastbox("toast-flash", 3000);
       });
     </script>
   <% end %>

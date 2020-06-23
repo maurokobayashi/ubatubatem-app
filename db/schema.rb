@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_210751) do
+ActiveRecord::Schema.define(version: 2020_06_22_211142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_210751) do
     t.integer "day"
     t.time "opens_at"
     t.time "closes_at"
+    t.boolean "closed", default: true
     t.index ["profile_id"], name: "index_opening_hours_on_profile_id"
   end
 

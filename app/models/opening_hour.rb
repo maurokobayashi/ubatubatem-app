@@ -7,6 +7,7 @@
 #  day        :integer
 #  opens_at   :time
 #  closes_at  :time
+#  closed     :boolean          default(TRUE)
 #
 class OpeningHour < ApplicationRecord
   belongs_to :profile

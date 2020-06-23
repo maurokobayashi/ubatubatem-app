@@ -1,5 +1,5 @@
 <%
-  _position = (defined?(position) ? position : "bottom")
+  _position = (defined?(position) ? position : "center")
   _text = (defined?(text) ? text : "")
   _text_id = (defined?(text_id) ? text_id : "toast-text")
   _color = (defined?(color) ? color : "secondary")
@@ -7,11 +7,11 @@
 %>
 
 <!-- Toast notification -->
-<div id="<%= id %>" class="toast-box toast-<%= _position %> bg-<%= _color %>">
+<div id="<%= id %>" class="toast-box tap-to-close toast-<%= _position %> bg-<%= _color %>">
   <div class="in">
     <ion-icon name="checkmark-circle" class="text-white md hydrated" role="img" aria-label="checkmark circle"></ion-icon>
     <div id="<%= _text_id %>" class="text text-white weight-5"><%= _text %></div>
   </div>
-  <button type="button" class="btn btn-sm btn-text-light close-button"><%= _close_label %></button>
+  <!-- <button type="button" class="btn btn-sm btn-text-light close-button"><%= _close_label %></button> -->
 </div>
 <!-- * Toast notification -->

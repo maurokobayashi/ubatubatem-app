@@ -14,6 +14,7 @@ class ProfilesController < ApplicationController
       Address.create(profile: @profile) if @profile.address.blank?
       Feature.create(profile: @profile) if @profile.feature.blank?
       InstagramAccount.create(profile: @profile) if @profile.instagram_account.blank?
+      @profile.setup_opening_hours
     else
       flash.alert = FlashMessages::NOT_AUTHORIZED
       redirect_back fallback_location: root_path
@@ -75,7 +76,7 @@ private
       :tagline, :title, :user_id, :username, :website, :whatsapp,
       address_attributes: [:id, :bairro_id, :logradouro, :numero, :complemento], # important: include nested object's id to force update instead of delete and insert
       instagram_account_attributes: [:id, :username, :instagram_user_id, :access_token],
-      opening_hours_attributes: [:_destroy, :id, :day, :opens_at, :closes_at] #important: _destroy (true) means the object should be destroyed
+      opening_hours_attributes: [:id, :day, :opens_at, :closes_at, :closed] #important: _destroy (true) means the object should be destroyed
     )
   end
 
