@@ -170,7 +170,7 @@
 
                       <!-- Submit button -->
                       <div class="fab-button with-fixed-bottom text bottom-center sm">
-                        <input type="submit" class="fab border-none bg-success" value="Salvar alterações">
+                        <input type="submit" class="fab border-none bg-primary" value="Salvar alterações">
                       </div>
                     <% end %>
                   </div>
@@ -286,7 +286,7 @@
                         <div class="card-footer">
                           <ul class="listview listview-sm simple-listview border-none">
                             <li class="padding-none">
-                              <div>Não abre hoje</div>
+                              <div>Fechado</div>
                               <div class="custom-control custom-switch">
                                 <%= ohf.check_box :closed, class: "custom-control-input danger" %>
                                 <%= ohf.label :closed, "&nbsp;".html_safe, class: "custom-control-label danger" %>

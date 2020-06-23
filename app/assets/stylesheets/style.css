@@ -3579,6 +3579,13 @@ a.badge-dark {
   color: #FFF;
 }
 
+.bg-dark-transparent {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+.bg-danger-transparent {
+  background: rgba(236, 68, 51, 0.8) !important;
+}
+
 a.color-secondary {
   color: #6C7C94 !important;
 }
