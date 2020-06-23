@@ -28,7 +28,7 @@ class FeaturesController < ApplicationController
 private
   def feature_params
     params.require(:feature)
-      .permit(:delivery, :ponto_comercial, :produtor_local, :plastico,
+      .permit(:delivery, :ponto_comercial, :produtor_local, :plastico, :restricao_etaria,
         :vegetariano, :natural, :vegano, :organico, :lactose, :gluten, :diabetico, :plus_size)
   end
 
