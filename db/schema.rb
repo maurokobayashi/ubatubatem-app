@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_203732) do
+ActiveRecord::Schema.define(version: 2020_06_24_225504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,14 @@ ActiveRecord::Schema.define(version: 2020_06_23_203732) do
     t.string "search_tags"
     t.integer "employees_qty"
     t.index ["username"], name: "index_profiles_on_username"
+  end
+
+  create_table "search_histories", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "query"
+    t.integer "result_qty"
+    t.datetime "created_at"
+    t.index ["query"], name: "index_search_histories_on_query"
   end
 
   create_table "statistics", force: :cascade do |t|

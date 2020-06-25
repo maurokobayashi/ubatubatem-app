@@ -47,8 +47,10 @@ class CatalogoController < ApplicationController
   def search
     @query = params[:q]
     if @query.present?
-      @profiles = SearchCatalogo.profiles_broad_match @query, params
-      @sub_categs = SearchCatalogo.sub_categs @query
+      @profiles = SearchCatalogo.profiles(@query, params)
+      @result_count = @profiles.count
+
+      SearchHistory.track!(current_user, @query, @result_count)
     else
       # will_paginate needs it
       @profiles = Profile.none

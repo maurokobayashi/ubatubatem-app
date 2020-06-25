@@ -20,19 +20,25 @@
 #  employees_qty   :integer
 #
 class Profile < ApplicationRecord
-  # include PgSearch::Model
-  #   pg_search_scope :search_full,
-  #   against: {
-  #     title: 'A',
-  #     username: 'B',
-  #     tagline: 'C'
-  #   },
-  #   using: {
-  #     tsearch: {
-  #       prefix: true,
-  #       any_word: true
-  #     }
-  #   }
+  include PgSearch::Model
+    pg_search_scope :search_full,
+    associated_against: {
+      sub_categ: [:name, :search_tags],
+      bairro: :name
+    },
+    against: {
+      title: 'A',
+      tagline: 'B',
+      username: 'C',
+      search_tags: 'D'
+      # bio: 'E'
+    },
+    using: {
+      tsearch: {
+        prefix: true,
+        any_word: true
+      }
+    }
 
   TITLE_MAX_LENGTH = 30
   TAGLINE_MAX_LENGTH = 60
