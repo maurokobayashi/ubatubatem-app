@@ -1,9 +1,9 @@
+<% @tag_title = "#{@profile.title} #{@profile.tagline != @profile.title ? " - "+@profile.tagline : ""} | #{@profile.sub_categ.name} em #{@profile.address.present? ? @profile.address.bairro.name+', ' : ''}Ubatuba" %>
+<% @tag_description = "Explore pequenos negócios com o charme de Ubatuba - #CompreDoPequeno" %>
 <%
   _signed_in = signed_in?
   _is_current_user = is_current_user? @profile.user
 %>
-<% @tag_title = "#{@profile.title} - #{@profile.tagline} | #{@profile.address.present? ? @profile.address.bairro.name+', ' : ''}Ubatuba-SP" %>
-<% @tag_description = "Conheça #{Profile.count} pequenos negócios com o charme de Ubatuba-SP." %>
 
 <body>
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options] %>
