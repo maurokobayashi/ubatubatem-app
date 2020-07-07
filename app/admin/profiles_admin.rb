@@ -91,23 +91,6 @@ Trestle.resource(:profiles) do
       end
     end
 
-    # tab :delivery, badge: profile.delivery.present? ? 1 : nil do
-    #   table (Delivery.where("profile_id = ?", profile)), admin: :delivery do
-    #     column :has_delivery, header: "Delivery"
-    #     column :has_retirada, header: "Retirada"
-    #     column :has_ponto_comercial, header: "Ponto comercial"
-    #     column :bairro_ids, ->(delivery) { content_tag(:small, Bairro.where(id: delivery.bairro_ids).map(&:name).join(", "), class: "text-muted hidden-xs") }, header: "Locais de entrega"
-    #   end
-
-    #   if profile.delivery && profile.delivery.persisted?
-    #     concat "</br>".html_safe
-    #     concat link_to(icon("fa fa-pencil")+" Editar", trestle.deliveries_admin_path(profile.delivery.id), class: "btn btn-success")
-    #   else
-    #     concat "</br>".html_safe
-    #     concat admin_link_to("Configurar Delivery", admin: :deliveries, action: :new, params: { profile_id: profile }, class: "btn btn-success")
-    #   end
-    # end
-
     tab :endereço, badge: profile.address.present? ? 1 : nil do
       table (Address.where("profile_id = ?", profile.id)), admin: :address do
         column :logradouro, ->(address) {link_to(address.logradouro, trestle.addresses_admin_path(address.id))}, link: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_205652) do
+ActiveRecord::Schema.define(version: 2020_07_07_215756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,14 +61,6 @@ ActiveRecord::Schema.define(version: 2020_07_07_205652) do
     t.integer "status", default: 0
     t.datetime "created_at"
     t.index ["uuid"], name: "index_claims_on_uuid"
-  end
-
-  create_table "deliveries", force: :cascade do |t|
-    t.integer "profile_id", null: false
-    t.boolean "has_delivery", default: true
-    t.boolean "has_retirada", default: false
-    t.boolean "has_ponto_comercial", default: false
-    t.integer "bairro_ids", default: [], array: true
   end
 
   create_table "features", force: :cascade do |t|

@@ -7,7 +7,6 @@
 
 <body>
   <%= render "app_components/header", classes: "bg-primary text-light flat", left_button: :back, right_buttons: [:share_profile, :options] %>
-  <%= render("dialog_delivery", profile: @profile) if @profile.delivery.present? && @profile.delivery.has_bairros? %>
   <%= render("dialog_phone", profile: @profile) if @profile.whatsapp.present? || @profile.phone_secondary.present? %>
   <%= render("dialog_address", address: @profile.address) if @profile.address.present? %>
   <%= render("dialog_horarios", profile: @profile) if @profile.has_set_opening_hours? %>
