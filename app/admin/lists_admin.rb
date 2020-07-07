@@ -1,6 +1,6 @@
 Trestle.resource(:lists) do
   menu do
-    item :lists, icon: "fa fa-star", label: "Curadoria"
+    item :lists, icon: "fa fa-star", label: "Destaques"
   end
 
   search do |query|

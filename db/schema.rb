@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_225504) do
+ActiveRecord::Schema.define(version: 2020_07_07_205652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_225504) do
     t.integer "user_id"
     t.string "uuid"
     t.integer "status", default: 0
+    t.datetime "created_at"
     t.index ["uuid"], name: "index_claims_on_uuid"
   end
 

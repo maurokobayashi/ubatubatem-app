@@ -7,6 +7,7 @@
 #  user_id    :integer
 #  uuid       :string
 #  status     :integer          default("solicitado")
+#  created_at :datetime
 #
 class Claim < ApplicationRecord
 
@@ -17,6 +18,11 @@ class Claim < ApplicationRecord
   belongs_to :profile
 
   enum status: { solicitado: 0, usado: 1 }
+
+
+  def confirmation_link
+    "#{Ubatubatem::Application.config.root_url}/reivindicar/#{self.uuid}"
+  end
 
 
 private
