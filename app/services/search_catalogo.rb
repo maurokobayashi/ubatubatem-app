@@ -12,7 +12,7 @@ class SearchCatalogo
     if params[:categoria].present?
       result = result.joins(:sub_categ).where(sub_categs: {alias: params[:categoria]})
     end
-      result = result.paginate(page: params[:page], per_page: PROFILES_LIMIT)
+      result = result.group(:id).paginate(page: params[:page], per_page: PROFILES_LIMIT)
   end
 
   def self.profiles_from_sub_categ(sub_categ, params)
@@ -20,7 +20,7 @@ class SearchCatalogo
     if params[:bairro].present?
       result = result.joins(:bairro).where(bairros: {alias: params[:bairro]})
     end
-    result = result.paginate(page: params[:page], per_page: PROFILES_LIMIT)
+    result = result.group(:id).paginate(page: params[:page], per_page: PROFILES_LIMIT)
   end
 
 end

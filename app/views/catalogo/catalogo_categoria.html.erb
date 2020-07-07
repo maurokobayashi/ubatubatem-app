@@ -2,7 +2,7 @@
 <% @tag_description = "Explore as melhores opções de #{@sub_categ.name}. Somos um catálogo voluntário de Pequenos Negócios de Ubatuba - #CompreDoPequeno" %>
 <% @keywords = @sub_categ.search_tags %>
 <%
-  result_qty = @profiles.count
+  result_qty = @profiles.length
   filtro_bairro = params[:bairro]
 %>
 <body>
