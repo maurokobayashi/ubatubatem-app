@@ -1,0 +1,38 @@
+<% @tag_noindex = true %>
+
+<body class="bg-white" data-mp-track-visit="<%= MixPanel::CLAIM_VIEW %>">
+  <%= render "app_components/header", classes: "bg-primary text-light flat", title: "reivindicar perfil", left_button: :back %>
+
+  <!-- App Capsule -->
+  <div id="appCapsule" class="mt-3 mb-5">
+    <div class="blog-post">
+      <div class="post-body">
+        <h2>Parabéns!</h2>
+        <p>
+          <strong class="weight-6">'<%= @profile.title %>'</strong> agora é administrado por você.
+          <br>Isso te dá os seguintes privilégios:
+          <ul class="pl-3 mt-0">
+            <li>Editar dados do negócio</li>
+            <li>Visualizar estatísticas do perfil</li>
+            <li>Exibir o status de <i>perfil verificado</i> <ion-icon name="checkmark-circle" class="text-primary"></ion-icon></li>
+          </ul>
+        </p>
+
+        <h3 class="mt-3">O que fazer agora?</h3>
+        <ol class="pl-3">
+          <li>Complete os dados do seu negócio para aparecer em destaque no <i>ubatubatem.app</i></li>
+          <li>Seu perfil possui <strong class="weight-6"><%= @profile.completion_progress %>%</strong> dos dados preenchidos</li>
+          <li>Divulgue o link do seu perfil nas redes sociais: <strong class="weight-6 text-primary"><%= @profile.profile_path %></strong></li>
+          <li>
+            Indique o <i>ubatubatem.app</i> para outros pequenos negócios da cidade. Nosso objetivo é criar uma bonita rede de apoio e fortalecer o pequeno comércio local.
+          </li>
+        </ol>
+      </div>
+
+      <div class="section mt-4">
+        <a href="<%= @profile.profile_path %>" class="btn btn-primary btn-block">Ver o meu perfil</a>
+      </div>
+    </div>
+
+  </div>
+</body>

@@ -84,6 +84,10 @@ class Profile < ApplicationRecord
     self.avatar_url || "avatar_empty"
   end
 
+  def claimed_by! user
+    self.update(user: user, status: 2)
+  end
+
   def closed?
     !open?
   end

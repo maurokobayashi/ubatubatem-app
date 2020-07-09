@@ -14,6 +14,7 @@ Trestle.resource(:claims) do
     column :instagram, ->(claim) { claim.profile.instagram_account.present? ? link_to(claim.profile.instagram_account.username, "https://www.instagram.com/#{claim.profile.instagram_account.username}", target: "_blank", class: "external-link") : "Não cadastrado"}, header: "Instagram", link: true
     column :user, ->(claim) {claim.user.try(:email)}, header: "Solicitado por"
     column :uuid, ->(claim) {claim.confirmation_link}, header: "Link de confirmação"
+    column :status, ->(claim) {status_tag(claim.status, :info)}
     column :created_at, header: "Criado em", align: :center
     actions
   end

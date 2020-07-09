@@ -4,7 +4,27 @@ class ClaimsController < ApplicationController
 
 # GET /reivindicar/:uuid
   def confirm
+    success = false
+    claim = Claim.find_by(uuid: params[:uuid])
+    if claim.blank?
+      flash.alert = FlashMessages::CLAIM_NOT_FOUND
+      redirect_to root_path
+      return
+    else
+      @profile = claim.profile
+      if @profile.reivindicado?
+        flash.alert = FlashMessages::CLAIM_PROFILE_ALREADY_CLAIMED
+        redirect_to @profile.profile_path
+        return
+      else
+        @profile.claimed_by! claim.user
+        claim.usado!
+        sign_in claim.user unless signed_in?
 
+        success = true
+        flash.notice = FlashMessages::CLAIM_CONFIRMED_SUCCESS
+      end
+    end
   end
 
   # POST /claims
@@ -44,7 +64,6 @@ class ClaimsController < ApplicationController
   def show
     @claim = Claim.find(params[:id])
   end
-
 
 
 private

@@ -10,6 +10,8 @@ class FlashMessages
 
   CLAIM_USER_ALREADY_HAS_PROFILE = "Você já possui um perfil reivindicado"
   CLAIM_PROFILE_ALREADY_CLAIMED = "Este perfil já foi reivindicado por outro usuário"
+  CLAIM_NOT_FOUND = "Verifique se copiou o link corretamente ou faça uma nova solicitacão."
+  CLAIM_CONFIRMED_SUCCESS = "Perfil foi reivindicado com sucesso"
 
   NOT_AUTHENTICATED = "Você precisa estar logado em sua conta"
   NOT_AUTHORIZED = "Você não possui autorização para isso"

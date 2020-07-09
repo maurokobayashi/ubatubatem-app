@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get ":username/reivindicar", to: "claims#new", as: "new_claim", constraints: { username: /[^\/]+/ }
   post "claims", to: "claims#create", as: "create_claim"
   get "claims/:id", to: "claims#show", as: "claim"
-  get "reivindicar/:uuid", to: "caims#confirm", as: "confirm_claim"
+  get "reivindicar/:uuid", to: "claims#confirm", as: "confirm_claim"
 
   # Features (profile)
   patch "features/:id", to: "features#update", as: "update_feature"
