@@ -18,8 +18,12 @@ $(document).ready(function () {
   // Page Loader with preload
   setTimeout(() => {
     $("#loader").fadeToggle(300);
-    }, 250); // hide delay when page load
+  }, 250); // hide delay when page load
 
+  // Page loader after link click
+  $("a:not([href*='#'],[href*='javascript;'],[target*='_'])").click(function() {
+    $("#loader").fadeToggle(300);
+  });
 
   // Vibrate on click
   $(".vibrate").click(function (e) {
@@ -38,6 +42,7 @@ $(document).ready(function () {
     showCharsTyped: true
   }
 
+  // Max length
   $('input[maxlength]').maxlength(maxlengthOptions);
   $('textarea[maxlength]').maxlength(maxlengthOptions);
 
