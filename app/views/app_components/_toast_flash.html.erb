@@ -1,0 +1,16 @@
+<%
+  _text_id = (defined?(text_id) ? text_id : "toast-text")
+  _position = (defined?(position) ? position : "center")
+  _text = flash.notice || flash.alert
+  _color = flash.alert ? "danger-transparent" : "dark-transparent"
+  _icon = flash.alert ? "close-circle" : "checkmark-circle"
+%>
+
+<!-- Toast notification -->
+<div id="<%= id %>" class="toast-box tap-to-close toast-<%= _position %> bg-<%= _color %>">
+  <div class="in">
+    <ion-icon name="<%= _icon %>" class="text-white md hydrated" role="img"></ion-icon>
+    <div id="<%= _text_id %>" class="text text-white weight-5"><%= _text %></div>
+  </div>
+</div>
+<!-- * Toast notification -->

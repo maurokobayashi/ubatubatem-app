@@ -24,6 +24,8 @@ gem 'will_paginate'
 gem 'will_paginate_infinite'
 # Loads environment variables from '.env'
 gem 'dotenv-rails', group: :development
+# Generate seed dump
+gem 'seed_dump'
 
 
 ############# DEFAULT GEMS #############
