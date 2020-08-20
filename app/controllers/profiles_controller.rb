@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
   before_action :require_authentication,  only: [:edit, :update]
-  skip_before_action :verify_authenticity_token, only: [:update_avatar, :update_bio]
+  skip_before_action :verify_authenticity_token, only: [:update_avatar, :update_bio, :index]
 
   RESULTS_PER_PAGE = 10
 
@@ -18,6 +18,17 @@ class ProfilesController < ApplicationController
     else
       flash.alert = FlashMessages::NOT_AUTHORIZED
       redirect_back fallback_location: root_path
+    end
+  end
+
+  # GET /profiles
+  # returns a JSON with all profile IDs
+  def index
+    profile_ids = Profile.active.select(:id).order(:id).map(&:id)
+    respond_to do |format|
+      format.json do
+        render json: profile_ids.to_json, status: 200
+      end
     end
   end
 
