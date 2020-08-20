@@ -4,7 +4,11 @@
 # ATENÇÃO! ESSE SCRIPT DEVE SER EXECUTADO EM LOCALHOST, POIS O INSTAGRAM BLOQUEOU REQUISIÇÕES A PARTIR DO SERVIDOR DO HEROKU
 
 profile_ids = HTTParty.get("https://www.ubatubatem.app/profiles.json")
+profile_ids.each do |id|
+  profile = Profile.find(id)
 
+  response = HTTParty.get("https://www.instagram.com/#{lead_insta.username}/?__a=1")
+end
 
 LeadInstagram.where("id >= 700").each do |lead_insta|
   if !InstagramAccount.exists?(username: lead_insta.username)

@@ -24,10 +24,10 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # returns a JSON with all profile IDs
   def index
-    profile_ids = Profile.active.select(:id).order(:id).map(&:id)
+    profiles = Profile.order(:id).limit(params[:limit]).offset(params[:offset])
     respond_to do |format|
       format.json do
-        render json: profile_ids.to_json, status: 200
+        render json: profiles.to_json, status: 200
       end
     end
   end
