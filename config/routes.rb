@@ -28,7 +28,8 @@ Rails.application.routes.draw do
 
   # Profiles
   patch "profiles/:id", to: "profiles#update", as: "update_profile"
-  patch "profiles/:id/avatar", to: "profiles#update_avatar", as: "update_profile_avatar"
+  patch "profiles/:id/avatar", to: "profiles#update_avatar", as: "update_profile_avatar" #hack
+  patch "profiles/:id/bio", to: "profiles#update_bio", as: "update_profile_bio" #hack
 
   # Sessions
   get "entrar", to: "sessions#new", as: "signin"

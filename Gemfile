@@ -24,6 +24,8 @@ gem 'will_paginate'
 gem 'will_paginate_infinite'
 # Loads environment variables from '.env'
 gem 'dotenv-rails', group: :development
+# Zenvia SMS Api
+gem 'zenvia-rest-rails'
 
 
 ############# DEFAULT GEMS #############

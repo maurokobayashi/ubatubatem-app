@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
   before_action :require_authentication,  only: [:edit, :update]
-  skip_before_action :verify_authenticity_token, only: [:update_avatar]
+  skip_before_action :verify_authenticity_token, only: [:update_avatar, :update_bio]
 
   RESULTS_PER_PAGE = 10
 
@@ -66,6 +66,26 @@ class ProfilesController < ApplicationController
     else
       success = false
       msg = FlashMessages::PROFILE_AVATAR_UPDATE_ERROR
+    end
+
+    respond_to do |format|
+      format.json do
+        render json: {msg: msg}, status: (success ? 200 : 400)
+      end
+    end
+  end
+
+  # PATCH /profiles/:id/bio
+  def update_bio
+    success = true
+    msg = ""
+    profile = Profile.find(params[:id])
+
+    if profile.present? && profile.update(bio: profile_params[:bio])
+      msg = FlashMessages::PROFILE_UPDATE_SUCCESS
+    else
+      success = false
+      msg = FlashMessages::PROFILE_UPDATE_ERROR
     end
 
     respond_to do |format|

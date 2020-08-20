@@ -8,7 +8,7 @@ class SearchCatalogo
   end
 
   def self.profiles_from_bairro(bairro, params)
-    result = Profile.active.joins(:bairro).where(bairros: {alias: bairro.alias}).order('RANDOM()')
+    result = Profile.active.joins(:bairro).where(bairros: {alias: bairro.alias}).order(updated_at: :desc)
     if params[:categoria].present?
       result = result.joins(:sub_categ).where(sub_categs: {alias: params[:categoria]})
     end
@@ -16,7 +16,7 @@ class SearchCatalogo
   end
 
   def self.profiles_from_sub_categ(sub_categ, params)
-    result = Profile.active.where(sub_categ: sub_categ).order('RANDOM()')
+    result = Profile.active.where(sub_categ: sub_categ).order(updated_at: :desc)
     if params[:bairro].present?
       result = result.joins(:bairro).where(bairros: {alias: params[:bairro]})
     end
