@@ -51,7 +51,6 @@ class Profile < ApplicationRecord
   has_one :bairro, through: :address
   has_many :bookmarks, dependent: :destroy
   has_many :claims, dependent: :destroy
-  has_one :delivery, dependent: :destroy
   has_one :feature, dependent: :destroy
   has_one :instagram_account, dependent: :destroy
   accepts_nested_attributes_for :instagram_account

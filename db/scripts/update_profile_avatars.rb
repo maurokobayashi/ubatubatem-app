@@ -3,7 +3,7 @@
 
 # ATENÇÃO! ESSE SCRIPT DEVE SER EXECUTADO EM LOCALHOST, POIS O INSTAGRAM BLOQUEOU REQUISIÇÕES A PARTIR DO SERVIDOR DO HEROKU
 
-profiles_response = HTTParty.get("https://www.ubatubatem.app/profiles.json?limit=900&offset=110")
+profiles_response = HTTParty.get("https://www.ubatubatem.app/profiles.json?limit=100&offset=860")
 profiles = JSON(profiles_response.body)
 profiles.each do |p|
   puts "Fazendo SCRAPPING do perfil #{p['username']} no Instagram..."
