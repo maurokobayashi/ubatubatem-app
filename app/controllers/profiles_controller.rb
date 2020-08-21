@@ -42,9 +42,13 @@ class ProfilesController < ApplicationController
   def show
     @profile = Profile.find_by(username: params[:username])
     if @profile
-      Statistic.track!(@profile, Statistic.events[:perfil_view]) unless is_current_user? @profile.user
+      if browser.bot?
+        logger.info("[PROFILE::SHOW] Bot detectado: #{browser.name}")
+      else
+        Statistic.track!(@profile, Statistic.events[:perfil_view]) unless is_current_user? @profile.user
+      end
     else
-      render "not_found"
+      render "catalogo/not_found"
     end
   end
 

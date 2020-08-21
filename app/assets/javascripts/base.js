@@ -21,7 +21,7 @@ $(document).ready(function () {
   }, 250); // hide delay when page load
 
   // Page loader after link click
-  $("a:not([href*='#'],[href*='javascript;'],[target*='_'])").click(function() {
+  $("a:not([href*='#'],[href*='javascript:;'],[target*='_'])").click(function() {
     $("#loader").fadeToggle(300);
   });
 

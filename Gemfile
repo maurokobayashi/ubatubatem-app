@@ -26,6 +26,8 @@ gem 'will_paginate_infinite'
 gem 'dotenv-rails', group: :development
 # Zenvia SMS Api
 gem 'zenvia-rest-rails'
+# Browser & Bots inspector
+gem 'browser'
 
 
 ############# DEFAULT GEMS #############

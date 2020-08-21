@@ -10,7 +10,7 @@
 class Statistic < ApplicationRecord
   belongs_to :profile
 
-  enum event: { perfil_view: 0, phone_call: 1, whatsapp_send: 2, instagram_click: 3, link_click: 4, compartilhar_click: 5, foto_click: 6, salvar_click: 7, address_click: 8 }
+  enum event: { perfil_view: 0, phone_click: 1, instagram_click: 2, compartilhar_click: 3, salvar_click: 4}
 
   def self.track!(profile, event)
     Statistic.create profile: profile, event: event
