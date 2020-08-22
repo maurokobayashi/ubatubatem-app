@@ -19,76 +19,18 @@
     </div>
 
     <div class="carousel-multiple owl-carousel owl-theme mt-3">
+      <% @destaques.each do |destaque| %>
       <a href="<%= catalogo_path %>">
         <div class="item">
           <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
+            <img src="<%= image_path(destaque.cover_image_url) %>" class="card-img-top" alt="image">
             <div class="card-body pt-2">
-              <h4 class="mb-0">Café da manhã</h4>
+              <h4 class="mb-0"><%= destaque.title %></h4>
             </div>
           </div>
         </div>
       </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Produtos ecológicos</h4>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Lanches rápidos</h4>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Artistas locais</h4>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Pães artesanais</h4>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Crochê</h4>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="<%= catalogo_path %>">
-        <div class="item">
-          <div class="card">
-            <img src="https://picsum.photos/200/155" class="card-img-top" alt="image">
-            <div class="card-body pt-2">
-              <h4 class="mb-0">Refeições até R$ 20</h4>
-            </div>
-          </div>
-        </div>
-      </a>
+      <% end %>
     </div>
 
     <!-- Section Categorias -->

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_215756) do
+ActiveRecord::Schema.define(version: 2020_08_22_190621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "profile_id"
+    t.integer "profile_id", null: false
     t.string "logradouro"
     t.string "numero"
     t.string "complemento"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_215756) do
   end
 
   create_table "instagram_accounts", force: :cascade do |t|
-    t.integer "profile_id"
+    t.integer "profile_id", null: false
     t.string "username"
     t.string "access_token"
     t.string "instagram_user_id"
@@ -121,14 +121,16 @@ ActiveRecord::Schema.define(version: 2020_07_07_215756) do
     t.time "starts_at"
     t.time "finishes_at"
     t.datetime "expires_on"
-    t.integer "priority"
-    t.integer "status"
+    t.integer "priority", default: 0
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "alias", default: "a", null: false
+    t.index ["alias"], name: "index_lists_on_alias"
   end
 
   create_table "opening_hours", force: :cascade do |t|
-    t.integer "profile_id"
+    t.integer "profile_id", null: false
     t.integer "day"
     t.time "opens_at"
     t.time "closes_at"
@@ -142,7 +144,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_215756) do
     t.text "bio"
     t.string "whatsapp"
     t.string "phone_secondary"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "website"
