@@ -8,8 +8,9 @@ Trestle.resource(:lists) do
   end
 
   form do |list|
-    text_field :cover_image_url, label: "URL da imagem de capa"
     text_field :title, append: "max. 30", label: "Título"
+    text_field :alias, append: "max. 30", label: "Alias (URL)"
+    text_field :cover_image_url, label: "URL da imagem de capa"
     text_field :subtitle, append: "max. 600", label: "Subtítulo"
     select :profile_ids, Profile.all, { label: "Negócios" }, multiple: true
     date_field :expires_on, label: "Exibir até dia (padrão: sem limite)"
