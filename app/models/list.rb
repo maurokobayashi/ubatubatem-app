@@ -10,10 +10,11 @@
 #  starts_at       :time
 #  finishes_at     :time
 #  expires_on      :datetime
-#  priority        :integer
-#  status          :integer
+#  priority        :integer          default("normal")
+#  status          :integer          default("inativo")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  alias           :string           not null
 #
 class List < ApplicationRecord
   enum priority: { normal: 0, alta: 1, exibir_em_primeiro: 2 }

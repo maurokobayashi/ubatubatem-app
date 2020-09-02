@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   # Features (profile)
   patch "features/:id", to: "features#update", as: "update_feature"
 
+  # Lists
+  get "destaques/:alias", to: "lists#show", as: "list"
+
   # Profiles
   patch "profiles/:id", to: "profiles#update", as: "update_profile"
   patch "profiles/:id/avatar", to: "profiles#update_avatar", as: "update_profile_avatar" #hack

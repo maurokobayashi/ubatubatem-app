@@ -181,7 +181,7 @@ button:hover, button:active, button:focus {
 .appHeader .pageTitle {
   font-size: 17px;
   font-weight: 600;
-  letter-spacing: -0.07em;
+  /*letter-spacing: -0.07em;*/
   padding: 0 10px;
   color:#555;
 }

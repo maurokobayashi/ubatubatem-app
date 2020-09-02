@@ -3,7 +3,7 @@
 # Table name: opening_hours
 #
 #  id         :bigint           not null, primary key
-#  profile_id :integer
+#  profile_id :integer          not null
 #  day        :integer
 #  opens_at   :time
 #  closes_at  :time

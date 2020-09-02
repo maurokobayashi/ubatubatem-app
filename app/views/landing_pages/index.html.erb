@@ -19,13 +19,13 @@
     </div>
 
     <div class="carousel-multiple owl-carousel owl-theme mt-3">
-      <% @destaques.each do |destaque| %>
-      <a href="<%= catalogo_path %>">
+      <% @lists.each do |list| %>
+      <a href="<%= list_path list.alias %>">
         <div class="item">
           <div class="card">
-            <img src="<%= image_path(destaque.cover_image_url) %>" class="card-img-top" alt="image">
+            <img src="<%= image_path(list.cover_image_url) %>" class="card-img-top" alt="image">
             <div class="card-body pt-2">
-              <h4 class="mb-0"><%= destaque.title %></h4>
+              <h4 class="mb-0"><%= list.title %></h4>
             </div>
           </div>
         </div>

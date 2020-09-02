@@ -8,7 +8,7 @@
 #  bio             :text
 #  whatsapp        :string
 #  phone_secondary :string
-#  status          :integer
+#  status          :integer          default("novo")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  website         :string

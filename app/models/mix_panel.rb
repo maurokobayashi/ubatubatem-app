@@ -16,6 +16,9 @@ class MixPanel
   CLAIM_REQUEST_SUBMIT = "submit.claim_request"
   CLAIM_REQUEST_LINK_CLICK = "click.claim_request_link"
 
+  # List events
+  LIST_VIEW = "visit.list"
+
   # Profile events
   PROFILE_VIEW = "visit.profile"
   PROFILE_EDIT_VIEW = "visit.profile_edit"

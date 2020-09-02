@@ -3,7 +3,7 @@
 # Table name: addresses
 #
 #  id          :bigint           not null, primary key
-#  profile_id  :integer
+#  profile_id  :integer          not null
 #  logradouro  :string
 #  numero      :string
 #  complemento :string
