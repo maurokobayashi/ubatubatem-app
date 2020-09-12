@@ -23,7 +23,7 @@ Trestle.resource(:claims) do
     select :profile_id, Profile.all.to_a.unshift(Profile.new), label: "Negócio"
     select :user_id, User.all.to_a.unshift(User.new), label: "Solicitado por"
     select :status, Claim.statuses.keys.to_a
-    text_field :uuid, label: "Código (link) - ubatubatem.app/reivindicar/xxxx"
+    text_field :uuid, label: "Código (link) - ubatubatem.com/reivindicar/xxxx"
     datetime_field :created_at, label: "Criado em"
 
   end

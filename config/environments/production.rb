@@ -116,5 +116,5 @@ Rails.application.configure do
   # Custom configs
   ########################################
   # App root url, as needed by some classes
-  config.root_url = "https://ubatubatem.app"
+  config.root_url = "https://ubatubatem.com"
 end
